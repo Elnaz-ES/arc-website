@@ -1,52 +1,55 @@
-# ARC — Ancient Roots Circle (website)
+# ARC — Ancient Roots Circle
 
-Implemented from the Claude Design project `ARC.dc.html`
-(project: *AncientRootsCircle Website (Remix)*).
+Community website for the Persian diaspora.
 
-## What this is
+- **Live site:** https://ancientrootscircle.com
+- **GitHub Pages URL:** https://elnaz-es.github.io/arc-website/
+- **Repo:** https://github.com/Elnaz-ES/arc-website
 
-- **`ARC.dc.html`** — the page: template markup + a `<script data-dc-script>` state/data model.
-- **`support.js`** — the design runtime. It loads React 18 + Babel from unpkg at runtime,
-  parses the `<x-dc>` template, and renders the component. No build step.
-- **`photos/`, `illustrations/`, `*.jpg/png`** — image assets.
+## How it works
 
-It's a single-page app with client-side routing (Home / Community / Membership),
-a mobile menu, billing toggle, FAQ accordion, and an EN/FA cooking-language toggle —
-all driven by the data model in `ARC.dc.html`.
+A **static site** — no build step. `index.html` holds the page (markup + a
+`<script data-dc-script>` data model); `support.js` is the runtime that loads
+React from a CDN and renders it in the browser. Images live in `photos/` and
+`illustrations/`. Hosted free on **GitHub Pages**, which redeploys automatically
+on every push to `main`.
 
-## Run it
+## Updating the site (it goes live automatically)
 
-Any static server works (an internet connection is required so `support.js` can pull
-React/Babel from unpkg):
+**Easiest — edit online in GitHub:**
+1. Open the repo: https://github.com/Elnaz-ES/arc-website
+2. Click the file you want to change (e.g. `index.html`), then the ✏️ pencil.
+3. Make your edit → **Commit changes**.
+4. Wait ~30–60s — the change is live at ancientrootscircle.com. (Hard-refresh:
+   `Cmd+Shift+R`.)
 
+**Adding/replacing an image:** upload it into `photos/` (or `illustrations/`)
+in GitHub with the **same filename** it replaces, or add a new file and
+reference it in `index.html`.
+
+**From your Mac (local):**
 ```bash
-cd arc-website
-python3 -m http.server 4173
-# open http://localhost:4173/ARC.dc.html
+cd ~/Workarea/arc-website
+# ...make edits...
+git add -A
+git commit -m "describe the change"
+git push
 ```
 
-## ⚠️ Placeholder images (replace these)
+## Preview locally before pushing
 
-9 originals exceeded the design tool's 256 KiB transfer cap and could not be pulled
-intact, so they are currently **on-brand placeholders** (dark-green with a gold diamond
-and an "ARC placeholder" tag). Drop the real files in at the same paths to replace them:
+```bash
+cd ~/Workarea/arc-website
+npm run website     # or: python3 serve.py
+# open http://localhost:4173/
+```
+(`serve.py` sends no-cache headers so image swaps show immediately.)
 
-| File | Intended content |
-|------|------------------|
-| `logo.png` | ARC logo mark |
-| `hero-couple.jpg` | Hero photo (Hoda & Shervin) |
-| `illustrations/conversations.png` | Community "conversations" illustration |
-| `photos/family-three.jpg` | Family photo |
-| `photos/hoda-shervin-2.jpg` | Hoda & Shervin |
-| `photos/hoda-child-2.jpg` | Hoda as a child (founder) |
-| `photos/shervin-child.jpg` | Shervin as a child (founder) |
-| `photos/wedding.jpg` | Wedding photo |
-| `photos/recipe-ghormeh.jpg` | Ghormeh Sabzi recipe |
+## Notes
 
-The other 9 images are the real originals pulled from the design project.
-
-## Props (defaults, editable in the `data-props` attribute of `ARC.dc.html`)
-
-- `careerCadence`: `"Bi-weekly"` (or `"Weekly"`)
-- `basicPrice`: `35`
-- `premiumPrice`: `55`
+- Content/data (roadmap, pricing tiers, FAQs, founders, etc.) all live in the
+  `<script data-dc-script>` block near the bottom of `index.html`.
+- Props with defaults (editable in that script's `data-props`): `careerCadence`
+  (`Bi-weekly`/`Weekly`), `basicPrice` (35), `premiumPrice` (55).
+- Full-resolution image originals are kept locally in `originals/` (git-ignored,
+  not deployed). Stray files from earlier drops are parked in `_unused/`.
