@@ -1,0 +1,10 @@
+# local dev / OS cruft
+.DS_Store
+*.log
+.claude/
+
+# high-res image backups (kept locally, not needed in the deployed site)
+originals/
+
+# quarantined stray drops (kept locally, not part of the site)
+_unused/
