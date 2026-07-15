@@ -515,7 +515,7 @@ html,body{margin:0;padding:0;}
             <div style="flex:1;">
               <h3 style="font-family:{{ cookingHeadFont }};font-weight:700;font-size:clamp(19px,1.7vw,22px);color:#143027;line-height:1.2;margin:4px 0 8px;">{{ c.title }}</h3>
               <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:#8a7f6a;">
-                <span style="font-weight:600;color:#c5612e;">{{ c.host }}</span><span style="opacity:.5;">·</span><span>{{ c.date }}</span>
+                <span>{{ c.date }}</span>
               </div>
             </div>
           </div>
@@ -946,8 +946,8 @@ class Component extends DCLogic {
       ],
     };
     const roadmapItems = [
-      { week: '01', date: 'Aug 3', type: 'Cooking', title: 'Meet the Group & the Plan', meta: 'Live with Shervin · Thu 7pm', color: '#c5612e', access: 'Members' },
-      { week: '02', date: 'Aug 10', type: 'Cooking', title: 'Kitchen Gear: What You Need', meta: 'Live with Shervin · Thu 7pm', color: '#c5612e', access: 'Members' },
+      { week: '01', date: 'Aug 3', type: 'Cooking', title: 'Meet the Group & the Plan', meta: 'Thu 7pm', color: '#c5612e', access: 'Members' },
+      { week: '02', date: 'Aug 10', type: 'Cooking', title: 'Kitchen Gear: What You Need', meta: 'Thu 7pm', color: '#c5612e', access: 'Members' },
       { week: '03', date: 'Aug 15', type: 'Career', title: 'Resume Review Workshop', meta: 'Bi-weekly · Tue 6pm', color: '#2c4a7a', access: 'Premium' },
       { week: '04', date: 'Aug 16', type: 'Spotlight', title: 'Personal Finance Foundations', meta: 'Guest expert series', color: '#d6a23f', access: 'Premium' },
     ];
@@ -957,16 +957,16 @@ class Component extends DCLogic {
       month: 'August',
       dateRange: 'August 2026',
       cooking: [
-        { n: '01', day: 'THU', date: 'Aug 3', title: 'Meet the Group & the Plan', host: 'Live with Shervin',
+        { n: '01', day: 'THU', date: 'Aug 3', title: 'Meet the Group & the Plan', host: '',
           topics: ['The Predicament: What are we even trying to do here?', 'Philosophy Corner: On the nature of weekly sessions', 'What We Suggest: Our working tracks and how it all runs'],
           resources: ['Season 1 Program Guide'] },
-        { n: '02', day: 'THU', date: 'Aug 10', title: 'Kitchen Gear: What You Need (and Don\u2019t)', host: 'Live with Shervin',
+        { n: '02', day: 'THU', date: 'Aug 10', title: 'Kitchen Gear: What You Need (and Don\u2019t)', host: '',
           topics: ['The Predicament: The tools we truly need and the junk we don’t', 'Philosophy Corner: The self-evident truths of pots, pans & trusty sidekicks', 'What We Suggest: What to buy and what to skip'],
           resources: ['ARC Kitchen Essentials Guide'] },
-        { n: '03', day: 'THU', date: 'Aug 17', title: 'What Is Ghormeh, Really?', host: 'Live with Shervin',
+        { n: '03', day: 'THU', date: 'Aug 17', title: 'What Is Ghormeh, Really?', host: '',
           topics: ['The Predicament: Preserving meat in ancient times', 'Philosophy Corner: Why do we still need ghormeh?', 'What We Suggest: Making & storing ghormeh in the modern age'],
           resources: ['Ghormeh Recipe & Storage Guide'] },
-        { n: '04', day: 'THU', date: 'Aug 24', title: 'Open Q&A Night', host: 'Live with Shervin',
+        { n: '04', day: 'THU', date: 'Aug 24', title: 'Open Q&A Night', host: '',
           topics: ['Open floor: bring every question you\u2019ve been saving', 'Anything from sessions 1\u20133, no question too small'],
           resources: ['Q&A Recording'] },
       ],
