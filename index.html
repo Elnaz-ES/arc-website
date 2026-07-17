@@ -401,7 +401,7 @@ html,body{margin:0;padding:0;}
                 <div style="font-size:12.5px;color:rgba(246,239,227,.65);margin-top:3px;">{{ o.note }}</div>
               </div>
               <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:24px;color:#d6a23f;flex:none;">{{ o.priceLabel }}</div>
-              <span onClick="{{ o.add }}" style="cursor:pointer;flex:none;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;padding:11px 18px;border-radius:999px;white-space:nowrap;">Buy pass</span>
+              <span onClick="{{ o.go }}" style="cursor:pointer;flex:none;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;padding:11px 18px;border-radius:999px;white-space:nowrap;">Buy pass</span>
             </div>
           </sc-for>
           <div style="display:flex;align-items:center;gap:14px;background:rgba(214,162,63,.12);border:1px solid rgba(214,162,63,.35);border-radius:16px;padding:18px 20px;">
@@ -1221,15 +1221,15 @@ class Component extends DCLogic {
 
     // ---- à-la-carte spotlight pass ----
     const passDefs = [
-      { id: 'sp-guest', who: 'Non-members', price: 80, note: 'All 4 sessions + 30-day recording access', accent: '#c5612e' },
-      { id: 'sp-basic', who: 'Basic members', price: 50, note: 'All 4 sessions · member rate, added to your ARC account', accent: '#7d8a4e' },
+      { id: 'sp-guest', who: 'Non-members', price: 80, note: 'All 4 sessions + 30-day recording access', accent: '#c5612e', url: 'https://ancient-roots-circle.circle.so/checkout/personal-finance-foundations' },
+      { id: 'sp-basic', who: 'Basic members', price: 50, note: 'All 4 sessions · member rate, added to your ARC account', accent: '#7d8a4e', url: 'https://ancient-roots-circle.circle.so/checkout/personal-finance-foundations?coupon_code=BASIC-PF-2026' },
     ];
     const spotlightPass = {
       title: roadmapPage.spotlight.title,
       format: roadmapPage.spotlight.format,
       date: roadmapPage.spotlight.date,
       options: passDefs.map(p => ({ ...p, priceLabel: '$' + p.price,
-        add: () => { this.add({ id: p.id, name: 'Spotlight pass · ' + roadmapPage.spotlight.title + ' (' + p.who + ')', price: p.price }); this.setState({ cartOpen: true }); } })),
+        go: () => window.open(p.url, '_blank', 'noopener') })),
     };
 
     const comparison = [
