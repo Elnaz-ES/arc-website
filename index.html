@@ -1199,6 +1199,10 @@ class Component extends DCLogic {
       basic: 'https://ancient-roots-circle.circle.so/checkout/basic-membership',
       premium: 'https://ancient-roots-circle.circle.so/checkout/premium-membership',
     };
+    const checkoutUrlsAnnual = {
+      basic: 'https://ancient-roots-circle.circle.so/checkout/basic-membership-annual',
+      premium: 'https://ancient-roots-circle.circle.so/checkout/premium-membership-annual',
+    };
     const tiers = tierDefs.map(t => {
       const free = t.monthly === 0;
       const perMonth = annual ? Math.round(t.annual / 12) : t.monthly;
@@ -1217,7 +1221,7 @@ class Component extends DCLogic {
         joinShadow: '0 1px 3px rgba(20,48,39,.06)',
         joinBtnBg: accent, joinBtnText: '#fff',
         checkColor: accent,
-        go: () => window.open(checkoutUrls[t.id], '_blank', 'noopener'),
+        go: () => window.open((annual && checkoutUrlsAnnual[t.id]) || checkoutUrls[t.id], '_blank', 'noopener'),
       };
     });
 
