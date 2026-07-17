@@ -364,7 +364,7 @@ html,body{margin:0;padding:0;}
             <span style="font-size:15px;color:#8a7f6a;">{{ t.period }}</span>
           </div>
           <div style="font-size:13px;color:#8a7f6a;margin:4px 0 22px;">{{ t.sub }}</div>
-          <span onClick="{{ goJoin }}" style="cursor:pointer;display:block;text-align:center;background:{{ t.joinBtnBg }};color:{{ t.joinBtnText }};font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px;border-radius:999px;margin-bottom:20px;">{{ t.cta }}</span>
+          <span onClick="{{ t.go }}" style="cursor:pointer;display:block;text-align:center;background:{{ t.joinBtnBg }};color:{{ t.joinBtnText }};font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px;border-radius:999px;margin-bottom:20px;">{{ t.cta }}</span>
           <div style="display:flex;flex-direction:column;gap:13px;">
             <sc-for list="{{ t.features }}" as="ft" hint-placeholder-count="4">
               <div style="display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.45;">
@@ -1192,6 +1192,11 @@ class Component extends DCLogic {
         features: ['Everything in Basic', careerCadence + ' career & growth sessions', '1 special-topic session each month (investing, skincare, saving, side hustles, etc.)', '20% off HodaFit Workout Plans'],
       },
     ];
+    const checkoutUrls = {
+      free: 'https://ancient-roots-circle.circle.so/join?invitation_token=157ff8b8d976acc146b9bb8121881e79b58e9557-a50f3947-97b1-49db-aed9-ff9a21f100e1',
+      basic: 'https://ancient-roots-circle.circle.so/checkout/basic-membership',
+      premium: 'https://ancient-roots-circle.circle.so/checkout/premium-membership',
+    };
     const tiers = tierDefs.map(t => {
       const free = t.monthly === 0;
       const perMonth = annual ? Math.round(t.annual / 12) : t.monthly;
@@ -1210,6 +1215,7 @@ class Component extends DCLogic {
         joinShadow: '0 1px 3px rgba(20,48,39,.06)',
         joinBtnBg: accent, joinBtnText: '#fff',
         checkColor: accent,
+        go: () => window.open(checkoutUrls[t.id], '_blank', 'noopener'),
       };
     });
 
