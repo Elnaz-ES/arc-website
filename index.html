@@ -519,6 +519,9 @@ html,body{margin:0;padding:0;}
               <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:#8a7f6a;">
                 <span>{{ c.date }}</span>
               </div>
+              <sc-if value="{{ c.badge }}" hint-placeholder-val="{{ false }}">
+                <span style="display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#4a5a2a;background:#e3ecd6;padding:5px 11px;border-radius:999px;line-height:1.35;">{{ c.badge }}</span>
+              </sc-if>
             </div>
           </div>
           <div style="flex:2 1 360px;min-width:260px;">
@@ -573,23 +576,38 @@ html,body{margin:0;padding:0;}
 
   <!-- career & growth -->
   <section style="max-width:1180px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,56px) 0;">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:30px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:8px;">
       <span style="position:relative;width:26px;height:26px;flex:none;"><span style="position:absolute;inset:0;background:#2c4a7a;border-radius:4px;"></span><span style="position:absolute;inset:0;background:#2c4a7a;border-radius:4px;transform:rotate(45deg);"></span></span>
       <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em;color:#143027;margin:0;">Career &amp; growth</h2>
       <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c5612e;background:#f1ddd0;padding:4px 10px;border-radius:999px;">Premium</span>
       <span style="font-size:13px;font-weight:600;color:#8a7f6a;margin-left:2px;">{{ careerNote }}</span>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;">
-      <sc-for list="{{ roadmapPage.career }}" as="c" hint-placeholder-count="2">
-        <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:18px;padding:26px;">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px;">
-            <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#2c4a7a;background:#dfe6f2;padding:6px 12px;border-radius:999px;">{{ c.n }}</span>
-            <span style="font-size:13px;font-weight:600;color:#8a7f6a;">{{ c.date }} · Tue 6pm</span>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 28px;max-width:640px;line-height:1.55;">One dedicated career session every month — a single, focused hour with Hoda, exclusive to Premium members.</p>
+    <div style="background:#1b2f52;color:#eef2fa;border-radius:24px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(199,225,255,.05) 25%,transparent 25%,transparent 75%,rgba(199,225,255,.05) 75%),linear-gradient(45deg,rgba(199,225,255,.05) 25%,transparent 25%,transparent 75%,rgba(199,225,255,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
+      <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);">
+        <div style="flex:1 1 360px;min-width:280px;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:16px;">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1b2f52;background:#c8a24a;padding:5px 12px;border-radius:999px;">{{ roadmapPage.career.format }}</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c8a24a;border:1px solid rgba(200,162,74,.5);padding:4px 11px;border-radius:999px;">Premium only</span>
           </div>
-          <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:19px;color:#143027;line-height:1.25;margin:0 0 8px;">{{ c.title }}</h3>
-          <p style="font-size:15px;color:#6b6456;line-height:1.55;margin:0;">{{ c.desc }}</p>
+          <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,38px);letter-spacing:-0.02em;margin:0 0 12px;line-height:1.08;">{{ roadmapPage.career.title }}</h3>
+          <p style="font-size:16px;line-height:1.6;color:rgba(238,242,250,.82);margin:0 0 18px;max-width:520px;">{{ roadmapPage.career.desc }}</p>
+          <div style="display:flex;align-items:center;gap:9px;">
+            <span style="width:7px;height:7px;background:#c8a24a;transform:rotate(45deg);display:inline-block;flex:none;"></span>
+            <span style="font-size:14px;font-weight:600;color:#eef2fa;">{{ roadmapPage.career.date }}</span>
+          </div>
         </div>
-      </sc-for>
+        <div style="flex:1 1 300px;min-width:260px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c8a24a;margin-bottom:14px;">What we'll cover</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <sc-for list="{{ roadmapPage.career.covers }}" as="cv" hint-placeholder-count="4">
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(238,242,250,.14);font-size:15px;color:rgba(238,242,250,.92);line-height:1.4;">
+                <span style="flex:none;width:7px;height:7px;margin-top:6px;background:#c8a24a;transform:rotate(45deg);display:inline-block;"></span><span>{{ cv }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -880,7 +898,7 @@ html,body{margin:0;padding:0;}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;careerCadence&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Bi-weekly&quot;, &quot;Weekly&quot;], &quot;default&quot;: &quot;Bi-weekly&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;basicPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 35, &quot;min&quot;: 0, &quot;max&quot;: 200, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}, &quot;premiumPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 55, &quot;min&quot;: 0, &quot;max&quot;: 300, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;basicPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 35, &quot;min&quot;: 0, &quot;max&quot;: 200, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}, &quot;premiumPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 55, &quot;min&quot;: 0, &quot;max&quot;: 300, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}}">
 class Component extends DCLogic {
   state = { page: 'home', mobileOpen: false, cartOpen: false, billing: 'monthly', cart: [], faqOpen: 0, vw: 1200, lightboxImg: null, cookingLang: 'en' };
 
@@ -942,8 +960,8 @@ class Component extends DCLogic {
       theme: 'The Everyday Persian Kitchen',
       blurb: 'A month of cooking smarter, time-saving techniques, a practical immigrant kitchen, and weeknight meals the whole family will actually eat.',
       stats: [
-        { n: '4', label: 'cooking nights' },
-        { n: '2', label: 'career sessions' },
+        { n: '4', label: 'live sessions' },
+        { n: '1', label: 'career session' },
         { n: '2', label: 'spotlight sessions' },
       ],
     };
@@ -962,24 +980,27 @@ class Component extends DCLogic {
         { n: '01', day: 'THU', date: 'Aug 3', title: 'Meet the Group & the Plan', host: '',
           topics: ['The Predicament: What are we even trying to do here?', 'Philosophy Corner: On the nature of weekly sessions', 'What We Suggest: Our working tracks and how it all runs'],
           resources: ['Season 1 Program Guide'] },
-        { n: '02', day: 'THU', date: 'Aug 10', title: 'Kitchen Gear: What You Need (and Don\u2019t)', host: '',
-          topics: ['The Predicament: The tools we truly need and the junk we don’t', 'Philosophy Corner: The self-evident truths of pots, pans & trusty sidekicks', 'What We Suggest: What to buy and what to skip'],
-          resources: ['ARC Kitchen Essentials Guide'] },
-        { n: '03', day: 'THU', date: 'Aug 17', title: 'What Is Ghormeh, Really?', host: '',
+        { n: '02', day: 'THU', date: 'Aug 10', title: 'Move & Reset with Hoda', host: 'Live with Hoda', badge: 'Open to all · Free tier: first 20 RSVPs',
+          topics: ['The Predicament: no time, no energy, all week long', 'Philosophy Corner: why 15 honest minutes beat an hour you never do', 'What We Suggest: a repeatable weeknight movement reset'],
+          resources: ['This Month’s Movement Guide'] },
+        { n: '03', day: 'THU', date: 'Aug 17', title: 'What Is Ghormeh, Really?', host: 'Live with Shervin',
           topics: ['The Predicament: Preserving meat in ancient times', 'Philosophy Corner: Why do we still need ghormeh?', 'What We Suggest: Making & storing ghormeh in the modern age'],
           resources: ['Ghormeh Recipe & Storage Guide'] },
-        { n: '04', day: 'THU', date: 'Aug 24', title: 'Open Q&A Night', host: '',
+        { n: '04', day: 'THU', date: 'Aug 24', title: 'Open Q&A Night', host: 'Live with Hoda & Shervin',
           topics: ['Open floor: bring every question you\u2019ve been saving', 'Anything from sessions 1\u20133, no question too small'],
           resources: ['Q&A Recording'] },
       ],
       recipes: [
         { name: 'Crispy Chicken Fillet: fast, no pain, no bloodshed', kind: 'Easy dish of the month', cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#e7d9bf url('photos/recipe-chicken.jpg') center/cover no-repeat" },
-        { name: 'Kitchen gear: what you actually need (and what to skip)', kind: 'Live doc', open: true, cursor: 'pointer', hoverTransform: 'translateY(-3px)', hoverShadow: '0 12px 28px rgba(20,48,39,.12)', docUrl: 'https://www.icloud.com/keynote/08cT6hmOkCjUADW5SB3la566w#ARC%5FKitchen%5FEssentials%5Fpalette', cardBg: "#dcc8a4 url('photos/recipe-ghormeh.jpg?v=2') center/cover no-repeat" },
+        { name: 'Kitchen gear: what you actually need (and what to skip)', kind: 'Live doc', open: true, cursor: 'pointer', hoverTransform: 'translateY(-3px)', hoverShadow: '0 12px 28px rgba(20,48,39,.12)', docUrl: 'https://www.icloud.com/keynote/08cT6hmOkCjUADW5SB3la566w#ARC%5FKitchen%5FEssentials%5Fpalette', cardBg: "#dcc8a4 url('photos/recipe-ghormeh.jpg') center/cover no-repeat" },
       ],
-      career: [
-        { n: 'Session #1', date: 'Aug 15', title: 'Resume Review Workshop', desc: 'Members submit resumes in advance and receive live, personalized feedback on the call.' },
-        { n: 'Session #2', date: 'Aug 29', title: 'Mock Interviews & Hiring Manager Q&A', desc: 'Practice interviews and an open discussion around the common interview mistakes newcomers make.' },
-      ],
+      career: {
+        title: 'Career Lab with Hoda',
+        date: 'Aug 17 · Tue 6pm',
+        format: 'Monthly · Premium',
+        desc: 'One focused hour a month for building a career in a new country — bring your resume, your questions, and your next move.',
+        covers: ['Live resume reviews & personalized feedback', 'Mock interviews & hiring-manager Q&A', 'AI and the changing job market', 'Networking, LinkedIn & personal brand'],
+      },
       spotlight: {
         title: 'Personal Finance Foundations', format: 'Guest Expert Series', date: 'August – September · Sat 11am',
         desc: 'A four-part money course, made simple — from how you think about money to making work optional. Two live sessions a month, no prior knowledge needed.',
@@ -1034,20 +1055,20 @@ class Component extends DCLogic {
     const cookingFa = {
       heading: 'کارگاه‌های آشپزی',
       members: 'ویژهٔ اعضا',
-      intro: 'چهار شب زنده با شروین — کاربردی، بی‌عجله، و ساخته‌شده برای زندگی واقعی در شب‌های شلوغ هفته.',
+      intro: 'چهار شب زندهٔ ماهانه با هدی و شروین — آشپزی، تحرک و زندگی واقعی در شب‌های هفته.',
       inThisSession: 'در این جلسه',
       resourcesLabel: 'منابع',
       sessions: [
         { title: 'معرفی گروه و برنامه', host: 'زنده با شروین', date: '۳ اوت',
           topics: ['شرح مصیبت: هدف ما چیست؟', 'بحث فلسفی: در باب جلسه‌های هفتگی', 'راهکارهای پیشنهادی: لایه‌های کاری و چگونگی کار'],
           resources: ['راهنمای برنامهٔ فصل ۱'] },
-        { title: 'لوازم آشپزی: چه لازم داریم و چه نه', host: 'زنده با شروین', date: '۱۰ اوت',
-          topics: ['شرح مصیبت: چیزهایی که در آشپزخانه به آن‌ها نیاز داریم و آشغال‌هایی که لازم نداریم', 'بحث فلسفی: بدیهیات قابلمه و دیگ و تابه و دیگر ملزومات کمکی', 'راهکارهای پیشنهادی: چه بخریم و چه نخریم'],
-          resources: ['راهنمای لوازم ضروری آشپزخانهٔ ARC'] },
+        { title: 'حرکت و ریست با هدی', host: 'زنده با هدی', date: '۱۰ اوت', badge: 'برای همه · رده رایگان: ۲۰ نفر اول',
+          topics: ['شرح مصیبت: بی‌وقتی و بی‌انرژی در تمام هفته', 'بحث فلسفی: چرا ۱۵ دقیقهٔ واقعی بهتر از یک ساعتی است که هرگز انجام نمی‌دهید', 'راهکارهای پیشنهادی: یک ریست حرکتی تکرارشدنی برای شب‌های هفته'],
+          resources: ['راهنمای حرکت این ماه'] },
         { title: 'قورمه چیست؟', host: 'زنده با شروین', date: '۱۷ اوت',
           topics: ['شرح مصیبت: نگهداری گوشت در عهد عتیق', 'بحث فلسفی: چرا هنوز به قورمه نیاز داریم؟', 'راهکارهای پیشنهادی: تهیه و نگهداری قورمه در عهد جدید'],
           resources: ['دستور و راهنمای نگهداری قورمه'] },
-        { title: 'پرسش و پاسخ', host: 'زنده با شروین', date: '۲۴ اوت',
+        { title: 'پرسش و پاسخ', host: 'زنده با هدی و شروین', date: '۲۴ اوت',
           topics: ['میدان باز — هر پرسشی را که ذخیره کرده‌اید بیاورید', 'هر چیزی از جلسات ۱ تا ۳؛ هیچ سؤالی کوچک نیست'],
           resources: ['ضبط پرسش و پاسخ'] },
       ],
@@ -1056,11 +1077,11 @@ class Component extends DCLogic {
     const cookingRtl = cookingLang === 'fa';
     const cookingSrc = cookingRtl ? cookingFa.sessions : roadmapPage.cooking;
     const cookingList = cookingSrc.map((c, i) => ({
-      n: roadmapPage.cooking[i].n, title: c.title, host: c.host, date: c.date, topics: c.topics, resources: c.resources,
+      n: roadmapPage.cooking[i].n, title: c.title, host: c.host, date: c.date, topics: c.topics, resources: c.resources, badge: c.badge,
     }));
     const cookingCopy = cookingRtl
       ? cookingFa
-      : { heading: 'Live cooking workshops', members: 'Members', intro: 'Four live nights with Shervin: practical, unhurried, and built around real weeknight life.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
+      : { heading: 'Live weekly sessions', members: 'Members', intro: 'Four live nights a month with Hoda & Shervin — cooking, movement, and real weeknight life.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
     const cookingDir = cookingRtl ? 'rtl' : 'ltr';
     const cookingFont = cookingRtl ? "'Vazirmatn', 'Hanken Grotesk', system-ui, sans-serif" : "'Hanken Grotesk', system-ui, sans-serif";
     const cookingHeadFont = cookingRtl ? "'Vazirmatn', 'Sora', sans-serif" : "'Sora', sans-serif";
@@ -1080,7 +1101,7 @@ class Component extends DCLogic {
     ];
     const founders = [
       { name: 'Hoda', role: 'Wellness, career & community', img: 'photos/hoda-child-2.jpg', pos: '68% 20%' },
-      { name: 'Shervin', role: 'Food & live workshops', img: 'photos/shervin-child.jpg', pos: '35% 20%' },
+      { name: 'Shervin', role: 'Food & live workshops', img: 'photos/shervin-child.jpg', pos: 'center 20%' },
     ];
     const benefits = [
       { title: 'Community access', desc: 'A welcoming space hosted on Circle, active every day of the week.' },
@@ -1169,7 +1190,6 @@ class Component extends DCLogic {
     });
     recPosts.forEach(p => { if (p.img) { p.bgStyle = Object.assign(bgFill(p.img, 'center 30%'), { borderRadius: '12px' }); } });
     const annual = s.billing === 'annual';
-    const careerCadence = this.props.careerCadence ?? 'Bi-weekly';
     const basicPrice = this.props.basicPrice ?? 35;
     const premiumPrice = this.props.premiumPrice ?? 55;
     const tierMeta = {
@@ -1181,17 +1201,17 @@ class Component extends DCLogic {
       {
         id: 'free', name: 'Free Member', monthly: 0, annual: 0, cta: 'Start free',
         blurb: 'Explore ARC before you commit. No card required.',
-        features: ['Access to 1 featured recipe', '1 community conversation group', 'Access to one recorded session'],
+        features: ['1 live wellness session/mo with Hoda — first 20 to RSVP', 'Access to 1 featured recipe', '1 community conversation group', 'Access to one recorded session'],
       },
       {
         id: 'basic', name: 'Basic Member', monthly: basicPrice, annual: Math.round(basicPrice * 12 * 0.85), cta: 'Choose Basic',
         blurb: 'The full ARC cooking and community experience.',
-        features: ['All 4 monthly live cooking sessions', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '10% off HodaFit Workout Plans'],
+        features: ['All 4 monthly live sessions with Hoda & Shervin', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '10% off HodaFit Workout Plans'],
       },
       {
         id: 'premium', name: 'Premium Member', monthly: premiumPrice, annual: Math.round(premiumPrice * 12 * 0.85), cta: 'Choose Premium',
         blurb: 'Cooking, community, and professional growth.',
-        features: ['Everything in Basic', careerCadence + ' career & growth sessions', '1 special-topic session each month (investing, skincare, saving, side hustles, etc.)', '20% off HodaFit Workout Plans'],
+        features: ['Everything in Basic', 'Monthly career session with Hoda (resumes, interviews, AI & jobs)', '1 special-topic session each month (investing, skincare, saving, side hustles, etc.)', '20% off HodaFit Workout Plans'],
       },
     ];
     const checkoutUrls = {
@@ -1239,11 +1259,11 @@ class Component extends DCLogic {
     };
 
     const comparison = [
-      { feature: 'Live cooking sessions', free: '—', basic: 'All 4 / mo', premium: 'All 4 / mo' },
+      { feature: 'Live monthly sessions', free: '1 · RSVP', basic: 'All 4 / mo', premium: 'All 4 / mo' },
       { feature: 'Featured recipes', free: '—', basic: 'Monthly', premium: 'Monthly' },
       { feature: 'Community conversations', free: '1 group', basic: 'All groups', premium: 'All groups' },
       { feature: 'Session recordings', free: '1', basic: '✓', premium: '✓' },
-      { feature: 'Career & growth sessions', free: '—', basic: '—', premium: careerCadence },
+      { feature: 'Career session (with Hoda)', free: '—', basic: '—', premium: 'Monthly' },
       { feature: 'Special-topic / spotlight session', free: '—', basic: 'Add for fee', premium: 'Included' },
       { feature: 'HodaFit Workout Plans discount', free: '—', basic: '10%', premium: '20%' },
       { feature: 'Price', free: 'Free', basic: '$' + basicPrice + '/mo', premium: '$' + premiumPrice + '/mo' },
@@ -1281,7 +1301,7 @@ class Component extends DCLogic {
       shervinTextOrder: (s.vw || 1200) < 820 ? 2 : 1,
       shervinPhotoOrder: (s.vw || 1200) < 820 ? 1 : 2,
       cookGridCols: 'repeat(' + ((s.vw || 1200) < 640 ? 1 : (s.vw || 1200) < 1080 ? 2 : 4) + ',minmax(0,1fr))',
-      careerNote: (this.props.careerCadence ?? 'Bi-weekly') === 'Weekly' ? 'Weekly · live sessions' : 'Every other week · 2 live sessions',
+      careerNote: 'Once a month · with Hoda',
       cartCount, cartItems, cartTotal, cartEmpty: s.cart.length === 0,
       cartOpen: s.cartOpen, toggleCart: () => this.setState(st => ({ cartOpen: !st.cartOpen })), closeCart: () => this.setState({ cartOpen: false }),
       insideCards, roadmap, roadmapItems, pastSessions, founders, benefits, shopProducts,
