@@ -94,8 +94,15 @@ html,body{margin:0;padding:0;}
         <p style="font-size:15px;line-height:2;color:#3a4a3f;margin:0;">اگر امکان یا تمایل استفاده از نام و عکس واقعی را ندارید، از شما خواهش می‌کنیم به ARC نپیوندید. از درک و همراهی شما برای حفظ فضای امن و قابل اعتماد این جامعه صمیمانه سپاسگزاریم.</p>
       </div>
 
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;">
-        <span onClick="{{ confirmAgree }}" style="cursor:pointer;flex:1 1 220px;text-align:center;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">I agree, continue · می‌پذیرم</span>
+      <sc-if value="{{ agreePaid }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:22px;padding:16px 18px;background:#efe6d6;border:1px solid rgba(20,48,39,.16);border-radius:14px;display:flex;gap:12px;align-items:flex-start;">
+          <span onClick="{{ toggleAgreeCheck }}" style="flex:none;width:24px;height:24px;border-radius:6px;border:2px solid {{ agreeCheckBorder }};background:{{ agreeCheckBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer;margin-top:1px;user-select:none;">{{ agreeMark }}</span>
+          <span style="font-size:14px;line-height:1.55;color:#3a4a3f;">I confirm I am the cardholder (or authorized to use this card), I am making this payment myself, and I agree to ARC's <a href="./terms.html" target="_blank" style="color:#c5612e;font-weight:600;text-decoration:underline;">Terms &amp; Refund Policy</a>.<span dir="rtl" style="display:block;font-family:'Vazirmatn',sans-serif;margin-top:8px;line-height:1.9;">تأیید می‌کنم که صاحب کارت هستم (یا اجازهٔ استفاده از آن را دارم)، این پرداخت را خودم انجام می‌دهم، و با <a href="./terms.html" target="_blank" style="color:#c5612e;font-weight:600;text-decoration:underline;">شرایط و سیاست بازپرداخت</a> ARC موافقم.</span></span>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
+        <span onClick="{{ confirmAgree }}" style="cursor:{{ agreeBtnCursor }};opacity:{{ agreeBtnOpacity }};transition:opacity .15s;flex:1 1 220px;text-align:center;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">I agree, continue · می‌پذیرم</span>
         <span onClick="{{ closeAgree }}" style="cursor:pointer;flex:0 1 auto;text-align:center;background:transparent;color:#143027;border:1.5px solid rgba(20,48,39,.28);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">Cancel · لغو</span>
       </div>
     </div>
@@ -1270,7 +1277,7 @@ class Component extends DCLogic {
         joinShadow: '0 1px 3px rgba(20,48,39,.06)',
         joinBtnBg: accent, joinBtnText: '#fff',
         checkColor: accent,
-        go: () => this.setState({ agreeUrl: (annual && checkoutUrlsAnnual[t.id]) || checkoutUrls[t.id] }),
+        go: () => this.setState({ agreeUrl: (annual && checkoutUrlsAnnual[t.id]) || checkoutUrls[t.id], agreePaid: t.id !== 'free', agreeChecked: false }),
       };
     });
 
@@ -1342,8 +1349,15 @@ class Component extends DCLogic {
       openLightbox: (imgUrl) => { if (imgUrl) this.setState({ lightboxImg: imgUrl }); },
       closeLightbox: () => this.setState({ lightboxImg: null }),
       agreeOpen: !!s.agreeUrl,
-      confirmAgree: () => { const u = this.state.agreeUrl; this.setState({ agreeUrl: null }); if (u) window.open(u, '_blank', 'noopener'); },
-      closeAgree: () => this.setState({ agreeUrl: null }),
+      agreePaid: !!s.agreePaid,
+      agreeMark: s.agreeChecked ? '✓' : '',
+      agreeCheckBg: s.agreeChecked ? '#c5612e' : '#fff',
+      agreeCheckBorder: s.agreeChecked ? '#c5612e' : 'rgba(20,48,39,.4)',
+      agreeBtnOpacity: (!s.agreePaid || s.agreeChecked) ? '1' : '.45',
+      agreeBtnCursor: (!s.agreePaid || s.agreeChecked) ? 'pointer' : 'not-allowed',
+      toggleAgreeCheck: () => this.setState(st => ({ agreeChecked: !st.agreeChecked })),
+      confirmAgree: () => { if (this.state.agreePaid && !this.state.agreeChecked) return; const u = this.state.agreeUrl; this.setState({ agreeUrl: null, agreeChecked: false }); if (u) window.open(u, '_blank', 'noopener'); },
+      closeAgree: () => this.setState({ agreeUrl: null, agreeChecked: false }),
       lightboxImg: s.lightboxImg,
       lightboxBg: s.lightboxImg ? 'url(' + s.lightboxImg + ')' : 'none',
     };
