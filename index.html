@@ -73,6 +73,35 @@ html,body{margin:0;padding:0;}
 
 <!-- cart removed — no store yet -->
 
+<!-- ===== JOIN AGREEMENT MODAL ===== -->
+<sc-if value="{{ agreeOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:60;background:rgba(20,48,39,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;animation:arcFade .2s ease;">
+    <div style="background:#f6efe3;border-radius:22px;max-width:600px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(20,48,39,.12);padding:clamp(24px,4vw,40px);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;margin-bottom:12px;">Community rule · قانون جامعه</div>
+      <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(20px,3vw,26px);color:#143027;margin:0 0 16px;line-height:1.25;">Before you join ARC, please read our most important community rule</h2>
+      <p style="font-size:15.5px;line-height:1.6;color:#3a4a3f;margin:0 0 14px;"><strong style="color:#143027;">No anonymous accounts.</strong> All members must join using their real name and a real profile photo.</p>
+      <p style="font-size:15.5px;line-height:1.6;color:#3a4a3f;margin:0 0 14px;">We understand that this may not be possible for everyone, and we completely respect that. That's why we want to be upfront about it before you sign up.</p>
+      <p style="font-size:15.5px;line-height:1.6;color:#3a4a3f;margin:0 0 14px;">Our goal is to build a community based on trust, meaningful relationships, and genuine conversations. Anonymity makes it impossible!</p>
+      <p style="font-size:15.5px;line-height:1.6;color:#3a4a3f;margin:0;">If using your real name and photo isn't something you're comfortable with, we kindly ask that you don't join ARC. We truly appreciate your understanding and helping us create the kind of community we're all looking for.</p>
+
+      <div style="height:1px;background:rgba(20,48,39,.14);margin:22px 0;"></div>
+
+      <div dir="rtl" style="font-family:'Vazirmatn',sans-serif;text-align:right;">
+        <h3 style="font-family:'Vazirmatn',sans-serif;font-weight:700;font-size:clamp(17px,2.6vw,21px);color:#143027;margin:0 0 16px;line-height:1.6;">قبل از اینکه به ARC بپیوندید، لطفاً مهم‌ترین قانون جامعه را بدانید</h3>
+        <p style="font-size:15px;line-height:2;color:#3a4a3f;margin:0 0 12px;"><strong style="color:#143027;">عضویت با هویت واقعی الزامی است.</strong> همه اعضا باید با نام واقعی و عکس واقعی وارد شوند.</p>
+        <p style="font-size:15px;line-height:2;color:#3a4a3f;margin:0 0 12px;">می‌دانیم که این موضوع برای همه امکان‌پذیر یا مناسب نیست و کاملاً به آن احترام می‌گذاریم. به همین دلیل می‌خواهیم از همان ابتدا این موضوع را شفاف اعلام کنیم.</p>
+        <p style="font-size:15px;line-height:2;color:#3a4a3f;margin:0 0 12px;">هدف ما ساختن یک جامعه بر پایه اعتماد، ارتباطات واقعی و گفت‌وگوهای صادقانه است. ناشناس بودن، مانعی برای شکل گرفتن چنین فضایی است.</p>
+        <p style="font-size:15px;line-height:2;color:#3a4a3f;margin:0;">اگر امکان یا تمایل استفاده از نام و عکس واقعی را ندارید، از شما خواهش می‌کنیم به ARC نپیوندید. از درک و همراهی شما برای حفظ فضای امن و قابل اعتماد این جامعه صمیمانه سپاسگزاریم.</p>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;">
+        <span onClick="{{ confirmAgree }}" style="cursor:pointer;flex:1 1 220px;text-align:center;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">I agree, continue · می‌پذیرم</span>
+        <span onClick="{{ closeAgree }}" style="cursor:pointer;flex:0 1 auto;text-align:center;background:transparent;color:#143027;border:1.5px solid rgba(20,48,39,.28);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">Cancel · لغو</span>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
 <!-- ============ PAGES ============ -->
 
 <!-- ===== HOME ===== -->
@@ -1241,7 +1270,7 @@ class Component extends DCLogic {
         joinShadow: '0 1px 3px rgba(20,48,39,.06)',
         joinBtnBg: accent, joinBtnText: '#fff',
         checkColor: accent,
-        go: () => window.open((annual && checkoutUrlsAnnual[t.id]) || checkoutUrls[t.id], '_blank', 'noopener'),
+        go: () => this.setState({ agreeUrl: (annual && checkoutUrlsAnnual[t.id]) || checkoutUrls[t.id] }),
       };
     });
 
@@ -1312,6 +1341,9 @@ class Component extends DCLogic {
       annualBg: annual ? '#143027' : 'transparent', annualColor: annual ? '#f6efe3' : '#5b5446',
       openLightbox: (imgUrl) => { if (imgUrl) this.setState({ lightboxImg: imgUrl }); },
       closeLightbox: () => this.setState({ lightboxImg: null }),
+      agreeOpen: !!s.agreeUrl,
+      confirmAgree: () => { const u = this.state.agreeUrl; this.setState({ agreeUrl: null }); if (u) window.open(u, '_blank', 'noopener'); },
+      closeAgree: () => this.setState({ agreeUrl: null }),
       lightboxImg: s.lightboxImg,
       lightboxBg: s.lightboxImg ? 'url(' + s.lightboxImg + ')' : 'none',
     };
