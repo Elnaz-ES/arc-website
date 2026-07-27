@@ -79,7 +79,7 @@ html,body{margin:0;padding:0;}
 <sc-if value="{{ agreeOpen }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;z-index:60;background:rgba(20,48,39,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;animation:arcFade .2s ease;">
     <div style="background:#f6efe3;border-radius:22px;max-width:600px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45);border:1px solid rgba(20,48,39,.12);padding:clamp(24px,4vw,40px);">
-      <div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;margin-bottom:12px;">Community rule · قانون کامیونیتی</div>
+      <div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;margin-bottom:12px;">Community rule</div>
       <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(20px,3vw,26px);color:#143027;margin:0 0 16px;line-height:1.25;">Before you join ARC, please read our most important community rule</h2>
       <p style="font-size:15.5px;line-height:1.6;color:#3a4a3f;margin:0 0 14px;"><strong style="color:#143027;">No anonymous accounts.</strong> All members must join using their real name and a real profile photo.</p>
       <p style="font-size:15.5px;line-height:1.6;color:#143027;font-weight:600;margin:0 0 14px;">Accounts without a real profile photo and a real first and last name will be removed from the community.</p>
@@ -101,13 +101,13 @@ html,body{margin:0;padding:0;}
       <sc-if value="{{ agreePaid }}" hint-placeholder-val="{{ true }}">
         <div style="margin-top:22px;padding:16px 18px;background:#efe6d6;border:1px solid rgba(20,48,39,.16);border-radius:14px;display:flex;gap:12px;align-items:flex-start;">
           <span onClick="{{ toggleAgreeCheck }}" style="flex:none;width:24px;height:24px;border-radius:6px;border:2px solid {{ agreeCheckBorder }};background:{{ agreeCheckBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer;margin-top:1px;user-select:none;">{{ agreeMark }}</span>
-          <span style="font-size:14px;line-height:1.55;color:#3a4a3f;">I confirm I am the cardholder (or authorized to use this card), I am making this payment myself, and I agree to ARC's <a href="./terms.html" target="_blank" style="color:#c5612e;font-weight:600;text-decoration:underline;">Terms &amp; Refund Policy</a>.<span dir="rtl" style="display:block;font-family:'Vazirmatn',sans-serif;margin-top:8px;line-height:1.9;">تأیید می‌کنم که صاحب کارت هستم (یا اجازهٔ استفاده از آن را دارم)، این پرداخت را خودم انجام می‌دهم، و با <a href="./terms.html" target="_blank" style="color:#c5612e;font-weight:600;text-decoration:underline;">شرایط و سیاست بازپرداخت</a> ARC موافقم.</span></span>
+          <span style="font-size:14px;line-height:1.55;color:#3a4a3f;">I confirm I am the cardholder (or authorized to use this card), I am making this payment myself, and I agree to ARC's <a href="./terms.html" target="_blank" style="color:#c5612e;font-weight:600;text-decoration:underline;">Terms &amp; Refund Policy</a>.</span>
         </div>
       </sc-if>
 
       <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
-        <span onClick="{{ confirmAgree }}" style="cursor:{{ agreeBtnCursor }};opacity:{{ agreeBtnOpacity }};transition:opacity .15s;flex:1 1 220px;text-align:center;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">I agree, continue · می‌پذیرم</span>
-        <span onClick="{{ closeAgree }}" style="cursor:pointer;flex:0 1 auto;text-align:center;background:transparent;color:#143027;border:1.5px solid rgba(20,48,39,.28);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">Cancel · لغو</span>
+        <span onClick="{{ confirmAgree }}" style="cursor:{{ agreeBtnCursor }};opacity:{{ agreeBtnOpacity }};transition:opacity .15s;flex:1 1 220px;text-align:center;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">I agree, continue</span>
+        <span onClick="{{ closeAgree }}" style="cursor:pointer;flex:0 1 auto;text-align:center;background:transparent;color:#143027;border:1.5px solid rgba(20,48,39,.28);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 24px;border-radius:999px;">Cancel</span>
       </div>
     </div>
   </div>
@@ -1039,7 +1039,7 @@ class Component extends DCLogic {
       { week: '01', date: 'Fri Aug 7', type: 'Cooking', title: 'ARC Kickoff · Kitchen Essentials', meta: '5–6:30 PM PT', color: '#c5612e', chipBg: '#f4e3d8', chipInk: '#8a3a1a', access: 'Juniper & up' },
       { week: '02', date: 'Sat Aug 8', type: 'Career Lab', title: 'Big Career Moves in the Era of AI', meta: '12–1 PM PT', color: '#2c4a7a', chipBg: '#dde4ef', chipInk: '#1b2f52', access: 'Cypress' },
       { week: '03', date: 'Sat Aug 22', type: 'Spotlight', title: 'Money Mindset', meta: '12–1 PM PT', color: '#d6a23f', chipBg: '#f7edd4', chipInk: '#74561c', access: 'Cypress' },
-      { week: '04', date: 'Fri Aug 28', type: 'Open to all tiers', title: 'Sex, Gender & Relationships', meta: 'Dr. Behzad · 5–6:30 PM PT', color: '#1f7a5a', chipBg: '#e2f0e8', chipInk: '#14563d', access: 'All tiers' },
+      { week: '04', date: 'Fri Aug 28', type: 'Open to all tiers', title: 'Sex, Gender & Relationships', meta: 'Dr. Behzad Sorouri Khorashad · 5–6:30 PM PT', color: '#1f7a5a', chipBg: '#e2f0e8', chipInk: '#14563d', access: 'All tiers' },
     ];
 
     // ---- session types & the full Aug–Oct schedule ----
@@ -1057,7 +1057,7 @@ class Component extends DCLogic {
         { d: 14, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'The Base of Every Stew' },
         { d: 21, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
         { d: 22, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Money Mindset' },
-        { d: 28, dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Dr. Behzad',     title: 'Sex, Gender & Relationships' },
+        { d: 28, dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Dr. Behzad Sorouri Khorashad',     title: 'Sex, Gender & Relationships' },
         { d: 29, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Money Goal Setting' },
       ] },
       { key: 'sep', name: 'September', short: 'Sept', y: 2026, mi: 8, label: 'September 2026', status: 'Sneak peek', events: [
@@ -1115,7 +1115,7 @@ class Component extends DCLogic {
       { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['career', 'money']) },
     ];
     const freeSessions = [
-      { date: 'Fri Aug 28', title: 'Sex, Gender & Relationships', host: 'with Dr. Behzad' },
+      { date: 'Fri Aug 28', title: 'Sex, Gender & Relationships', host: 'with Dr. Behzad Sorouri Khorashad' },
       { date: 'Fri Sept 11', title: 'Building Real Friendships Abroad', host: 'with Hoda' },
       { date: 'Fri Oct 2', title: 'Cooking the Season', host: 'with Shervin' },
     ];
@@ -1134,7 +1134,7 @@ class Component extends DCLogic {
         { n: '03', type: 'qa', date: 'Fri Aug 21', time: '5–6:30 PM PT', title: 'Open Q&A Night', host: '',
           topics: ['Open floor: bring every question you\u2019ve been saving', 'Anything from this month\u2019s sessions — no question too small'],
           resources: ['Q&A Recording'] },
-        { n: '04', type: 'free', date: 'Fri Aug 28', time: '5–6:30 PM PT', title: 'Sex, Gender & Relationships', host: 'Live with Dr. Behzad',
+        { n: '04', type: 'free', date: 'Fri Aug 28', time: '5–6:30 PM PT', title: 'Sex, Gender & Relationships', host: 'Live with Dr. Behzad Sorouri Khorashad',
           topics: ['The conversations our families never had with us', 'Intimacy, consent & relationships across two cultures', 'Raising kids with a healthier script than we were given'],
           resources: ['Session Recording'] },
       ],
