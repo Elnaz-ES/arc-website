@@ -985,11 +985,30 @@ class Component extends DCLogic {
     this._r = () => this.setState({ vw: window.innerWidth });
     window.addEventListener('resize', this._r);
     this.setState({ vw: window.innerWidth });
+    this._syncFromHash();
+    this._h = () => this._syncFromHash();
+    window.addEventListener('hashchange', this._h);
   }
-  componentWillUnmount() { window.removeEventListener('resize', this._r); }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('hashchange', this._h); }
+
+  // URL hash <-> page mapping, so pages have shareable links & back/forward works
+  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story' };
+  _pageToHash = { home: '', join: 'membership', community: 'community', calendar: 'calendar', story: 'story' };
+  _syncFromHash() {
+    try {
+      const h = (window.location.hash || '').replace('#', '').toLowerCase();
+      const page = this._hashToPage[h];
+      if (page && page !== this.state.page) this.setState({ page, mobileOpen: false });
+    } catch (e) {}
+  }
 
   go(page) {
     this.setState({ page, mobileOpen: false });
+    try {
+      const h = this._pageToHash[page];
+      const url = window.location.pathname + window.location.search + (h ? '#' + h : '');
+      window.history.pushState(null, '', url);
+    } catch (e) {}
     try { window.scrollTo(0, 0); } catch (e) {}
   }
   add(p) {
