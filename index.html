@@ -381,7 +381,7 @@ html,body{margin:0;padding:0;}
         </div>
         <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">August</div>
         <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">The Everyday Persian Kitchen</h2>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and one workshop this month that every tier gets, free Sapling included. September and October are already planned — see them on the Calendar. All times Pacific.</p>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and one workshop this month that every tier gets, free Sapling included. September and October are already planned — see them on the Calendar. All times Eastern.</p>
         
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
@@ -460,7 +460,7 @@ html,body{margin:0;padding:0;}
       <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#74561c;background:#f7edd4;padding:4px 10px;border-radius:999px;">Cypress</span>
       <span style="font-size:13px;font-weight:600;color:#8a7f6a;margin-left:2px;">{{ careerNote }}</span>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 28px;max-width:640px;line-height:1.55;">One Career Lab every month — a single, focused hour with Hoda on a Saturday at noon Pacific, exclusive to Cypress members.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 28px;max-width:640px;line-height:1.55;">One Career Lab every month — a single, focused hour with Hoda on a Saturday at noon Eastern, exclusive to Cypress members.</p>
     <div style="background:#1b2f52;color:#eef2fa;border-radius:24px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(199,225,255,.05) 25%,transparent 25%,transparent 75%,rgba(199,225,255,.05) 75%),linear-gradient(45deg,rgba(199,225,255,.05) 25%,transparent 25%,transparent 75%,rgba(199,225,255,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
       <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);">
         <div style="flex:1 1 360px;min-width:280px;">
@@ -752,7 +752,7 @@ html,body{margin:0;padding:0;}
         </div>
         <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">Season one</div>
         <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">Three months, planned to the day.</h1>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 26px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and one workshop every month that every tier gets, free Sapling included. Pick a month, see it all. All times Pacific.</p>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 26px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and one workshop every month that every tier gets, free Sapling included. Pick a month, see it all. All times Eastern.</p>
         <span onClick="{{ goAugust }}" style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:14px 26px;border-radius:999px;">See August in full →</span>
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
@@ -777,7 +777,7 @@ html,body{margin:0;padding:0;}
         <span onClick="{{ setCalAgenda }}" style="cursor:pointer;padding:8px 18px;border-radius:999px;background:{{ calAgBg }};color:{{ calAgColor }};transition:background .2s,color .2s;">List</span>
       </div>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, three months out — all of them live. Friday workshops run 5–6:30 PM, Saturday Spotlight and Career Lab run 12–1 PM — <strong style="color:#143027;font-weight:600;">all times Pacific</strong>.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, three months out — all of them live. Friday workshops run 5–6:30 PM, Saturday Spotlight and Career Lab run 12–1 PM — <strong style="color:#143027;font-weight:600;">all times Eastern</strong>.</p>
 
     <!-- month tabs -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
@@ -1062,10 +1062,10 @@ class Component extends DCLogic {
       ],
     };
     const roadmapItems = [
-      { week: '01', date: 'Fri Aug 7', type: 'Cooking', title: 'ARC Kickoff · Kitchen Essentials', meta: '5–6:30 PM PT', color: '#c5612e', chipBg: '#f4e3d8', chipInk: '#8a3a1a', access: 'Juniper & up' },
-      { week: '02', date: 'Sat Aug 8', type: 'Career Lab', title: 'Big Career Moves in the Era of AI', meta: '12–1 PM PT', color: '#2c4a7a', chipBg: '#dde4ef', chipInk: '#1b2f52', access: 'Cypress' },
-      { week: '03', date: 'Sat Aug 22', type: 'Spotlight', title: 'Money Mindset', meta: '12–1 PM PT', color: '#d6a23f', chipBg: '#f7edd4', chipInk: '#74561c', access: 'Cypress' },
-      { week: '04', date: 'Fri Aug 28', type: 'Open to all tiers', title: 'Sex, Gender & Relationships', meta: 'Dr. Behzad Sorouri Khorashad · 5–6:30 PM PT', color: '#1f7a5a', chipBg: '#e2f0e8', chipInk: '#14563d', access: 'All tiers' },
+      { week: '01', date: 'Fri Aug 7', type: 'Cooking', title: 'ARC Kickoff · Kitchen Essentials', meta: '5–6:30 PM ET', color: '#c5612e', chipBg: '#f4e3d8', chipInk: '#8a3a1a', access: 'Juniper & up' },
+      { week: '02', date: 'Sat Aug 8', type: 'Career Lab', title: 'Big Career Moves in the Era of AI', meta: '12–1 PM ET', color: '#2c4a7a', chipBg: '#dde4ef', chipInk: '#1b2f52', access: 'Cypress' },
+      { week: '03', date: 'Sat Aug 22', type: 'Spotlight', title: 'Money Mindset', meta: '12–1 PM ET', color: '#d6a23f', chipBg: '#f7edd4', chipInk: '#74561c', access: 'Cypress' },
+      { week: '04', date: 'Fri Aug 28', type: 'Open to all tiers', title: 'Sex, Gender & Relationships', meta: 'Dr. Behzad Sorouri Khorashad · 5–6:30 PM ET', color: '#1f7a5a', chipBg: '#e2f0e8', chipInk: '#14563d', access: 'All tiers' },
     ];
 
     // ---- session types & the full Aug–Oct schedule ----
@@ -1151,16 +1151,16 @@ class Component extends DCLogic {
       month: 'August',
       dateRange: 'August 2026',
       cooking: [
-        { n: '01', type: 'cooking', date: 'Fri Aug 7', time: '5–6:30 PM PT', title: 'ARC Kickoff · Introduction · Kitchen Essentials', host: '',
+        { n: '01', type: 'cooking', date: 'Fri Aug 7', time: '5–6:30 PM ET', title: 'ARC Kickoff · Introduction · Kitchen Essentials', host: '',
           topics: ['Who we are, and how a month at ARC actually runs', 'The Predicament: a new kitchen, no tools, no time', 'What We Suggest: the short list of gear that earns its place'],
           resources: ['Kitchen Essentials Guide'] },
-        { n: '02', type: 'cooking', date: 'Fri Aug 14', time: '5–6:30 PM PT', title: 'The Base of Every Stew', host: '',
+        { n: '02', type: 'cooking', date: 'Fri Aug 14', time: '5–6:30 PM ET', title: 'The Base of Every Stew', host: '',
           topics: ['The Predicament: preserving meat before refrigeration', 'Philosophy Corner: why we still need ghormeh', 'What We Suggest: making & storing ghormeh in a modern kitchen'],
           resources: ['Ghormeh Recipe & Storage Guide'] },
-        { n: '03', type: 'qa', date: 'Fri Aug 21', time: '5–6:30 PM PT', title: 'Open Q&A Night', host: '',
+        { n: '03', type: 'qa', date: 'Fri Aug 21', time: '5–6:30 PM ET', title: 'Open Q&A Night', host: '',
           topics: ['Open floor: bring every question you\u2019ve been saving', 'Anything from this month\u2019s sessions — no question too small'],
           resources: ['Q&A Recording'] },
-        { n: '04', type: 'free', date: 'Fri Aug 28', time: '5–6:30 PM PT', title: 'Sex, Gender & Relationships', host: 'Live with Dr. Behzad Sorouri Khorashad',
+        { n: '04', type: 'free', date: 'Fri Aug 28', time: '5–6:30 PM ET', title: 'Sex, Gender & Relationships', host: 'Live with Dr. Behzad Sorouri Khorashad',
           topics: ['The conversations our families never had with us', 'Intimacy, consent & relationships across two cultures', 'Raising kids with a healthier script than we were given'],
           resources: ['Session Recording'] },
       ],
@@ -1170,7 +1170,7 @@ class Component extends DCLogic {
       ],
       career: {
         title: 'Big Career Moves in the Era of AI',
-        date: 'Sat Aug 8 · 12–1 PM PT',
+        date: 'Sat Aug 8 · 12–1 PM ET',
         format: 'Career Lab · Monthly',
         desc: 'This month\u2019s Career Lab with Hoda: what AI is actually changing about hiring, and how to aim for a bigger move instead of a sideways one.',
         covers: ['What AI is really changing about hiring right now', 'Reading the market: which roles are growing, which are shrinking', 'Positioning yourself for a step up, not a step sideways', 'The skills worth learning this year — and the ones that aren\u2019t'],
@@ -1180,25 +1180,25 @@ class Component extends DCLogic {
         ],
       },
       spotlight: {
-        title: 'Personal Finance Foundations', format: 'Guest Expert Series', date: 'Aug – Oct · Saturdays 12–1 PM PT',
+        title: 'Personal Finance Foundations', format: 'Guest Expert Series', date: 'Aug – Oct · Saturdays 12–1 PM ET',
         desc: 'A six-part money course, made simple — from how you think about money to buying your first index fund. Two live sessions a month, August through October. No prior knowledge needed.',
         months: [
           { month: 'August', label: 'Sessions 1 & 2', tag: 'Live this month', tagBg: '#d6a23f', tagColor: '#143027', cardBg: '#fdf4e0', cardBorder: '1.5px solid rgba(214,162,63,.55)', sessions: [
-            { n: '01', title: 'Money Mindset', sub: 'How to think about money — before you manage it.', date: 'Sat Aug 22 · 12–1 PM PT',
+            { n: '01', title: 'Money Mindset', sub: 'How to think about money — before you manage it.', date: 'Sat Aug 22 · 12–1 PM ET',
               topics: ['Behavior beats math — it\u2019s 80/20', 'Scarcity vs. growth thinking', 'Pay yourself first, automatically', 'Assets vs. liabilities', 'The real cost of waiting'] },
-            { n: '02', title: 'Money Goal Setting', sub: 'Turn “I should save more” into numbers with dates on them.', date: 'Sat Aug 29 · 12–1 PM PT',
+            { n: '02', title: 'Money Goal Setting', sub: 'Turn “I should save more” into numbers with dates on them.', date: 'Sat Aug 29 · 12–1 PM ET',
               topics: ['Name the goal, then price it', 'Short, medium & long-term buckets', 'Sinking funds for the predictable stuff', 'One account per goal', 'Course-correcting without quitting'] },
           ]},
           { month: 'September', label: 'Sessions 3 & 4', tag: '', tagBg: 'transparent', tagColor: 'transparent', cardBg: '#fbf6ec', cardBorder: '1px solid rgba(20,48,39,.1)', sessions: [
-            { n: '03', title: 'Budgeting & Saving', sub: 'Tell your money where to go — instead of wondering where it went.', date: 'Sat Sept 19 · 12–1 PM PT',
+            { n: '03', title: 'Budgeting & Saving', sub: 'Tell your money where to go — instead of wondering where it went.', date: 'Sat Sept 19 · 12–1 PM ET',
               topics: ['Know your three numbers', 'The 50/30/20 rule', 'Build an emergency fund', 'Cut the Big Three first', 'Automate everything on payday'] },
-            { n: '04', title: 'Planning for Retirement', sub: 'What “enough” looks like, and the math to get there.', date: 'Sat Sept 26 · 12–1 PM PT',
+            { n: '04', title: 'Planning for Retirement', sub: 'What “enough” looks like, and the math to get there.', date: 'Sat Sept 26 · 12–1 PM ET',
               topics: ['401(k), Roth IRA & HSA, plainly explained', 'Employer match: the free-money test', 'Your number = yearly spending × 25', 'Starting late, and starting over abroad', 'The 4% rule and what it assumes'] },
           ]},
           { month: 'October', label: 'Sessions 5 & 6', tag: '', tagBg: 'transparent', tagColor: 'transparent', cardBg: '#fbf6ec', cardBorder: '1px solid rgba(20,48,39,.1)', sessions: [
-            { n: '05', title: 'Investment Mindset', sub: 'Make your money work while you sleep.', date: 'Sat Oct 10 · 12–1 PM PT',
+            { n: '05', title: 'Investment Mindset', sub: 'Make your money work while you sleep.', date: 'Sat Oct 10 · 12–1 PM ET',
               topics: ['Compound interest, the snowball', 'Risk vs. return, honestly', 'Time in the market beats timing it', 'Dollar-cost averaging', 'The real cost of waiting a year'] },
-            { n: '06', title: 'Stock Market Investing', sub: 'From “I don\u2019t understand stocks” to your first position.', date: 'Sat Oct 24 · 12–1 PM PT',
+            { n: '06', title: 'Stock Market Investing', sub: 'From “I don\u2019t understand stocks” to your first position.', date: 'Sat Oct 24 · 12–1 PM ET',
               topics: ['Index funds: owning everything at once', 'Stocks, bonds, ETFs & mutual funds', 'How to open and fund a brokerage', 'Fees, taxes & what quietly eats returns', 'Building a portfolio you can ignore'] },
           ]},
         ],
@@ -1214,20 +1214,20 @@ class Component extends DCLogic {
     const cookingFa = {
       heading: 'کارگاه‌های جمعه',
       members: 'ویژهٔ اعضا',
-      intro: 'چهار شب جمعه در ماه اوت — آشپزی با شروین، شب پرسش و پاسخ، و یک کارگاه که همهٔ رده‌ها، از جمله Sapling رایگان، در آن هستند. همهٔ ساعت‌ها به وقت کالیفرنیا.',
+      intro: 'چهار شب جمعه در ماه اوت — آشپزی با شروین، شب پرسش و پاسخ، و یک کارگاه که همهٔ رده‌ها، از جمله Sapling رایگان، در آن هستند. همهٔ ساعت‌ها به وقت شرق آمریکا.',
       inThisSession: 'در این جلسه',
       resourcesLabel: 'منابع',
       sessions: [
-        { title: 'شروع ARC · معرفی · ضروریات آشپزخانه', host: '', date: 'جمعه ۷ اوت', time: '۵ تا ۶:۳۰ عصر (وقت کالیفرنیا)', typeLabel: 'آشپزی',
+        { title: 'شروع ARC · معرفی · ضروریات آشپزخانه', host: '', date: 'جمعه ۷ اوت', time: '۵ تا ۶:۳۰ عصر (وقت شرق آمریکا)', typeLabel: 'آشپزی',
           topics: ['ما کی هستیم و یک ماه در ARC چطور می‌گذرد', 'شرح مصیبت: آشپزخانهٔ تازه، بی‌ابزار و بی‌وقت', 'راهکارهای پیشنهادی: فهرست کوتاه وسایلی که واقعاً لازم‌اند'],
           resources: ['راهنمای ضروریات آشپزخانه'] },
-        { title: 'پایهٔ خورش‌ها و قورمه', host: '', date: 'جمعه ۱۴ اوت', time: '۵ تا ۶:۳۰ عصر (وقت کالیفرنیا)', typeLabel: 'آشپزی',
+        { title: 'پایهٔ خورش‌ها و قورمه', host: '', date: 'جمعه ۱۴ اوت', time: '۵ تا ۶:۳۰ عصر (وقت شرق آمریکا)', typeLabel: 'آشپزی',
           topics: ['شرح مصیبت: نگهداری گوشت در عهد عتیق', 'بحث فلسفی: چرا هنوز به قورمه نیاز داریم؟', 'راهکارهای پیشنهادی: تهیه و نگهداری قورمه در عهد جدید'],
           resources: ['دستور و راهنمای نگهداری قورمه'] },
-        { title: 'شب پرسش و پاسخ', host: '', date: 'جمعه ۲۱ اوت', time: '۵ تا ۶:۳۰ عصر (وقت کالیفرنیا)', typeLabel: 'پرسش و پاسخ',
+        { title: 'شب پرسش و پاسخ', host: '', date: 'جمعه ۲۱ اوت', time: '۵ تا ۶:۳۰ عصر (وقت شرق آمریکا)', typeLabel: 'پرسش و پاسخ',
           topics: ['میدان باز — هر پرسشی را که ذخیره کرده‌اید بیاورید', 'هر چیزی از جلسات این ماه؛ هیچ سؤالی کوچک نیست'],
           resources: ['ضبط پرسش و پاسخ'] },
-        { title: 'سکس، جنسیت و روابط', host: 'زنده با دکتر بهزاد سروری خوراشاد', date: 'جمعه ۲۸ اوت', time: '۵ تا ۶:۳۰ عصر (وقت کالیفرنیا)', typeLabel: 'رایگان برای همه',
+        { title: 'سکس، جنسیت و روابط', host: 'زنده با دکتر بهزاد سروری خوراشاد', date: 'جمعه ۲۸ اوت', time: '۵ تا ۶:۳۰ عصر (وقت شرق آمریکا)', typeLabel: 'رایگان برای همه',
           topics: ['گفت‌وگوهایی که خانواده‌هایمان هرگز با ما نکردند', 'صمیمیت، رضایت و رابطه در میانهٔ دو فرهنگ', 'بزرگ‌کردن بچه‌ها با روایتی سالم‌تر از آنچه به ما دادند'],
           resources: ['ضبط جلسه'] },
       ],
@@ -1250,7 +1250,7 @@ class Component extends DCLogic {
     });
     const cookingCopy = cookingRtl
       ? cookingFa
-      : { heading: 'Friday workshops', members: 'Members', intro: 'Four Friday nights in August — cooking with Shervin, an open Q&A, and one workshop that every tier gets, free Sapling included. Every ARC session is live; these are the weeknight workshops. All times Pacific.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
+      : { heading: 'Friday workshops', members: 'Members', intro: 'Four Friday nights in August — cooking with Shervin, an open Q&A, and one workshop that every tier gets, free Sapling included. Every ARC session is live; these are the weeknight workshops. All times Eastern.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
     const cookingDir = cookingRtl ? 'rtl' : 'ltr';
     const cookingFont = cookingRtl ? "'Vazirmatn', 'Hanken Grotesk', system-ui, sans-serif" : "'Hanken Grotesk', system-ui, sans-serif";
     const cookingHeadFont = cookingRtl ? "'Vazirmatn', 'Sora', sans-serif" : "'Sora', sans-serif";
