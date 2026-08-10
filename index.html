@@ -18,6 +18,8 @@
 html,body{margin:0;padding:0;}
 @keyframes arcFade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 ::selection{background:#d6a23f;color:#143027;}
+/* Mobile: stack pricing tiers Cypress → Juniper → Sapling (reverse of desktop order) */
+@media (max-width:600px){.arc-tiers{display:flex!important;flex-direction:column-reverse!important;}}
 </style>
 </helmet>
 
@@ -619,7 +621,7 @@ html,body{margin:0;padding:0;}
 
   <!-- pricing cards -->
   <section style="max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;align-items:start;">
+    <div class="arc-tiers" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;align-items:start;">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
         <div style="background:{{ t.joinBg }};color:{{ t.joinText }};border:{{ t.joinBorder }};border-radius:24px;padding:34px 30px 30px;position:relative;box-shadow:{{ t.joinShadow }};overflow:hidden;">
           <span style="position:absolute;top:0;left:0;right:0;height:5px;background:{{ t.accent }};"></span>
