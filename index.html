@@ -20,6 +20,8 @@ html,body{margin:0;padding:0;}
 ::selection{background:#d6a23f;color:#143027;}
 /* Mobile: stack pricing tiers Cypress → Juniper → Sapling (reverse of desktop order) */
 @media (max-width:600px){.arc-tiers{display:flex!important;flex-direction:column-reverse!important;}}
+/* Career Lab month tabs: below the width where all three fit in one row, stack them full-width (no 2+1 break) */
+@media (max-width:680px){.career-tab{flex-basis:100%!important;min-width:0!important;}}
 </style>
 </helmet>
 
@@ -467,7 +469,7 @@ html,body{margin:0;padding:0;}
     <!-- month tabs: see all three at a glance, click to open -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
       <sc-for list="{{ careerTabs }}" as="tab" hint-placeholder-count="3">
-        <span onClick="{{ tab.click }}" style="cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:12px 20px;border-radius:16px;background:{{ tab.bg }};border:{{ tab.border }};transition:background .2s,color .2s;min-width:170px;flex:1 1 170px;">
+        <span onClick="{{ tab.click }}" class="career-tab" style="cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:12px 20px;border-radius:16px;background:{{ tab.bg }};border:{{ tab.border }};transition:background .2s,color .2s;min-width:170px;flex:1 1 170px;">
           <span style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
             <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:{{ tab.color }};">{{ tab.month }}</span>
             <span style="font-size:10.5px;font-weight:700;letter-spacing:.04em;color:{{ tab.sub }};">{{ tab.date }}</span>
