@@ -462,25 +462,39 @@ html,body{margin:0;padding:0;}
       <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#74561c;background:#f7edd4;padding:4px 10px;border-radius:999px;">Cypress</span>
       <span style="font-size:13px;font-weight:600;color:#8a7f6a;margin-left:2px;">{{ careerNote }}</span>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 28px;max-width:640px;line-height:1.55;">One Career Lab every month — a single, focused hour with Hoda on a Saturday at noon Eastern, exclusive to Cypress members.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 22px;max-width:640px;line-height:1.55;">One Career Lab every month — a single, focused hour with Hoda on a Saturday at noon Eastern, exclusive to Cypress members.</p>
+
+    <!-- month tabs: see all three at a glance, click to open -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
+      <sc-for list="{{ careerTabs }}" as="tab" hint-placeholder-count="3">
+        <span onClick="{{ tab.click }}" style="cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:12px 20px;border-radius:16px;background:{{ tab.bg }};border:{{ tab.border }};transition:background .2s,color .2s;min-width:170px;flex:1 1 170px;">
+          <span style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:{{ tab.color }};">{{ tab.month }}</span>
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.04em;color:{{ tab.sub }};">{{ tab.date }}</span>
+          </span>
+          <span style="font-size:13px;font-weight:600;color:{{ tab.sub }};line-height:1.3;">{{ tab.title }}</span>
+        </span>
+      </sc-for>
+    </div>
+
     <div style="background:#1b2f52;color:#eef2fa;border-radius:24px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(199,225,255,.05) 25%,transparent 25%,transparent 75%,rgba(199,225,255,.05) 75%),linear-gradient(45deg,rgba(199,225,255,.05) 25%,transparent 25%,transparent 75%,rgba(199,225,255,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
       <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);">
         <div style="flex:1 1 360px;min-width:280px;">
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:16px;">
-            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1b2f52;background:#c8a24a;padding:5px 12px;border-radius:999px;">{{ roadmapPage.career.format }}</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1b2f52;background:#c8a24a;padding:5px 12px;border-radius:999px;">{{ careerActive.format }}</span>
             <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c8a24a;border:1px solid rgba(200,162,74,.5);padding:4px 11px;border-radius:999px;">Cypress only</span>
           </div>
-          <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,38px);letter-spacing:-0.02em;margin:0 0 12px;line-height:1.08;">{{ roadmapPage.career.title }}</h3>
-          <p style="font-size:16px;line-height:1.6;color:rgba(238,242,250,.82);margin:0 0 18px;max-width:520px;">{{ roadmapPage.career.desc }}</p>
+          <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,38px);letter-spacing:-0.02em;margin:0 0 12px;line-height:1.08;">{{ careerActive.title }}</h3>
+          <p style="font-size:16px;line-height:1.6;color:rgba(238,242,250,.82);margin:0 0 18px;max-width:520px;">{{ careerActive.desc }}</p>
           <div style="display:flex;align-items:center;gap:9px;">
             <span style="width:7px;height:7px;background:#c8a24a;transform:rotate(45deg);display:inline-block;flex:none;"></span>
-            <span style="font-size:14px;font-weight:600;color:#eef2fa;">{{ roadmapPage.career.date }}</span>
+            <span style="font-size:14px;font-weight:600;color:#eef2fa;">{{ careerActive.date }}</span>
           </div>
         </div>
         <div style="flex:1 1 300px;min-width:260px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c8a24a;margin-bottom:14px;">What we'll cover</div>
           <div style="display:flex;flex-direction:column;gap:2px;">
-            <sc-for list="{{ roadmapPage.career.covers }}" as="cv" hint-placeholder-count="4">
+            <sc-for list="{{ careerActive.covers }}" as="cv" hint-placeholder-count="4">
               <div style="display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(238,242,250,.14);font-size:15px;color:rgba(238,242,250,.92);line-height:1.4;">
                 <span style="flex:none;width:7px;height:7px;margin-top:6px;background:#c8a24a;transform:rotate(45deg);display:inline-block;"></span><span>{{ cv }}</span>
               </div>
@@ -1189,14 +1203,28 @@ class Component extends DCLogic {
         { name: 'Kitchen gear: what you actually need (and what to skip)', kind: 'Live doc', open: true, cursor: 'pointer', hoverTransform: 'translateY(-3px)', hoverShadow: '0 12px 28px rgba(20,48,39,.12)', docUrl: 'https://www.icloud.com/keynote/08cT6hmOkCjUADW5SB3la566w#ARC%5FKitchen%5FEssentials%5Fpalette', cardBg: "#dcc8a4 url('photos/recipe-ghormeh.jpg') center/cover no-repeat" },
       ],
       career: {
-        title: 'Big Career Moves in the Era of AI',
-        date: 'Sat Aug 8 · 12–1 PM ET',
-        format: 'Career Lab · Monthly',
-        desc: 'This month\u2019s Career Lab with Hoda: what AI is actually changing about hiring, and how to aim for a bigger move instead of a sideways one.',
-        covers: ['What AI is really changing about hiring right now', 'Reading the market: which roles are growing, which are shrinking', 'Positioning yourself for a step up, not a step sideways', 'The skills worth learning this year — and the ones that aren\u2019t'],
-        upcoming: [
-          { date: 'Sat Sept 5', title: 'Resume Writing' },
-          { date: 'Sat Oct 3', title: 'Promotion: How to Talk About It' },
+        months: [
+          { key: 'aug', month: 'August',
+            title: 'Big Career Moves in the Era of AI',
+            date: 'Sat Aug 8 · 12–1 PM ET',
+            format: 'Career Lab · Monthly',
+            desc: 'This month\u2019s Career Lab with Hoda: what AI is actually changing about hiring, and how to aim for a bigger move instead of a sideways one.',
+            covers: ['What AI is really changing about hiring right now', 'Reading the market: which roles are growing, which are shrinking', 'Positioning yourself for a step up, not a step sideways', 'The skills worth learning this year — and the ones that aren\u2019t'],
+          },
+          { key: 'sep', month: 'September',
+            title: 'Resume Writing with Hoda',
+            date: 'Sat Sept 5 · 12–1 PM ET',
+            format: 'Career Lab · Monthly',
+            desc: 'Build a résumé that gets read — structure, wording, and knowing what to cut. Bring your draft and leave with a sharper one.',
+            covers: ['Structure that gets read in the first 10 seconds', 'Wording that shows impact, not just duties', 'What to cut — and what never belongs on a résumé', 'Live feedback on your draft'],
+          },
+          { key: 'oct', month: 'October',
+            title: 'Promotion: How to Talk About It',
+            date: 'Sat Oct 3 · 12–1 PM ET',
+            format: 'Career Lab · Monthly',
+            desc: 'This month\u2019s Career Lab with Hoda: building the case for your promotion — and actually saying it out loud.',
+            covers: ['Building your case with evidence, not vibes', 'When to raise it, and how to time the ask', 'The exact words for the conversation with your manager', 'What to do if the answer is “not yet”'],
+          },
         ],
       },
       spotlight: {
@@ -1224,6 +1252,17 @@ class Component extends DCLogic {
         ],
       },
     };
+    const careerKey = s.careerMonth || 'aug';
+    const careerMonths = roadmapPage.career.months;
+    const careerActive = careerMonths.filter(m => m.key === careerKey)[0] || careerMonths[0];
+    const careerTabs = careerMonths.map(m => ({
+      key: m.key, month: m.month, title: m.title, date: m.date,
+      bg: m.key === careerKey ? '#1b2f52' : 'transparent',
+      color: m.key === careerKey ? '#eef2fa' : '#143027',
+      sub: m.key === careerKey ? 'rgba(238,242,250,.65)' : '#8a7f6a',
+      border: m.key === careerKey ? '1px solid #1b2f52' : '1px solid rgba(20,48,39,.16)',
+      click: () => this.setState({ careerMonth: m.key }),
+    }));
     const seasonStats = [
       { n: '21', label: 'live sessions, Aug \u2013 Oct' },
       { n: '3', label: 'open to all tiers' },
@@ -1505,6 +1544,7 @@ class Component extends DCLogic {
       shervinPhotoOrder: (s.vw || 1200) < 820 ? 1 : 2,
       cookGridCols: 'repeat(' + ((s.vw || 1200) < 640 ? 1 : (s.vw || 1200) < 1080 ? 2 : 4) + ',minmax(0,1fr))',
       careerNote: 'Once a month · with Hoda',
+      careerTabs, careerActive,
       cartCount, cartItems, cartTotal, cartEmpty: s.cart.length === 0,
       cartOpen: s.cartOpen, toggleCart: () => this.setState(st => ({ cartOpen: !st.cartOpen })), closeCart: () => this.setState({ cartOpen: false }),
       insideCards, roadmap, roadmapItems: roadmapItems.map(r => ({ ...r, accessColor: r.color === '#d6a23f' ? '#74561c' : r.color })), seasonStats, pastSessions, founders, benefits, shopProducts,
