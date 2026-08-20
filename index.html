@@ -691,8 +691,8 @@ html,body{margin:0;padding:0;}
                 <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#f6efe3;">{{ o.who }}</div>
                 <div style="font-size:12.5px;color:rgba(246,239,227,.65);margin-top:3px;">{{ o.note }}</div>
               </div>
-              <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:24px;color:#d6a23f;flex:none;">{{ o.priceLabel }}</div>
-              <span onClick="{{ o.go }}" style="cursor:pointer;flex:none;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;padding:11px 18px;border-radius:999px;white-space:nowrap;">Buy pass</span>
+              <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:24px;color:rgba(214,162,63,.5);flex:none;text-decoration:line-through;">{{ o.priceLabel }}</div>
+              <span style="flex:none;background:rgba(246,239,227,.1);color:rgba(246,239,227,.6);border:1px solid rgba(246,239,227,.22);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px;white-space:nowrap;">Sold out</span>
             </div>
           </sc-for>
           <div style="display:flex;align-items:center;gap:14px;background:rgba(214,162,63,.12);border:1px solid rgba(214,162,63,.35);border-radius:16px;padding:18px 20px;">
