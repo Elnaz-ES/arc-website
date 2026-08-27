@@ -698,7 +698,7 @@ html,body{margin:0;padding:0;}
           <div style="display:flex;align-items:center;gap:14px;background:rgba(214,162,63,.12);border:1px solid rgba(214,162,63,.35);border-radius:16px;padding:18px 20px;">
             <div style="flex:1;">
               <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#f6efe3;">Cypress members</div>
-              <div style="font-size:12.5px;color:rgba(246,239,227,.65);margin-top:3px;">Both monthly Spotlight sessions, always included</div>
+              <div style="font-size:12.5px;color:rgba(246,239,227,.65);margin-top:3px;">Expert spotlight sessions, always included</div>
             </div>
             <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#143027;background:#d6a23f;padding:7px 14px;border-radius:999px;white-space:nowrap;flex:none;">Included</span>
           </div>
@@ -1439,12 +1439,12 @@ class Component extends DCLogic {
       {
         id: 'basic', name: 'Juniper', monthly: basicPrice, annual: Math.round(basicPrice * 12 * 0.85), cta: 'Choose Juniper',
         blurb: 'The full ARC cooking and community experience.',
-        features: ['All 4 monthly Friday workshops with Hoda & Shervin', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '20% off HodaFit Workout Plans'],
+        features: ['All cooking workshops and monthly Q&A sessions', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '20% off HodaFit Workout Plans'],
       },
       {
         id: 'premium', name: 'Cypress', monthly: premiumPrice, annual: Math.round(premiumPrice * 12 * 0.85), cta: 'Choose Cypress',
         blurb: 'Cooking, community, and professional growth.',
-        features: ['Everything in Juniper', 'Monthly Career Lab with Hoda (resumes, interviews, AI & jobs)', 'Both monthly Spotlight sessions (this season: money & investing)', '25% off HodaFit Workout Plans'],
+        features: ['Everything in Juniper', 'Monthly Career Lab with Hoda (resumes, interviews, AI & jobs)', 'Expert spotlight sessions', '25% off HodaFit Workout Plans'],
       },
     ];
     const checkoutUrls = {
@@ -1492,12 +1492,12 @@ class Component extends DCLogic {
     };
 
     const comparison = [
-      { feature: 'Monthly Friday workshops', free: '1 (the open one)', basic: 'All 4 / mo', premium: 'All 4 / mo' },
+      { feature: 'Cooking workshops & Q&A', free: '1 (the open one)', basic: 'All', premium: 'All' },
       { feature: 'Featured recipes', free: '1', basic: 'Monthly', premium: 'Monthly' },
       { feature: 'Community conversations', free: '1 group', basic: 'All groups', premium: 'All groups' },
       { feature: 'Session recordings', free: '1 / mo (open session)', basic: '✓', premium: '✓' },
       { feature: 'Career Lab (with Hoda)', free: '—', basic: '—', premium: 'Monthly' },
-      { feature: 'Spotlight sessions', free: '—', basic: 'Add a pass', premium: 'Included' },
+      { feature: 'Expert spotlight sessions', free: '—', basic: 'Add a pass', premium: 'Included' },
       { feature: 'HodaFit Workout Plans discount', free: '—', basic: '20%', premium: '25%' },
       { feature: 'Price', free: 'Free', basic: '$' + basicPrice + '/mo', premium: '$' + premiumPrice + '/mo' },
     ];
