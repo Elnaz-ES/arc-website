@@ -231,30 +231,7 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
-  <!-- COURSES TEASER -->
-  <section style="background:#f6efe3;">
-    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,5vw,56px);">
-      <div style="display:grid;grid-template-columns:{{ courseCols }};gap:clamp(26px,4vw,52px);align-items:center;">
-        <div onClick="{{ goCourses }}" style="cursor:pointer;position:relative;border-radius:26px;overflow:hidden;aspect-ratio:16/9;background:#143027 {{ featuredCourse.imgBg }} center/cover no-repeat;box-shadow:0 24px 50px rgba(20,48,39,.18);border:1px solid rgba(20,48,39,.12);"></div>
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(197,97,46,.35);border-radius:999px;padding:6px 15px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;margin-bottom:20px;">
-            <span style="width:6px;height:6px;background:#c5612e;transform:rotate(45deg);display:inline-block;"></span>New at ARC · Courses
-          </div>
-          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,44px);letter-spacing:-0.022em;color:#143027;margin:0 0 16px;line-height:1.08;">{{ featuredCourse.title }}</h2>
-          <p style="font-size:clamp(16px,1.8vw,18px);line-height:1.65;color:#5b5446;margin:0 0 20px;max-width:520px;">{{ featuredCourse.blurb }}</p>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;font-size:13px;color:#8a7f6a;margin-bottom:28px;">
-            <sc-for list="{{ featuredCourse.meta }}" as="m" hint-placeholder-count="3">
-              <span style="background:#efe6d6;border-radius:999px;padding:5px 12px;white-space:nowrap;">{{ m }}</span>
-            </sc-for>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;">
-            <span onClick="{{ featuredCourse.go }}" style="cursor:pointer;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:16px;padding:15px 30px;border-radius:999px;box-shadow:0 10px 24px rgba(197,97,46,.26);">Get the course · {{ featuredCourse.priceLabel }}</span>
-            <span onClick="{{ goCourses }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#143027;border-bottom:2px solid rgba(20,48,39,.2);padding-bottom:3px;">See what's inside<span style="font-size:17px;line-height:1;">→</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- COURSES TEASER removed from the home page — Courses live in the nav and on the Membership page (#courses) -->
 
   <!-- PAST TOPICS removed — no archive yet -->
 
