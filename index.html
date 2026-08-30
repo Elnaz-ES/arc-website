@@ -705,7 +705,7 @@ html,body{margin:0;padding:0;}
     <div style="display:flex;flex-direction:column;gap:22px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="1">
         <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-radius:26px;overflow:hidden;box-shadow:0 18px 40px rgba(20,48,39,.07);display:grid;grid-template-columns:{{ courseCols }};align-items:stretch;">
-          <div style="position:relative;min-height:230px;background:#143027 {{ c.cardImgBg }} center 55%/cover no-repeat;">
+          <div style="position:relative;min-height:268px;background:{{ c.cardImgTint }} {{ c.cardImgBg }} center/contain no-repeat;">
             <span style="position:absolute;top:16px;left:16px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#143027;background:#d6a23f;padding:6px 13px;border-radius:999px;">{{ c.badge }}</span>
           </div>
           <div style="padding:clamp(26px,3.2vw,38px);display:flex;flex-direction:column;">
@@ -1585,7 +1585,8 @@ class Component extends DCLogic {
         title: 'Healthy Nutrition Principles',
         hosts: 'with Damoon & Hoda',
         img: 'illustrations/course-nutrition.jpg',   // 16:9 branded cover — shown whole (home teaser, sharing)
-        cardImg: 'illustrations/course-nutrition-art.svg',  // same art, untitled — the in-card panel crops
+        cardImg: 'illustrations/course-nutrition-art.jpg',  // untitled art, shown whole (contain) — it doesn't crop well
+        cardImgTint: '#fcefe0',                            // the artwork's own background, so contain bands are invisible
         price: 60,
         blurb: 'A practical, evidence-based look at how to actually eat well — what the science says about nutrition, what the new weight-loss medications really do, and how the popular dietary patterns compare.',
         lessons: ['Nutrition principles', 'GLP-1 based medications', 'Dietary patterns'],
