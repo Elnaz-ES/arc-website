@@ -39,11 +39,12 @@ html,body{margin:0;padding:0;}
     </div>
 
     <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;gap:30px;">
-        <span onClick="{{ goHome }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navHomeColor }};transition:color .2s;">Home</span>
-        <span onClick="{{ goCommunity }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCommunityColor }};transition:color .2s;">Community</span>
-        <span onClick="{{ goCalendar }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCalendarColor }};transition:color .2s;">Calendar</span>
-        <span onClick="{{ goJoin }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navJoinColor }};transition:color .2s;">Membership</span>
+      <div style="display:flex;align-items:center;gap:clamp(18px,2.4vw,30px);">
+        <span onClick="{{ goHome }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navHomeColor }};transition:color .2s;white-space:nowrap;">Home</span>
+        <span onClick="{{ goCommunity }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCommunityColor }};transition:color .2s;white-space:nowrap;">Community</span>
+        <span onClick="{{ goCalendar }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCalendarColor }};transition:color .2s;white-space:nowrap;">Calendar</span>
+        <span onClick="{{ goCourses }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCoursesColor }};transition:color .2s;white-space:nowrap;">Courses</span>
+        <span onClick="{{ goJoin }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navJoinColor }};transition:color .2s;white-space:nowrap;">Membership</span>
         <span onClick="{{ goJoin }}" style="cursor:pointer;background:#143027;color:#f6efe3;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;padding:11px 22px;border-radius:999px;letter-spacing:.01em;">Join ARC</span>
       </div>
     </sc-if>
@@ -71,6 +72,7 @@ html,body{margin:0;padding:0;}
       <span onClick="{{ goHome }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Home</span>
       <span onClick="{{ goCommunity }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Community</span>
       <span onClick="{{ goCalendar }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Calendar</span>
+      <span onClick="{{ goCourses }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Courses</span>
       <span onClick="{{ goJoin }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Membership</span>
     </div>
     <span onClick="{{ goJoin }}" style="margin-top:auto;cursor:pointer;text-align:center;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:17px;padding:16px;border-radius:999px;">Join ARC</span>
@@ -225,6 +227,31 @@ html,body{margin:0;padding:0;}
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES TEASER -->
+  <section style="background:#f6efe3;">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,5vw,56px);">
+      <div style="display:grid;grid-template-columns:{{ courseCols }};gap:clamp(26px,4vw,52px);align-items:center;">
+        <div onClick="{{ goCourses }}" style="cursor:pointer;position:relative;border-radius:26px;overflow:hidden;aspect-ratio:16/9;background:#143027 {{ featuredCourse.imgBg }} center/cover no-repeat;box-shadow:0 24px 50px rgba(20,48,39,.18);border:1px solid rgba(20,48,39,.12);"></div>
+        <div>
+          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(197,97,46,.35);border-radius:999px;padding:6px 15px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;margin-bottom:20px;">
+            <span style="width:6px;height:6px;background:#c5612e;transform:rotate(45deg);display:inline-block;"></span>New at ARC · Courses
+          </div>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,44px);letter-spacing:-0.022em;color:#143027;margin:0 0 16px;line-height:1.08;">{{ featuredCourse.title }}</h2>
+          <p style="font-size:clamp(16px,1.8vw,18px);line-height:1.65;color:#5b5446;margin:0 0 20px;max-width:520px;">{{ featuredCourse.blurb }}</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;font-size:13px;color:#8a7f6a;margin-bottom:28px;">
+            <sc-for list="{{ featuredCourse.meta }}" as="m" hint-placeholder-count="3">
+              <span style="background:#efe6d6;border-radius:999px;padding:5px 12px;white-space:nowrap;">{{ m }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;">
+            <span onClick="{{ featuredCourse.go }}" style="cursor:pointer;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:16px;padding:15px 30px;border-radius:999px;box-shadow:0 10px 24px rgba(197,97,46,.26);">Get the course · {{ featuredCourse.priceLabel }}</span>
+            <span onClick="{{ goCourses }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#143027;border-bottom:2px solid rgba(20,48,39,.2);padding-bottom:3px;">See what's inside<span style="font-size:17px;line-height:1;">→</span></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -667,6 +694,49 @@ html,body{margin:0;padding:0;}
     <p style="max-width:760px;margin:clamp(20px,3vw,30px) auto 0;text-align:center;font-size:14.5px;line-height:1.6;color:#8a7f6a;">If you downgrade — for example, from Cypress to Juniper — you'll immediately lose access to Cypress-exclusive content.</p>
   </section>
 
+  <!-- ARC COURSES -->
+  <section id="courses" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
+    <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:8px;">
+      <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-0.02em;color:#143027;margin:0;">ARC Courses</h2>
+      <span style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;">Buy on their own</span>
+    </div>
+    <p style="font-size:16px;line-height:1.6;color:#6b6456;margin:0 0 clamp(22px,3vw,30px);max-width:620px;">Self-paced courses you can buy once and watch whenever you like — no membership required, and no change to the plan you're already on.</p>
+
+    <div style="display:flex;flex-direction:column;gap:22px;">
+      <sc-for list="{{ courses }}" as="c" hint-placeholder-count="1">
+        <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-radius:26px;overflow:hidden;box-shadow:0 18px 40px rgba(20,48,39,.07);display:grid;grid-template-columns:{{ courseCols }};align-items:stretch;">
+          <div style="position:relative;min-height:230px;background:#143027 {{ c.cardImgBg }} center 55%/cover no-repeat;">
+            <span style="position:absolute;top:16px;left:16px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#143027;background:#d6a23f;padding:6px 13px;border-radius:999px;">{{ c.badge }}</span>
+          </div>
+          <div style="padding:clamp(26px,3.2vw,38px);display:flex;flex-direction:column;">
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,28px);letter-spacing:-0.015em;color:#143027;margin:0 0 5px;line-height:1.15;">{{ c.title }}</h3>
+            <div style="font-size:14px;font-weight:600;color:#a8451f;margin-bottom:14px;">{{ c.hosts }}</div>
+            <p style="font-size:15.5px;line-height:1.6;color:#5b5446;margin:0 0 18px;">{{ c.blurb }}</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+              <sc-for list="{{ c.lessons }}" as="ls" hint-placeholder-count="3">
+                <div style="display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:#2f3a30;">
+                  <span style="flex:none;width:6px;height:6px;background:#1f7a5a;transform:rotate(45deg);display:inline-block;margin-top:7px;"></span><span>{{ ls }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;font-size:13px;color:#8a7f6a;margin-bottom:22px;">
+              <sc-for list="{{ c.meta }}" as="m" hint-placeholder-count="3">
+                <span style="background:#efe6d6;border-radius:999px;padding:5px 12px;white-space:nowrap;">{{ m }}</span>
+              </sc-for>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+              <div style="display:flex;align-items:baseline;gap:6px;">
+                <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:36px;letter-spacing:-0.02em;color:#143027;">{{ c.priceLabel }}</span>
+                <span style="font-size:14px;color:#8a7f6a;">one-time</span>
+              </div>
+              <span onClick="{{ c.go }}" style="cursor:pointer;flex:1 1 auto;text-align:center;background:#143027;color:#f6efe3;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:15px 30px;border-radius:999px;min-width:180px;">Get the course</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
   <!-- spotlight a-la-carte -->
   <section id="alacarte" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="background:#143027;color:#f6efe3;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
@@ -972,6 +1042,7 @@ html,body{margin:0;padding:0;}
             <span onClick="{{ goHome }}" style="cursor:pointer;">Home</span>
             <span onClick="{{ goCommunity }}" style="cursor:pointer;">Community</span>
             <span onClick="{{ goCalendar }}" style="cursor:pointer;">Calendar</span>
+            <span onClick="{{ goCourses }}" style="cursor:pointer;">Courses</span>
             <span onClick="{{ goJoin }}" style="cursor:pointer;">Membership</span>
             <a href="./trees.html" style="color:inherit;text-decoration:none;">The tier trees</a>
             <a href="./terms.html" style="color:inherit;text-decoration:none;">Terms &amp; Refund</a>
@@ -1013,29 +1084,43 @@ class Component extends DCLogic {
   componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('hashchange', this._h); }
 
   // URL hash <-> page mapping, so pages have shareable links & back/forward works
-  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join' };
+  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join', 'courses': 'join' };
   _pageToHash = { home: '', join: 'membership', community: 'community', calendar: 'calendar', story: 'story' };
+  // hashes that deep-link to a section *within* a page
+  _hashToAnchor = { alacarte: 'alacarte', passes: 'alacarte', courses: 'courses' };
+
+  // Re-scroll (instant) until the section settles at the top, to survive
+  // layout shift as content/fonts/images load; stop once stable.
+  _scrollToAnchor(id) {
+    let n = 0, stable = 0;
+    const iv = setInterval(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = Math.round(el.getBoundingClientRect().top);
+        if (Math.abs(top - 90) > 6) { el.scrollIntoView({ block: 'start' }); stable = 0; }
+        else if (++stable >= 2) { clearInterval(iv); }
+      }
+      if (++n >= 24) clearInterval(iv);
+    }, 110);
+  }
+
   _syncFromHash() {
     try {
       const h = (window.location.hash || '').replace('#', '').toLowerCase();
       const page = this._hashToPage[h];
       if (page && page !== this.state.page) this.setState({ page, mobileOpen: false });
-      // deep-link to the à-la-carte passes section within the Membership page.
-      // Re-scroll (instant) until the section settles at the top, to survive
-      // layout shift as content/fonts/images load; stop once stable.
-      if (h === 'alacarte' || h === 'passes') {
-        let n = 0, stable = 0;
-        const iv = setInterval(() => {
-          const el = document.getElementById('alacarte');
-          if (el) {
-            const top = Math.round(el.getBoundingClientRect().top);
-            if (Math.abs(top - 90) > 6) { el.scrollIntoView({ block: 'start' }); stable = 0; }
-            else if (++stable >= 2) { clearInterval(iv); }
-          }
-          if (++n >= 24) clearInterval(iv);
-        }, 110);
-      }
+      const anchor = this._hashToAnchor[h];
+      if (anchor) this._scrollToAnchor(anchor);
     } catch (e) {}
+  }
+
+  // navigate to a page and land on one of its sections (e.g. Membership → Courses)
+  goSection(page, hash, anchorId) {
+    this.setState({ page, mobileOpen: false });
+    try {
+      window.history.pushState(null, '', window.location.pathname + window.location.search + '#' + hash);
+    } catch (e) {}
+    this._scrollToAnchor(anchorId);
   }
 
   go(page) {
@@ -1491,6 +1576,31 @@ class Component extends DCLogic {
         go: () => window.open(p.url, '_blank', 'noopener') })),
     };
 
+    // ---- ARC courses (self-paced, one-time purchase, no membership required) ----
+    const courseDefs = [
+      {
+        id: 'nutrition',
+        badge: 'New',
+        title: 'Healthy Nutrition Principles',
+        hosts: 'with Damoon & Hoda',
+        img: 'illustrations/course-nutrition.jpg',   // 16:9 branded cover — shown whole (home teaser, sharing)
+        cardImg: 'photos/recipe-salmon.jpg',         // untitled art — the in-card panel crops, so no text to clip
+        price: 60,
+        blurb: 'A practical, evidence-based look at how to actually eat well — what the science says about nutrition, what the new weight-loss medications really do, and how the popular dietary patterns compare.',
+        lessons: ['Nutrition principles', 'GLP-1 based medications', 'Dietary patterns'],
+        meta: ['3 sessions', 'Recorded — watch anytime', 'One-time payment'],
+        url: 'https://ancient-roots-circle.circle.so/checkout/healthy-nutrition-course-access',
+      },
+    ];
+    const courses = courseDefs.map(c => ({
+      ...c,
+      priceLabel: '$' + c.price,
+      imgBg: "url('" + c.img + "')",
+      cardImgBg: "url('" + (c.cardImg || c.img) + "')",
+      go: () => this.setState({ agreeUrl: c.url, agreePaid: true, agreeChecked: false }),
+    }));
+    const featuredCourse = courses[0];
+
     const comparison = [
       { feature: 'Cooking workshops & Q&A', free: '1 (the open one)', basic: 'All', premium: 'All' },
       { feature: 'Featured recipes', free: '1', basic: 'Monthly', premium: 'Monthly' },
@@ -1505,6 +1615,7 @@ class Component extends DCLogic {
     const faqDefs = [
       { q: 'How do I join ARC?', a: 'Pick a tier above and you’ll be guided into our Circle community in minutes. Sapling members can start exploring right away — no card required.' },
       { q: 'Can I cancel or change tiers anytime?', a: 'Yes, and you don’t need to ask us. Cancel or change your tier yourself, anytime, from your own account — no notice period and no long-term contract.\n\nYour access stays active until the end of the billing cycle you’ve already paid for, so nothing disappears the moment you cancel. Any sessions or passes you’ve already paid for remain yours either way.' },
+      { q: 'Are ARC courses included in my membership?', a: 'No — courses are separate, one-time purchases. You can buy a course whether you’re on Sapling, Juniper, Cypress, or not a member at all, and buying one doesn’t change the membership you’re on. Once you’ve bought it, the course lives in your ARC account on Circle and you can watch the sessions at your own pace.' },
       { q: 'Where does the community actually live?', a: 'ARC is hosted on Circle — a calm, ad-free space for conversations, live sessions, and resources, accessible on web and mobile.' },
       { q: 'What language is ARC in?', a: 'ARC is primarily a Farsi-speaking community. All live sessions, community conversations and Q&As are conducted in Farsi. Some resources—such as recipe PDFs, guides, and supporting materials—may also be available in English, but the community experience itself is designed for Persian speakers.' },
     ];
@@ -1523,7 +1634,7 @@ class Component extends DCLogic {
         }, 60);
       }, goRoadmap: () => this.go('calendar'),
       toggleMobile: () => this.setState(st => ({ mobileOpen: !st.mobileOpen })),
-      navHomeColor: navColor('home'), navCommunityColor: navColor('community'), navJoinColor: navColor('join'), navCalendarColor: navColor('calendar'), navRoadmapColor: navColor('roadmap'),
+      navHomeColor: navColor('home'), navCommunityColor: navColor('community'), navJoinColor: navColor('join'), navCalendarColor: navColor('calendar'), navRoadmapColor: navColor('roadmap'), navCoursesColor: navColor('courses'),
       roadmapPage,
       calTabs, calCells, calDayNames, calAgenda, calLegend, freeSessions,
       calMonthLabel: calActive.label, calMonthName: calActive.name, calMonthStatus: calActive.status,
@@ -1538,6 +1649,9 @@ class Component extends DCLogic {
       cookingList, cookingCopy, cookingDir, cookingFont, cookingHeadFont, cookingLang,
       setCookingEn, setCookingFa, cookingEnBg, cookingEnColor, cookingFaBg, cookingFaColor,
       spotlightPass,
+      courses, featuredCourse,
+      goCourses: () => this.goSection('join', 'courses', 'courses'),
+      courseCols: (s.vw || 1200) < 900 ? '1fr' : '1.05fr 1fr',
       insideGridCols: 'repeat(' + ((s.vw || 1200) < 600 ? 1 : (s.vw || 1200) < 860 ? 2 : 3) + ',minmax(0,1fr))',
       storyCols: (s.vw || 1200) < 820 ? '1fr' : '1.2fr 1fr',
       bioCols: (s.vw || 1200) < 820 ? '1fr' : '0.85fr 1.4fr',
