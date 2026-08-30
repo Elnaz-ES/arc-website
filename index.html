@@ -700,7 +700,7 @@ html,body{margin:0;padding:0;}
       <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-0.02em;color:#143027;margin:0;">ARC Courses</h2>
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;">Buy on their own</span>
     </div>
-    <p style="font-size:16px;line-height:1.6;color:#6b6456;margin:0 0 clamp(22px,3vw,30px);max-width:620px;">Self-paced courses you can buy once and watch whenever you like — no membership required, and no change to the plan you're already on.</p>
+    <p style="font-size:16px;line-height:1.6;color:#6b6456;margin:0 0 clamp(22px,3vw,30px);max-width:620px;">Self-paced courses you can buy once and watch at your own pace — no membership required, and no change to the plan you're already on.</p>
 
     <div style="display:flex;flex-direction:column;gap:22px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="1">
@@ -719,11 +719,12 @@ html,body{margin:0;padding:0;}
                 </div>
               </sc-for>
             </div>
-            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;font-size:13px;color:#8a7f6a;margin-bottom:22px;">
-              <sc-for list="{{ c.meta }}" as="m" hint-placeholder-count="3">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;font-size:13px;color:#8a7f6a;margin-bottom:14px;">
+              <sc-for list="{{ c.meta }}" as="m" hint-placeholder-count="4">
                 <span style="background:#efe6d6;border-radius:999px;padding:5px 12px;white-space:nowrap;">{{ m }}</span>
               </sc-for>
             </div>
+            <p style="font-size:13.5px;line-height:1.55;color:#8a7f6a;margin:0 0 22px;">{{ c.access }}</p>
             <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
               <div style="display:flex;align-items:baseline;gap:6px;">
                 <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:36px;letter-spacing:-0.02em;color:#143027;">{{ c.priceLabel }}</span>
@@ -1588,7 +1589,8 @@ class Component extends DCLogic {
         price: 60,
         blurb: 'A practical, evidence-based look at how to actually eat well — what the science says about nutrition, what the new weight-loss medications really do, and how the popular dietary patterns compare.',
         lessons: ['Nutrition principles', 'GLP-1 based medications', 'Dietary patterns'],
-        meta: ['3 sessions', 'In Farsi', 'Recorded — watch anytime', 'One-time payment'],
+        meta: ['3 sessions', 'In Farsi', '3 months of access', 'One-time payment'],
+        access: 'All three sessions are recorded, so you can watch at your own pace. Your access to the course material lasts for 3 months from the day you buy it.',
         url: 'https://ancient-roots-circle.circle.so/checkout/healthy-nutrition-course-access',
       },
     ];
@@ -1615,7 +1617,7 @@ class Component extends DCLogic {
     const faqDefs = [
       { q: 'How do I join ARC?', a: 'Pick a tier above and you’ll be guided into our Circle community in minutes. Sapling members can start exploring right away — no card required.' },
       { q: 'Can I cancel or change tiers anytime?', a: 'Yes, and you don’t need to ask us. Cancel or change your tier yourself, anytime, from your own account — no notice period and no long-term contract.\n\nYour access stays active until the end of the billing cycle you’ve already paid for, so nothing disappears the moment you cancel. Any sessions or passes you’ve already paid for remain yours either way.' },
-      { q: 'Are ARC courses included in my membership?', a: 'No — courses are separate, one-time purchases. You can buy a course whether you’re on Sapling, Juniper, Cypress, or not a member at all, and buying one doesn’t change the membership you’re on. Once you’ve bought it, the course lives in your ARC account on Circle and you can watch the sessions at your own pace.' },
+      { q: 'Are ARC courses included in my membership?', a: 'No — courses are separate, one-time purchases. You can buy a course whether you’re on Sapling, Juniper, Cypress, or not a member at all, and buying one doesn’t change the membership you’re on. Once you’ve bought it, the course lives in your ARC account on Circle and you can watch the sessions at your own pace, with access to the material for 3 months from the day you buy it.' },
       { q: 'Where does the community actually live?', a: 'ARC is hosted on Circle — a calm, ad-free space for conversations, live sessions, and resources, accessible on web and mobile.' },
       { q: 'What language is ARC in?', a: 'ARC is primarily a Farsi-speaking community. All live sessions, community conversations and Q&As are conducted in Farsi. Some resources—such as recipe PDFs, guides, and supporting materials—may also be available in English, but the community experience itself is designed for Persian speakers.' },
     ];
