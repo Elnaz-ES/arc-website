@@ -1229,18 +1229,25 @@ class Component extends DCLogic {
         { n: countIn(thisMonth, ['money']),         label: 'Spotlight sessions' },
       ],
     };
-    const roadmapItems = thisMonth.events.slice(0, 4).map((e, i) => {
+    const eventOn = d => thisMonth.events.filter(e => e.d === d)[0];
+    const itemFrom = (e, over) => {
       const st = sessionTypes[e.type];
-      return {
-        week: '0' + (i + 1),
+      return Object.assign({
         date: e.dow + ' ' + thisMonth.short + ' ' + e.d,
         type: st.label,
         title: e.title,
         meta: (e.host && e.host !== 'ARC' ? e.host + ' · ' : '') + e.time + ' ET',
         color: st.color, chipBg: st.tint, chipInk: st.ink,
         access: accessOf(e.type),
-      };
-    });
+      }, over || {});
+    };
+    // one of each strand, in date order; the month's two Spotlights ride together
+    const roadmapItems = [
+      itemFrom(eventOn(2)),
+      itemFrom(eventOn(11)),
+      itemFrom(eventOn(12)),
+      itemFrom(eventOn(19), { date: 'Sat Sept 19 & 26', title: 'Budgeting & Saving · Planning for Retirement', meta: '12–1 PM ET' }),
+    ].map((it, i) => Object.assign({ week: '0' + (i + 1) }, it));
 
     const decorate = e => ({ ...e, typeLabel: sessionTypes[e.type].label, color: sessionTypes[e.type].color, tint: sessionTypes[e.type].tint, ink: sessionTypes[e.type].ink, isFree: openToAll.includes(e.type) });
     const calKey = s.calMonth || 'sep';
@@ -1478,9 +1485,7 @@ class Component extends DCLogic {
       { img: 'illustrations/conversations.png', title: 'Community conversations', tag: 'Daily', tagBg: '#f3e6c6', tagColor: '#7a5a1f', color: '#d6a23f', desc: 'Connect with members to ask questions, share experiences, exchange recommendations, and learn from community leaders.' },
       { img: 'illustrations/career.jpg', title: 'Career & professional growth', tag: 'Cypress', tagBg: '#dfe6f2', tagColor: '#2c4a7a', color: '#2c4a7a', desc: 'Cypress members enjoy career growth sessions covering interview prep, resume reviews, networking with people who\u2019ve done it, plus insights on AI and future-ready skills for a competitive job market.' },
       { img: 'illustrations/special-events.jpg', title: 'Spotlight Sessions', tag: 'Monthly', tagBg: '#f7edd4', tagColor: '#74561c', color: '#d6a23f', desc: "Exclusive deep dives on investing, saving, side hustles, skincare, smart money, real estate, Airbnb, AI, and other practical topics you won't find anywhere else." },
-      { img: 'illustrations/science-review.jpg', title: 'Science in Review', tag: 'All tiers', tagBg: '#ddefe9', tagColor: '#1c5c4c', color: '#2f8f7a', desc: 'From evidence to practice — a monthly session where we read two papers properly and translate them into what they actually mean for you. Open to every tier.' },
-      { img: 'illustrations/yoga.jpg', title: 'Yoga', tag: 'All tiers', tagBg: '#e2f0e8', tagColor: '#14563d', color: '#5a9e7a', desc: 'Move, breathe, and reset together — an hour of gentle practice with the ARC community. All levels welcome, and every tier can join, free Sapling included.' },
-      { img: 'illustrations/mobility.jpg', title: 'Mobility & Fitness Q&A', tag: 'Juniper & up', tagBg: '#e7ead9', tagColor: '#3d4624', color: '#5f6b3a', desc: 'Bring your questions on movement, mobility and training, and work through them live with us. Open to Juniper and Cypress members — day and time to be announced.' },
+      { img: 'illustrations/mobility.jpg', title: 'Mobility & Fitness Q&A', tag: 'Juniper & up', tagBg: '#e7ead9', tagColor: '#3d4624', color: '#5f6b3a', desc: 'A live session for the questions you actually have about your body — a stiff back, a nagging knee, how to start moving again, or how to train around an injury. Bring yours, get a straight answer, and leave with something you can practise at home. Open to Juniper and Cypress members; day and time to be announced.' },
     ];
 
     // ---- member recommendation posts ----
