@@ -389,7 +389,7 @@ html,body{margin:0;padding:0;}
         </div>
         <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">August</div>
         <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">The Everyday Persian Kitchen</h2>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and one workshop this month that every tier gets, free Sapling included. September and October are already planned — see them on the Calendar. All times Eastern.</p>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. September and October are already planned — see them on the Calendar. All times Eastern.</p>
         
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
@@ -821,7 +821,7 @@ html,body{margin:0;padding:0;}
         </div>
         <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">Season one</div>
         <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">Three months, planned to the day.</h1>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 26px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and one workshop every month that every tier gets, free Sapling included. Pick a month, see it all. All times Eastern.</p>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 26px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. Pick a month, see it all. All times Eastern.</p>
         <span onClick="{{ goAugust }}" style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:14px 26px;border-radius:999px;">See August in full →</span>
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
@@ -846,7 +846,7 @@ html,body{margin:0;padding:0;}
         <span onClick="{{ setCalAgenda }}" style="cursor:pointer;padding:8px 18px;border-radius:999px;background:{{ calAgBg }};color:{{ calAgColor }};transition:background .2s,color .2s;">List</span>
       </div>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, three months out — all of them live. Friday workshops run 5–6:30 PM, Saturday Spotlight and Career Lab run 12–1 PM — <strong style="color:#143027;font-weight:600;">all times Eastern</strong>.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, three months out — all of them live. Friday workshops run 5–6:30 PM, Saturday Spotlight and Career Lab run 12–1 PM, Wednesday Science in Review and Yoga run 4–5 PM — <strong style="color:#143027;font-weight:600;">all times Eastern</strong>.</p>
 
     <!-- month tabs -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
@@ -924,6 +924,23 @@ html,body{margin:0;padding:0;}
                 <span style="width:8px;height:8px;border-radius:2px;background:{{ lg.color }};flex:none;"></span>{{ lg.label }}
               </span>
             </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- announced, not yet dated -->
+    <div style="margin-top:18px;">
+      <sc-for list="{{ comingSoon }}" as="cs" hint-placeholder-count="1">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;background:#fbf6ec;border:1px dashed rgba(20,48,39,.28);border-left:4px solid {{ cs.color }};border-radius:16px;padding:18px 22px;">
+          <span style="flex:none;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ cs.tint }};color:{{ cs.ink }};padding:5px 11px;border-radius:999px;">{{ cs.typeLabel }}</span>
+          <div style="flex:1 1 260px;min-width:220px;">
+            <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#143027;line-height:1.3;">{{ cs.title }}</div>
+            <div style="font-size:13.5px;color:#6b6456;margin-top:4px;line-height:1.5;">{{ cs.desc }}</div>
+          </div>
+          <div style="flex:none;text-align:right;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a8451f;">{{ cs.when }}</div>
+            <div style="font-size:12.5px;color:#8a7f6a;margin-top:3px;">{{ cs.access }}</div>
           </div>
         </div>
       </sc-for>
@@ -1174,7 +1191,13 @@ class Component extends DCLogic {
       free:    { label: 'Open to all tiers', color: '#1f7a5a', tint: '#e2f0e8', ink: '#14563d' },
       career:  { label: 'Career Lab',        color: '#2c4a7a', tint: '#dde4ef', ink: '#1b2f52' },
       money:   { label: 'Spotlight',         color: '#d6a23f', tint: '#f7edd4', ink: '#74561c' },
+      // wellness strand — Wednesdays, 4–5 PM ET
+      science: { label: 'Science in Review',  color: '#2f8f7a', tint: '#ddefe9', ink: '#1c5c4c' },
+      yoga:    { label: 'Yoga',               color: '#5a9e7a', tint: '#e3f1e8', ink: '#33654a' },
+      mobility:{ label: 'Mobility & Fitness', color: '#5f6b3a', tint: '#e7ead9', ink: '#3d4624' },
     };
+    // every tier gets into these, Sapling included
+    const openToAll = ['free', 'science', 'yoga'];
     const scheduleMonths = [
       { key: 'aug', name: 'August', short: 'Aug', y: 2026, mi: 7, label: 'August 2026', status: 'Now open', events: [
         { d: 7,  dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin + Hoda', title: 'ARC Kickoff · Introduction · Kitchen Essentials' },
@@ -1186,9 +1209,10 @@ class Component extends DCLogic {
         { d: 29, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Money Goal Setting' },
       ] },
       { key: 'sep', name: 'September', short: 'Sept', y: 2026, mi: 8, label: 'September 2026', status: 'Sneak peek', events: [
-        { d: 4,  dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Ghormeh Sabzi, Properly' },
-        { d: 5,  dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Resume Writing' },
-        { d: 11, dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Hoda',           title: 'Building Real Friendships Abroad' },
+        { d: 2,  dow: 'Wed', time: '4–5 PM',    type: 'science', host: 'ARC',            title: 'Science in Review: From Evidence to Practice' },
+        { d: 9,  dow: 'Wed', time: '4–5 PM',    type: 'yoga',    host: 'ARC',            title: 'ARC Yoga' },
+        { d: 11, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Ghormeh Sabzi, Properly' },
+        { d: 12, dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Resume Writing' },
         { d: 18, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Berenj: Rice, Done Right' },
         { d: 19, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Budgeting & Saving' },
         { d: 25, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
@@ -1197,14 +1221,16 @@ class Component extends DCLogic {
       { key: 'oct', name: 'October', short: 'Oct', y: 2026, mi: 9, label: 'October 2026', status: 'Sneak peek', events: [
         { d: 2,  dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Shervin',        title: 'Cooking the Season' },
         { d: 3,  dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Promotion: How to Talk About It' },
+        { d: 7,  dow: 'Wed', time: '4–5 PM',    type: 'science', host: 'ARC',            title: 'Science in Review: From Evidence to Practice' },
         { d: 9,  dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Know the Meat Cuts' },
         { d: 10, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Investment Mindset' },
         { d: 16, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Chenjeh Kabab' },
+        { d: 21, dow: 'Wed', time: '4–5 PM',    type: 'yoga',    host: 'ARC',            title: 'ARC Yoga' },
         { d: 23, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
         { d: 24, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Stock Market Investing' },
       ] },
     ];
-    const decorate = e => ({ ...e, typeLabel: sessionTypes[e.type].label, color: sessionTypes[e.type].color, tint: sessionTypes[e.type].tint, ink: sessionTypes[e.type].ink, isFree: e.type === 'free' });
+    const decorate = e => ({ ...e, typeLabel: sessionTypes[e.type].label, color: sessionTypes[e.type].color, tint: sessionTypes[e.type].tint, ink: sessionTypes[e.type].ink, isFree: openToAll.includes(e.type) });
     const calKey = s.calMonth || 'aug';
     const calActive = scheduleMonths.filter(m => m.key === calKey)[0] || scheduleMonths[0];
     const calTabs = scheduleMonths.map(m => ({
@@ -1235,15 +1261,24 @@ class Component extends DCLogic {
     const calView = s.calView || (isMobile ? 'agenda' : 'calendar');
     const legendOf = keys => keys.map(k => ({ label: sessionTypes[k].label, color: sessionTypes[k].color }));
     const calLegend = [
-      { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['free']) },
-      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'qa']) },
+      { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['free', 'science', 'yoga']) },
+      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'qa', 'mobility']) },
       { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['career', 'money']) },
     ];
     const freeSessions = [
       { date: 'Fri Aug 28', title: 'Sex, Gender & Relationships', host: 'with Dr. Behzad Sorouri Khorashad' },
-      { date: 'Fri Sept 11', title: 'Building Real Friendships Abroad', host: 'with Hoda' },
+      { date: 'Wed Sept 2', title: 'Science in Review: From Evidence to Practice', host: 'Monthly · 4–5 PM ET' },
+      { date: 'Wed Sept 9', title: 'ARC Yoga', host: 'All levels welcome · 4–5 PM ET' },
       { date: 'Fri Oct 2', title: 'Cooking the Season', host: 'with Shervin' },
     ];
+    // announced, but not yet scheduled — shown under the calendar
+    const comingSoon = [{
+      type: 'mobility',
+      title: 'Mobility & Fitness Q&A',
+      access: 'Juniper & Cypress',
+      desc: 'A live Q&A on movement, mobility and training — bring your questions and work through them with us.',
+      when: 'Day and time to be announced',
+    }].map(decorate);
 
     // ---- full roadmap page ----
     const roadmapPage = {
@@ -1328,10 +1363,12 @@ class Component extends DCLogic {
       border: m.key === careerKey ? '1px solid #1b2f52' : '1px solid rgba(20,48,39,.16)',
       click: () => this.setState({ careerMonth: m.key }),
     }));
+    // counted off the schedule itself, so these never drift when sessions are added
+    const allSeasonEvents = scheduleMonths.reduce((a, m) => a.concat(m.events), []);
     const seasonStats = [
-      { n: '21', label: 'live sessions, Aug \u2013 Oct' },
-      { n: '3', label: 'open to all tiers' },
-      { n: '6', label: 'Spotlight sessions, Aug \u2013 Oct' },
+      { n: String(allSeasonEvents.length), label: 'live sessions, Aug \u2013 Oct' },
+      { n: String(allSeasonEvents.filter(e => openToAll.includes(e.type)).length), label: 'open to all tiers' },
+      { n: String(allSeasonEvents.filter(e => e.type === 'money').length), label: 'Spotlight sessions, Aug \u2013 Oct' },
     ];
 
     // ---- live cooking sessions: EN / FA ----
@@ -1497,12 +1534,12 @@ class Component extends DCLogic {
       {
         id: 'free', name: 'Sapling', monthly: 0, annual: 0, cta: 'Start free',
         blurb: 'Explore ARC before you commit. No card required.',
-        features: ['1 open workshop every month — the same one every tier gets', 'Access to 1 featured recipe', '1 community conversation group'],
+        features: ['1 open workshop every month — the same one every tier gets', 'Monthly Science in Review paper session', 'ARC Yoga sessions', 'Access to 1 featured recipe', '1 community conversation group'],
       },
       {
         id: 'basic', name: 'Juniper', monthly: basicPrice, annual: Math.round(basicPrice * 12 * 0.85), cta: 'Choose Juniper',
         blurb: 'The full ARC cooking and community experience.',
-        features: ['All cooking workshops and monthly Q&A sessions', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '20% off HodaFit Workout Plans'],
+        features: ['All cooking workshops and monthly Q&A sessions', 'Science in Review, Yoga & the Mobility & Fitness Q&A', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '20% off HodaFit Workout Plans'],
       },
       {
         id: 'premium', name: 'Cypress', monthly: premiumPrice, annual: Math.round(premiumPrice * 12 * 0.85), cta: 'Choose Cypress',
@@ -1584,6 +1621,9 @@ class Component extends DCLogic {
     const comparison = [
       { feature: 'Cooking workshops & Q&A', free: '1 (the open one)', basic: 'All', premium: 'All' },
       { feature: 'Featured recipes', free: '1', basic: 'Monthly', premium: 'Monthly' },
+      { feature: 'Science in Review (monthly paper session)', free: '✓', basic: '✓', premium: '✓' },
+      { feature: 'ARC Yoga', free: '✓', basic: '✓', premium: '✓' },
+      { feature: 'Mobility & Fitness Q&A', free: '—', basic: '✓', premium: '✓' },
       { feature: 'Community conversations', free: '1 group', basic: 'All groups', premium: 'All groups' },
       { feature: 'Session recordings', free: '1 / mo (open session)', basic: '✓', premium: '✓' },
       { feature: 'Career Lab (with Hoda)', free: '—', basic: '—', premium: 'Monthly' },
@@ -1616,7 +1656,7 @@ class Component extends DCLogic {
       toggleMobile: () => this.setState(st => ({ mobileOpen: !st.mobileOpen })),
       navHomeColor: navColor('home'), navCommunityColor: navColor('community'), navJoinColor: navColor('join'), navCalendarColor: navColor('calendar'), navRoadmapColor: navColor('roadmap'), navCoursesColor: navColor('courses'),
       roadmapPage,
-      calTabs, calCells, calDayNames, calAgenda, calLegend, freeSessions,
+      calTabs, calCells, calDayNames, calAgenda, calLegend, freeSessions, comingSoon,
       calMonthLabel: calActive.label, calMonthName: calActive.name, calMonthStatus: calActive.status,
       calIsSneak: calActive.status === 'Sneak peek', calSneakNote: calActive.name === 'September' ? 'Full topics, hosts and resources drop Sept 1.' : 'Full topics, hosts and resources drop Oct 1.',
       calIsCalendar: calView === 'calendar', calIsAgenda: calView === 'agenda',
