@@ -1064,7 +1064,7 @@ html,body{margin:0;padding:0;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;basicPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 35, &quot;min&quot;: 0, &quot;max&quot;: 200, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}, &quot;premiumPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 55, &quot;min&quot;: 0, &quot;max&quot;: 300, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'home', mobileOpen: false, cartOpen: false, billing: 'monthly', cart: [], faqOpen: 0, vw: 1200, lightboxImg: null, cookingLang: 'en', calMonth: 'aug', calView: null };
+  state = { page: 'home', mobileOpen: false, cartOpen: false, billing: 'monthly', cart: [], faqOpen: 0, vw: 1200, lightboxImg: null, cookingLang: 'en', calMonth: 'sep', calView: null };
 
   hasImg = (p) => !!p?.img;
 
@@ -1199,7 +1199,7 @@ class Component extends DCLogic {
     // every tier gets into these, Sapling included
     const openToAll = ['free', 'science', 'yoga'];
     const scheduleMonths = [
-      { key: 'aug', name: 'August', short: 'Aug', y: 2026, mi: 7, label: 'August 2026', status: 'Now open', events: [
+      { key: 'aug', name: 'August', short: 'Aug', y: 2026, mi: 7, label: 'August 2026', status: 'Wrapped', events: [
         { d: 7,  dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin + Hoda', title: 'ARC Kickoff · Introduction · Kitchen Essentials' },
         { d: 8,  dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Big Career Moves in the Era of AI' },
         { d: 14, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'The Base of Every Stew' },
@@ -1208,7 +1208,7 @@ class Component extends DCLogic {
         { d: 28, dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Dr. Behzad Sorouri Khorashad',     title: 'Sex, Gender & Relationships' },
         { d: 29, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Money Goal Setting' },
       ] },
-      { key: 'sep', name: 'September', short: 'Sept', y: 2026, mi: 8, label: 'September 2026', status: 'Sneak peek', events: [
+      { key: 'sep', name: 'September', short: 'Sept', y: 2026, mi: 8, label: 'September 2026', status: 'Now open', events: [
         { d: 2,  dow: 'Wed', time: '4–5 PM',    type: 'science', host: 'ARC',            title: 'Science in Review: From Evidence to Practice' },
         { d: 9,  dow: 'Wed', time: '4–5 PM',    type: 'yoga',    host: 'ARC',            title: 'ARC Yoga' },
         { d: 11, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Ghormeh Sabzi, Properly' },
@@ -1218,7 +1218,7 @@ class Component extends DCLogic {
         { d: 25, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
         { d: 26, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Planning for Retirement' },
       ] },
-      { key: 'oct', name: 'October', short: 'Oct', y: 2026, mi: 9, label: 'October 2026', status: 'Sneak peek', events: [
+      { key: 'oct', name: 'October', short: 'Oct', y: 2026, mi: 9, label: 'October 2026', status: 'Sneak peek', note: 'Full topics, hosts and resources drop Oct 1.', events: [
         { d: 2,  dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Shervin',        title: 'Cooking the Season' },
         { d: 3,  dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Promotion: How to Talk About It' },
         { d: 7,  dow: 'Wed', time: '4–5 PM',    type: 'science', host: 'ARC',            title: 'Science in Review: From Evidence to Practice' },
@@ -1231,7 +1231,7 @@ class Component extends DCLogic {
       ] },
     ];
     const decorate = e => ({ ...e, typeLabel: sessionTypes[e.type].label, color: sessionTypes[e.type].color, tint: sessionTypes[e.type].tint, ink: sessionTypes[e.type].ink, isFree: openToAll.includes(e.type) });
-    const calKey = s.calMonth || 'aug';
+    const calKey = s.calMonth || 'sep';
     const calActive = scheduleMonths.filter(m => m.key === calKey)[0] || scheduleMonths[0];
     const calTabs = scheduleMonths.map(m => ({
       key: m.key, name: m.name, status: m.status, count: m.events.length,
@@ -1658,7 +1658,7 @@ class Component extends DCLogic {
       roadmapPage,
       calTabs, calCells, calDayNames, calAgenda, calLegend, freeSessions, comingSoon,
       calMonthLabel: calActive.label, calMonthName: calActive.name, calMonthStatus: calActive.status,
-      calIsSneak: calActive.status === 'Sneak peek', calSneakNote: calActive.name === 'September' ? 'Full topics, hosts and resources drop Sept 1.' : 'Full topics, hosts and resources drop Oct 1.',
+      calIsSneak: calActive.status === 'Sneak peek', calSneakNote: calActive.note || '',
       calIsCalendar: calView === 'calendar', calIsAgenda: calView === 'agenda',
       setCalCalendar: () => this.setState({ calView: 'calendar' }),
       setCalAgenda: () => this.setState({ calView: 'agenda' }),
