@@ -596,7 +596,7 @@ html,body{margin:0;padding:0;}
           </div>
           <div style="padding:16px 18px;">
             <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8a7f6a;margin-bottom:6px;">{{ r.kind }}</div>
-            <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#143027;line-height:1.25;">{{ r.name }}</div>
+            <div dir="{{ r.dir }}" style="font-family:{{ r.font }};font-weight:600;font-size:16px;color:#143027;line-height:1.5;">{{ r.name }}</div>
             <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
               <div style="margin-top:12px;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;color:#a8451f;">Read the doc →</div>
             </sc-if>
@@ -1315,8 +1315,8 @@ class Component extends DCLogic {
           resources: ['Q&A Recording'] },
       ],
       recipes: [
-        { name: 'Japanese Salmon: quick, flavorful, no fuss', kind: 'Easy dish of the month', cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#e7d9bf url('photos/recipe-salmon.jpg') center/cover no-repeat" },
-        { name: 'Kitchen gear: what you actually need (and what to skip)', kind: 'Live doc', cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#dcc8a4 url('photos/recipe-ghormeh.jpg') center/cover no-repeat" },
+        { name: 'Japanese Salmon: quick, flavorful, no fuss', kind: 'Easy dish of the month', dir: 'ltr', font: "'Sora', sans-serif", cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#e7d9bf url('photos/recipe-salmon.jpg') center/cover no-repeat" },
+        { name: 'میان‌برهای عملی در تهیهٔ قورمه سبزی در غربت', kind: 'Live doc', dir: 'rtl', font: "'Vazirmatn', 'Sora', sans-serif", cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#dcc8a4 url('photos/recipe-ghormeh-sabzi.jpg') center/cover no-repeat" },
       ],
       career: {
         months: [
