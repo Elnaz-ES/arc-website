@@ -389,7 +389,7 @@ html,body{margin:0;padding:0;}
         </div>
         <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">{{ roadmap.month }}</div>
         <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">{{ roadmap.theme }}</h2>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. September and October are already planned — see them on the Calendar. All times Eastern.</p>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. October is already planned too — see it on the Calendar. All times Eastern.</p>
         
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
@@ -1301,21 +1301,18 @@ class Component extends DCLogic {
 
     // ---- full roadmap page ----
     const roadmapPage = {
-      month: 'August',
-      dateRange: 'August 2026',
+      month: 'September',
+      dateRange: 'September 2026',
       cooking: [
-        { n: '01', type: 'cooking', date: 'Fri Aug 7', time: '5–6:30 PM ET', title: 'ARC Kickoff · Introduction · Kitchen Essentials', host: '',
-          topics: ['Who we are, and how a month at ARC actually runs', 'The Predicament: a new kitchen, no tools, no time', 'What We Suggest: the short list of gear that earns its place'],
-          resources: ['Kitchen Essentials Guide'] },
-        { n: '02', type: 'cooking', date: 'Fri Aug 14', time: '5–6:30 PM ET', title: 'The Base of Every Stew', host: '',
-          topics: ['The Predicament: preserving meat before refrigeration', 'Philosophy Corner: why we still need ghormeh', 'What We Suggest: making & storing ghormeh in a modern kitchen'],
-          resources: ['Ghormeh Recipe & Storage Guide'] },
-        { n: '03', type: 'qa', date: 'Fri Aug 21', time: '5–6:30 PM ET', title: 'Open Q&A Night', host: '',
-          topics: ['Open floor: bring every question you\u2019ve been saving', 'Anything from this month\u2019s sessions — no question too small'],
+        { n: '01', type: 'cooking', date: 'Fri Sept 11', time: '5–6:30 PM ET', title: 'Ghormeh Sabzi, Properly', host: '',
+          topics: ['The Predicament: herbs that turn bitter, meat that stays tough', 'Philosophy Corner: why every family swears theirs is the right one', 'What We Suggest: frying the herbs, timing the beans, balancing the sourness'],
+          resources: ['Ghormeh Sabzi Recipe & Notes'] },
+        { n: '02', type: 'cooking', date: 'Fri Sept 18', time: '5–6:30 PM ET', title: 'Berenj: Rice, Done Right', host: '',
+          topics: ['The Predicament: sticky rice, broken grains, and no tahdig to speak of', 'Philosophy Corner: why rice is how a Persian cook gets judged', 'What We Suggest: soaking, salting, steaming — and a tahdig that lifts out whole'],
+          resources: ['Rice & Tahdig Guide'] },
+        { n: '03', type: 'qa', date: 'Fri Sept 25', time: '5–6:30 PM ET', title: 'Open Q&A Night', host: '',
+          topics: ['Open floor: bring every question you’ve been saving', 'Anything from this month’s sessions — no question too small'],
           resources: ['Q&A Recording'] },
-        { n: '04', type: 'free', date: 'Fri Aug 28', time: '5–6:30 PM ET', title: 'Sex, Gender & Relationships', host: 'Live with Dr. Behzad Sorouri Khorashad',
-          topics: ['The conversations our families never had with us', 'Intimacy, consent & relationships across two cultures', 'Raising kids with a healthier script than we were given'],
-          resources: ['Session Recording'] },
       ],
       recipes: [
         { name: 'Japanese Salmon: quick, flavorful, no fuss', kind: 'Easy dish of the month', cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#e7d9bf url('photos/recipe-salmon.jpg') center/cover no-repeat" },
@@ -1394,22 +1391,19 @@ class Component extends DCLogic {
     const cookingFa = {
       heading: 'کارگاه‌های جمعه',
       members: 'ویژهٔ اعضا',
-      intro: 'چهار شب جمعه در ماه اوت — آشپزی با شروین، شب پرسش و پاسخ، و یک کارگاه که همهٔ رده‌ها، از جمله Sapling رایگان، در آن هستند. همهٔ ساعت‌ها به وقت شرق آمریکا.',
+      intro: 'سه شب جمعه در ماه سپتامبر — قورمه سبزی و برنج با شروین، و بعد شب پرسش و پاسخ. همهٔ جلسات ARC زنده برگزار می‌شوند؛ این‌ها کارگاه‌های شب‌های هفته‌اند. همهٔ ساعت‌ها به وقت شرق آمریکا.',
       inThisSession: 'در این جلسه',
       resourcesLabel: 'منابع',
       sessions: [
-        { title: 'شروع ARC · معرفی · ضروریات آشپزخانه', host: '', date: 'جمعه ۷ اوت', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'آشپزی',
-          topics: ['ما کی هستیم و یک ماه در ARC چطور می‌گذرد', 'شرح مصیبت: آشپزخانهٔ تازه، بی‌ابزار و بی‌وقت', 'راهکارهای پیشنهادی: فهرست کوتاه وسایلی که واقعاً لازم‌اند'],
-          resources: ['راهنمای ضروریات آشپزخانه'] },
-        { title: 'پایهٔ خورش‌ها و قورمه', host: '', date: 'جمعه ۱۴ اوت', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'آشپزی',
-          topics: ['شرح مصیبت: نگهداری گوشت در عهد عتیق', 'بحث فلسفی: چرا هنوز به قورمه نیاز داریم؟', 'راهکارهای پیشنهادی: تهیه و نگهداری قورمه در عهد جدید'],
-          resources: ['دستور و راهنمای نگهداری قورمه'] },
-        { title: 'شب پرسش و پاسخ', host: '', date: 'جمعه ۲۱ اوت', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'پرسش و پاسخ',
+        { title: 'قورمه سبزی، درست و اصولی', host: '', date: 'جمعه ۱۱ سپتامبر', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'آشپزی',
+          topics: ['شرح مصیبت: سبزی‌ای که تلخ می‌شود و گوشتی که نرم نمی‌شود', 'بحث فلسفی: چرا هر خانواده قورمهٔ خودش را درست‌ترین می‌داند', 'راهکارهای پیشنهادی: سرخ‌کردن سبزی، زمان لوبیا، و تنظیم ترشی'],
+          resources: ['دستور و نکات قورمه سبزی'] },
+        { title: 'برنج، آن‌طور که باید', host: '', date: 'جمعه ۱۸ سپتامبر', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'آشپزی',
+          topics: ['شرح مصیبت: برنج شفته، دانه‌های شکسته، و ته‌دیگی که نمی‌آید', 'بحث فلسفی: چرا برنج معیار سنجش آشپز ایرانی است', 'راهکارهای پیشنهادی: خیساندن، نمک، دم‌کردن — و ته‌دیگی که سالم درمی‌آید'],
+          resources: ['راهنمای برنج و ته‌دیگ'] },
+        { title: 'شب پرسش و پاسخ', host: '', date: 'جمعه ۲۵ سپتامبر', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'پرسش و پاسخ',
           topics: ['میدان باز — هر پرسشی را که ذخیره کرده‌اید بیاورید', 'هر چیزی از جلسات این ماه؛ هیچ سؤالی کوچک نیست'],
           resources: ['ضبط پرسش و پاسخ'] },
-        { title: 'سکس، جنسیت و روابط', host: 'زنده با دکتر بهزاد سروری خوراشاد', date: 'جمعه ۲۸ اوت', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'رایگان برای همه',
-          topics: ['گفت‌وگوهایی که خانواده‌هایمان هرگز با ما نکردند', 'صمیمیت، رضایت و رابطه در میانهٔ دو فرهنگ', 'بزرگ‌کردن بچه‌ها با روایتی سالم‌تر از آنچه به ما دادند'],
-          resources: ['ضبط جلسه'] },
       ],
     };
     const cookingLang = s.cookingLang || 'en';
@@ -1430,7 +1424,7 @@ class Component extends DCLogic {
     });
     const cookingCopy = cookingRtl
       ? cookingFa
-      : { heading: 'Friday workshops', members: 'Members', intro: 'Four Friday nights in August — cooking with Shervin, an open Q&A, and one workshop that every tier gets, free Sapling included. Every ARC session is live; these are the weeknight workshops. All times Eastern.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
+      : { heading: 'Friday workshops', members: 'Members', intro: 'Three Friday nights in September — ghormeh sabzi and rice with Shervin, then an open Q&A night. Every ARC session is live; these are the weeknight workshops. All times Eastern.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
     const cookingDir = cookingRtl ? 'rtl' : 'ltr';
     const cookingFont = cookingRtl ? "'Vazirmatn', 'Hanken Grotesk', system-ui, sans-serif" : "'Hanken Grotesk', system-ui, sans-serif";
     const cookingHeadFont = cookingRtl ? "'Vazirmatn', 'Sora', sans-serif" : "'Sora', sans-serif";
