@@ -1347,19 +1347,19 @@ class Component extends DCLogic {
         title: 'Personal Finance Foundations', format: 'Guest Expert Series', date: 'Aug – Oct · Saturdays 12–1 PM ET',
         desc: 'A six-part money course, made simple — from how you think about money to buying your first index fund. Two live sessions a month, August through October. No prior knowledge needed.',
         months: [
-          { month: 'August', label: 'Sessions 1 & 2', tag: 'Live this month', tagBg: '#d6a23f', tagColor: '#143027', cardBg: '#fdf4e0', cardBorder: '1.5px solid rgba(214,162,63,.55)', sessions: [
+          { month: 'August', label: 'Sessions 1 & 2', sessions: [
             { n: '01', title: 'Money Mindset', sub: 'How to think about money — before you manage it.', date: 'Sat Aug 22 · 12–1 PM ET',
               topics: ['Behavior beats math — it\u2019s 80/20', 'Scarcity vs. growth thinking', 'Pay yourself first, automatically', 'Assets vs. liabilities', 'The real cost of waiting'] },
             { n: '02', title: 'Money Goal Setting', sub: 'Turn “I should save more” into numbers with dates on them.', date: 'Sat Aug 29 · 12–1 PM ET',
               topics: ['Name the goal, then price it', 'Short, medium & long-term buckets', 'Sinking funds for the predictable stuff', 'One account per goal', 'Course-correcting without quitting'] },
           ]},
-          { month: 'September', label: 'Sessions 3 & 4', tag: '', tagBg: 'transparent', tagColor: 'transparent', cardBg: '#fbf6ec', cardBorder: '1px solid rgba(20,48,39,.1)', sessions: [
+          { month: 'September', label: 'Sessions 3 & 4', sessions: [
             { n: '03', title: 'Budgeting & Saving', sub: 'Tell your money where to go — instead of wondering where it went.', date: 'Sat Sept 19 · 12–1 PM ET',
               topics: ['Know your three numbers', 'The 50/30/20 rule', 'Build an emergency fund', 'Cut the Big Three first', 'Automate everything on payday'] },
             { n: '04', title: 'Planning for Retirement', sub: 'What “enough” looks like, and the math to get there.', date: 'Sat Sept 26 · 12–1 PM ET',
               topics: ['Retirement planning considerations', 'Your number = yearly spending × 25', 'Starting late, and starting over abroad', 'The 4% rule and what it assumes'] },
           ]},
-          { month: 'October', label: 'Sessions 5 & 6', tag: '', tagBg: 'transparent', tagColor: 'transparent', cardBg: '#fbf6ec', cardBorder: '1px solid rgba(20,48,39,.1)', sessions: [
+          { month: 'October', label: 'Sessions 5 & 6', sessions: [
             { n: '05', title: 'Investment Mindset', sub: 'Make your money work while you sleep.', date: 'Sat Oct 10 · 12–1 PM ET',
               topics: ['Compound interest, the snowball', 'Risk vs. return, honestly', 'Time in the market beats timing it', 'Dollar-cost averaging', 'The real cost of waiting a year'] },
             { n: '06', title: 'Stock Market Investing', sub: 'From “I don\u2019t understand stocks” to your first position.', date: 'Sat Oct 24 · 12–1 PM ET',
@@ -1368,6 +1368,16 @@ class Component extends DCLogic {
         ],
       },
     };
+    // Spotlight: the live month is highlighted, the rest sit back — follows thisMonth
+    roadmapPage.spotlight.months.forEach(m => {
+      const live = m.month === thisMonth.name;
+      m.tag = live ? 'Live this month' : '';
+      m.tagBg = live ? '#d6a23f' : 'transparent';
+      m.tagColor = live ? '#143027' : 'transparent';
+      m.cardBg = live ? '#fdf4e0' : '#fbf6ec';
+      m.cardBorder = live ? '1.5px solid rgba(214,162,63,.55)' : '1px solid rgba(20,48,39,.1)';
+    });
+
     const careerKey = s.careerMonth || 'sep';
     const careerMonths = roadmapPage.career.months;
     const careerActive = careerMonths.filter(m => m.key === careerKey)[0] || careerMonths[0];
