@@ -385,10 +385,10 @@ html,body{margin:0;padding:0;}
     <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) clamp(20px,5vw,56px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,52px);align-items:center;">
       <div style="flex:1 1 440px;min-width:300px;">
         <div style="display:inline-flex;align-items:center;gap:9px;white-space:nowrap;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:22px;">
-          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>This month at ARC · August 2026
+          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>This month at ARC · {{ roadmap.monthYear }}
         </div>
-        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">August</div>
-        <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">The Everyday Persian Kitchen</h2>
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">{{ roadmap.month }}</div>
+        <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">{{ roadmap.theme }}</h2>
         <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. September and October are already planned — see them on the Calendar. All times Eastern.</p>
         
       </div>
@@ -1167,23 +1167,6 @@ class Component extends DCLogic {
       { title: 'Monthly Spotlight', color: '#a8451f', tint: '#f1ddd0', desc: 'One deep-dive topic a month — investing, mortgages, side hustles, skincare, entrepreneurship, retirement, and the real questions of immigrant life.', note: 'Cypress · or buy a pass' },
       { title: 'Session Archive', color: '#1b4034', tint: '#d9e4df', desc: 'Never miss out. Every session, resource, and community favorite, saved — your own growing library of recipes and hard-won know-how.' },
     ];
-    const roadmap = {
-      month: 'August',
-      theme: 'The Everyday Persian Kitchen',
-      blurb: 'A month of cooking smarter, time-saving techniques, a practical immigrant kitchen, and weeknight meals the whole family will actually eat.',
-      stats: [
-        { n: '4', label: 'Friday workshops' },
-        { n: '1', label: 'Career Lab' },
-        { n: '2', label: 'Spotlight sessions' },
-      ],
-    };
-    const roadmapItems = [
-      { week: '01', date: 'Fri Aug 7', type: 'Cooking', title: 'ARC Kickoff · Kitchen Essentials', meta: '5–6:30 PM ET', color: '#c5612e', chipBg: '#f4e3d8', chipInk: '#8a3a1a', access: 'Juniper & up' },
-      { week: '02', date: 'Sat Aug 8', type: 'Career Lab', title: 'Big Career Moves in the Era of AI', meta: '12–1 PM ET', color: '#2c4a7a', chipBg: '#dde4ef', chipInk: '#1b2f52', access: 'Cypress' },
-      { week: '03', date: 'Sat Aug 22', type: 'Spotlight', title: 'Money Mindset', meta: '12–1 PM ET', color: '#d6a23f', chipBg: '#f7edd4', chipInk: '#74561c', access: 'Cypress' },
-      { week: '04', date: 'Fri Aug 28', type: 'Open to all tiers', title: 'Sex, Gender & Relationships', meta: 'Dr. Behzad Sorouri Khorashad · 5–6:30 PM ET', color: '#1f7a5a', chipBg: '#e2f0e8', chipInk: '#14563d', access: 'All tiers' },
-    ];
-
     // ---- session types & the full Aug–Oct schedule ----
     const sessionTypes = {
       cooking: { label: 'Cooking',           color: '#c5612e', tint: '#f4e3d8', ink: '#8a3a1a' },
@@ -1230,6 +1213,35 @@ class Component extends DCLogic {
         { d: 24, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Stock Market Investing' },
       ] },
     ];
+    // ---- "this month at ARC" — derived from the live month, so it moves with the schedule ----
+    const thisMonthKey = 'sep';
+    const thisMonth = scheduleMonths.filter(m => m.key === thisMonthKey)[0];
+    const accessOf = t => openToAll.includes(t) ? 'All tiers' : (t === 'career' || t === 'money') ? 'Cypress' : 'Juniper & up';
+    const countIn = (m, types) => String(m.events.filter(e => types.includes(e.type)).length);
+    const roadmap = {
+      month: thisMonth.name,
+      monthYear: thisMonth.label,
+      theme: 'The Heart of the Persian Table',
+      blurb: 'The two dishes every Persian kitchen is judged by — a proper ghormeh sabzi and rice done right — plus an open Q&A night, and the wellness sessions every tier can join.',
+      stats: [
+        { n: countIn(thisMonth, ['cooking', 'qa']), label: 'Friday workshops' },
+        { n: countIn(thisMonth, openToAll),         label: 'Open to all tiers' },
+        { n: countIn(thisMonth, ['money']),         label: 'Spotlight sessions' },
+      ],
+    };
+    const roadmapItems = thisMonth.events.slice(0, 4).map((e, i) => {
+      const st = sessionTypes[e.type];
+      return {
+        week: '0' + (i + 1),
+        date: e.dow + ' ' + thisMonth.short + ' ' + e.d,
+        type: st.label,
+        title: e.title,
+        meta: (e.host && e.host !== 'ARC' ? e.host + ' · ' : '') + e.time + ' ET',
+        color: st.color, chipBg: st.tint, chipInk: st.ink,
+        access: accessOf(e.type),
+      };
+    });
+
     const decorate = e => ({ ...e, typeLabel: sessionTypes[e.type].label, color: sessionTypes[e.type].color, tint: sessionTypes[e.type].tint, ink: sessionTypes[e.type].ink, isFree: openToAll.includes(e.type) });
     const calKey = s.calMonth || 'sep';
     const calActive = scheduleMonths.filter(m => m.key === calKey)[0] || scheduleMonths[0];
@@ -1313,7 +1325,7 @@ class Component extends DCLogic {
           },
           { key: 'sep', month: 'September',
             title: 'Resume Writing with Hoda',
-            date: 'Sat Sept 5 · 12–1 PM ET',
+            date: 'Sat Sept 12 · 12–1 PM ET',
             format: 'Career Lab · Monthly',
             desc: 'Build a résumé that gets read — structure, wording, and knowing what to cut. Bring your draft and leave with a sharper one.',
             covers: ['Structure that gets read in the first 10 seconds', 'Wording that shows impact, not just duties', 'What to cut — and what never belongs on a résumé', 'Live feedback on your draft'],
@@ -1352,7 +1364,7 @@ class Component extends DCLogic {
         ],
       },
     };
-    const careerKey = s.careerMonth || 'aug';
+    const careerKey = s.careerMonth || 'sep';
     const careerMonths = roadmapPage.career.months;
     const careerActive = careerMonths.filter(m => m.key === careerKey)[0] || careerMonths[0];
     const careerTabs = careerMonths.map(m => ({
@@ -1466,7 +1478,9 @@ class Component extends DCLogic {
       { img: 'illustrations/conversations.png', title: 'Community conversations', tag: 'Daily', tagBg: '#f3e6c6', tagColor: '#7a5a1f', color: '#d6a23f', desc: 'Connect with members to ask questions, share experiences, exchange recommendations, and learn from community leaders.' },
       { img: 'illustrations/career.jpg', title: 'Career & professional growth', tag: 'Cypress', tagBg: '#dfe6f2', tagColor: '#2c4a7a', color: '#2c4a7a', desc: 'Cypress members enjoy career growth sessions covering interview prep, resume reviews, networking with people who\u2019ve done it, plus insights on AI and future-ready skills for a competitive job market.' },
       { img: 'illustrations/special-events.jpg', title: 'Spotlight Sessions', tag: 'Monthly', tagBg: '#f7edd4', tagColor: '#74561c', color: '#d6a23f', desc: "Exclusive deep dives on investing, saving, side hustles, skincare, smart money, real estate, Airbnb, AI, and other practical topics you won't find anywhere else." },
-      { img: 'illustrations/recordings.jpg', title: 'Session recordings', tag: 'On demand', tagBg: '#d9e4df', tagColor: '#1b4034', color: '#1b4034', desc: 'Access previous content anytime with recorded sessions saved in your member library, so you can revisit lessons, catch up on what you missed, and learn at your own pace.' },
+      { img: 'illustrations/science-review.jpg', title: 'Science in Review', tag: 'All tiers', tagBg: '#ddefe9', tagColor: '#1c5c4c', color: '#2f8f7a', desc: 'From evidence to practice — a monthly session where we read two papers properly and translate them into what they actually mean for you. Open to every tier.' },
+      { img: 'illustrations/yoga.jpg', title: 'Yoga', tag: 'All tiers', tagBg: '#e2f0e8', tagColor: '#14563d', color: '#5a9e7a', desc: 'Move, breathe, and reset together — an hour of gentle practice with the ARC community. All levels welcome, and every tier can join, free Sapling included.' },
+      { img: 'illustrations/mobility.jpg', title: 'Mobility & Fitness Q&A', tag: 'Juniper & up', tagBg: '#e7ead9', tagColor: '#3d4624', color: '#5f6b3a', desc: 'Bring your questions on movement, mobility and training, and work through them live with us. Open to Juniper and Cypress members — day and time to be announced.' },
     ];
 
     // ---- member recommendation posts ----
