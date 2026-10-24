@@ -22,6 +22,8 @@ html,body{margin:0;padding:0;}
 @media (max-width:600px){.arc-tiers{display:flex!important;flex-direction:column-reverse!important;}}
 /* Career Lab month tabs: below the width where all three fit in one row, stack them full-width (no 2+1 break) */
 @media (max-width:680px){.career-tab{flex-basis:100%!important;min-width:0!important;}}
+/* Mentor bio pop-up: photo spans the full width on phones */
+@media (max-width:560px){.mentor-pop-photo{flex-basis:100%!important;min-height:260px!important;border-radius:24px 24px 0 0!important;}}
 </style>
 </helmet>
 
@@ -1267,11 +1269,8 @@ html,body{margin:0;padding:0;}
                 <sc-for list="{{ mt.helps }}" as="hp" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#123d4b;background:#eef5f7;border:1px solid rgba(31,91,110,.2);padding:4px 10px;border-radius:999px;">{{ hp }}</span></sc-for>
               </div>
             </sc-if>
-            <sc-if value="{{ mt.fullOpen }}" hint-placeholder-val="{{ false }}">
-              <p style="font-size:13.5px;line-height:1.6;color:#4c5348;margin:0 0 14px;padding:14px 16px;background:#f3ece0;border-radius:12px;">{{ mt.fullText }}</p>
-            </sc-if>
             <sc-if value="{{ mt.hasFull }}" hint-placeholder-val="{{ false }}">
-              <span onClick="{{ mt.toggleFull }}" style="cursor:pointer;align-self:flex-start;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;color:#1f5b6e;margin-bottom:14px;">{{ mt.fullLabel }} →</span>
+              <span onClick="{{ mt.toggleFull }}" style="cursor:pointer;align-self:flex-start;margin-top:auto;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;color:#1f5b6e;margin-bottom:14px;">Read full bio →</span>
             </sc-if>
             <sc-if value="{{ mt.session }}" hint-placeholder-val="{{ false }}"><span style="margin-top:auto;align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#dcebef;color:#123d4b;padding:5px 11px;border-radius:999px;">{{ mt.session }}</span></sc-if>
           </div>
@@ -1279,6 +1278,35 @@ html,body{margin:0;padding:0;}
       </sc-for>
     </div>
   </section>
+
+  <!-- full bio pop-up -->
+  <sc-if value="{{ mentorModalOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;animation:arcFade .2s ease;">
+      <div onClick="{{ closeMentor }}" style="position:absolute;inset:0;background:rgba(20,48,39,.72);backdrop-filter:blur(4px);cursor:pointer;"></div>
+      <div style="position:relative;background:#fbf6ec;border-radius:24px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+        <span onClick="{{ closeMentor }}" style="position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border-radius:999px;background:rgba(251,246,236,.92);color:#143027;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);">×</span>
+        <div style="display:flex;flex-wrap:wrap;">
+          <div class="mentor-pop-photo" style="flex:0 0 200px;min-height:220px;background:{{ mentorModal.photoBg }};border-radius:24px 0 0 0;display:flex;align-items:center;justify-content:center;">
+            <sc-if value="{{ mentorModal.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:76px;height:76px;border-radius:999px;background:rgba(246,239,227,.16);border:1.5px solid rgba(246,239,227,.4);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:30px;color:#f6efe3;">{{ mentorModal.initial }}</span></sc-if>
+          </div>
+          <div style="flex:1 1 280px;padding:28px 28px 20px;">
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:#143027;margin:0 0 4px;">{{ mentorModal.name }}</h3>
+            <div style="font-size:14px;font-weight:600;color:#1f5b6e;margin-bottom:14px;">{{ mentorModal.role }}</div>
+            <sc-if value="{{ mentorModal.session }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#dcebef;color:#123d4b;padding:5px 11px;border-radius:999px;margin-bottom:14px;">{{ mentorModal.session }}</span></sc-if>
+            <sc-if value="{{ mentorModal.hasHelps }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <sc-for list="{{ mentorModal.helps }}" as="hp" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#123d4b;background:#eef5f7;border:1px solid rgba(31,91,110,.2);padding:4px 10px;border-radius:999px;">{{ hp }}</span></sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div style="padding:22px 28px 30px;border-top:1px solid rgba(20,48,39,.1);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:10px;">About {{ mentorModal.name }}</div>
+          <p style="font-size:15.5px;line-height:1.7;color:#3a4038;margin:0;">{{ mentorModal.fullText }}</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 
   <!-- cta -->
   <section style="max-width:1180px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,56px) clamp(56px,8vw,96px);">
@@ -1910,7 +1938,7 @@ class Component extends DCLogic {
         helps: m.helps || [], hasHelps: !!(m.helps && m.helps.length),
         hasFull: !!m.full, fullOpen: open, fullText: m.full || '',
         fullLabel: open ? 'Hide full bio' : 'Read full bio',
-        toggleFull: () => this.setState(st => ({ mentorOpen: st.mentorOpen === m.name ? null : m.name })),
+        toggleFull: () => this.setState({ mentorOpen: m.name }),
         bio: m.bio || 'A short bio is on its way: their background, what they do today, and what they can help mentees with.',
         session: sess ? 'Group session · ' + fmtDate(sess) : '',
         hasImg: !!m.img, noImg: !m.img,
@@ -2173,6 +2201,9 @@ class Component extends DCLogic {
       goHome: () => this.go('home'), goCommunity: () => this.go('community'), goJoin: () => this.go('join'), goStory: () => this.go('story'), goCalendar: () => this.go('calendar'), goMentorship: () => this.go('mentorship'),
       goLiveRooms: () => this.goSection('community', 'liverooms', 'arc-how'),
       goDorehami: () => this.goSection('community', 'dorehami', 'arc-dorehami'),
+      mentorModal: mentors.filter(m => m.name === s.mentorOpen)[0] || { name: '', role: '', fullText: '', helps: [], hasHelps: false, photoBg: 'transparent', noImg: false, initial: '', session: '' },
+      mentorModalOpen: !!mentors.filter(m => m.name === s.mentorOpen)[0],
+      closeMentor: () => this.setState({ mentorOpen: null }),
       mentorRange: mentorSessionEvents.length ? mentorSessionEvents[0].short + ' to ' + mentorSessionEvents[mentorSessionEvents.length - 1].short : '', mentors, mentorSessions, mentorCount: String(mentors.length), mentorSessionCount: String(mentorSessions.length),
       seasonRange, seasonRangeLong, calHeroCta: 'See ' + thisMonth.name + ' in full →',
       handoffTitle: (nextMonths.length ? nextMonths.slice(0, 2).join(' and ') + (nextMonths.length > 1 ? ' are' : ' is') + ' already planned. ' : '') + 'See the whole season.',
