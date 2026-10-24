@@ -1225,7 +1225,7 @@ html,body{margin:0;padding:0;}
         <div style="opacity:{{ ms.cardOpacity }};background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-top:4px solid #1f5b6e;border-radius:20px;padding:26px;display:flex;flex-direction:column;">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
             <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1f5b6e;">{{ ms.month }}</span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.04em;color:#74561c;">{{ ms.access }}</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.04em;color:{{ ms.accessInk }};">{{ ms.access }}</span>
           </div>
           <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;color:#143027;margin:0 0 8px;line-height:1.2;">{{ ms.title }}</h3>
           <p style="font-size:14.5px;line-height:1.5;color:#6b6456;margin:0 0 18px;">{{ ms.theme }}</p>
@@ -1529,6 +1529,9 @@ class Component extends DCLogic {
     const openToAll = ['free', 'science', 'yoga', 'goals'];
     const cypressOnly = ['career', 'money', 'spotlight', 'liveroom', 'mentor'];
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
+    // a single session can be opened to everyone with open: true, whatever its type
+    const isOpen = e => !!e.open || openToAll.includes(e.type);
+    const accessOfEv = e => e.open ? 'All tiers' : accessOf(e.type);
     // Recorded / Not recorded badge, Live Rooms only. Set rec: true or rec: false on an event once confirmed; leave it off until then.
     const recBadge = e => e.rec === true
       ? { recLabel: 'Recorded', recBg: '#e2f0e8', recInk: '#14563d', recBorder: 'rgba(31,122,90,.45)' }
@@ -1561,7 +1564,7 @@ class Component extends DCLogic {
         blurb: 'Skin is our new spotlight, Live Rooms open, and the money challenge turns three months of lessons into habits. Plus our first mentorship session and a Thanksgiving table with Shervin.',
         events: [
         { d: 6,  time: '5–6 PM',       type: 'cooking',   host: 'Shervin', title: 'در باب آش', faTitle: 'در باب آش' },
-        { d: 8,  time: '2–3 PM',       type: 'mentor',    host: 'Sahar, Shiva & Masoud', title: 'Mentorship: Let’s Talk About Your Career', note: 'Mentorship introduction and career questions' },
+        { d: 8,  time: '2–3 PM',       type: 'mentor',    host: 'Sahar, Shiva & Masoud', title: 'Mentorship: Let’s Talk About Your Career', note: 'Mentorship introduction and career questions', open: true },
         { d: 11, time: '3–4 PM',       type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice', note: 'Using AI in Obesity Treatment · Is 1.6 g/kg of Protein Enough to Maximize Muscle Growth?' },
         { d: 12, time: '4:30–5:30 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: Is It Time to Move On?', note: 'Quitting your job',
           desc: 'Quitting your job is a big call. How to tell when it is really time to move on, and how to leave well when you do.' },
@@ -1655,7 +1658,7 @@ class Component extends DCLogic {
       const isChallenge = e.type === 'challenge';
       return {
         ...e, typeLabel: st.label, color: st.color, tint: st.tint, ink: st.ink,
-        isFree: openToAll.includes(e.type), access: accessOf(e.type), isChallenge,
+        isFree: isOpen(e), access: accessOfEv(e), isChallenge,
         when: isChallenge ? weeksWord[e.weeks] + ' weeks' : e.time,
         hostLine: isChallenge ? 'Runs ' + weeksWord[e.weeks].toLowerCase() + ' weeks, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
         evBorder: '1px solid transparent',
@@ -1686,7 +1689,7 @@ class Component extends DCLogic {
       kicker: thisMonth.status === 'This month' ? 'This month at ARC' : 'Coming up at ARC',
       stats: [
         { n: countIn(thisMonth, isSession), label: 'Live sessions' },
-        { n: countIn(thisMonth, e => openToAll.includes(e.type)), label: 'Open to all tiers' },
+        { n: countIn(thisMonth, isOpen), label: 'Open to all tiers' },
         liveRoomCount(thisMonth)
           ? { n: String(liveRoomCount(thisMonth)), label: 'Live Rooms' }
           : { n: countIn(thisMonth, e => e.type === 'money' || e.type === 'spotlight'), label: 'Spotlight sessions' },
@@ -1761,7 +1764,7 @@ class Component extends DCLogic {
       { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'challenge']) },
       { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'liveroom', 'career', 'mentor']) },
     ];
-    const freeSessions = upcoming.filter(e => openToAll.includes(e.type)).slice(0, 4).map(e => ({ date: e.dow + ' ' + e.short + ' ' + e.d, title: e.title, host: (e.host ? 'with ' + e.host + ' · ' : '') + e.time + ' ET' }));
+    const freeSessions = upcoming.filter(isOpen).slice(0, 4).map(e => ({ date: e.dow + ' ' + e.short + ' ' + e.d, title: e.title, host: (e.host ? 'with ' + e.host + ' · ' : '') + e.time + ' ET' }));
     // announced, but not yet scheduled — shown under the calendar
     const comingSoon = [];
 
@@ -1843,7 +1846,7 @@ class Component extends DCLogic {
     // counted off the schedule itself, so these never drift when sessions are added
     const seasonStats = [
       { n: String(shownEvents.filter(isSession).length), label: 'live sessions, ' + seasonRange },
-      { n: String(shownEvents.filter(e => openToAll.includes(e.type)).length), label: 'open to all tiers' },
+      { n: String(shownEvents.filter(isOpen).length), label: 'open to all tiers' },
       { n: String(shownEvents.filter(e => e.type === 'challenge').length), label: 'challenges to build habits' },
     ];
 
@@ -1922,7 +1925,8 @@ class Component extends DCLogic {
       month: scheduleMonths.filter(m => m.key === e.mKey)[0].name,
       isPast: e.ts < todayTs,
       cardOpacity: e.ts < todayTs ? '.6' : '1',
-      access: accessOf('mentor'),
+      access: accessOfEv(e),
+      accessInk: e.open ? '#14563d' : '#74561c',
     }));
     const pastSessions = [
       { category: 'Recipe', title: 'The perfect tahdig, three ways', label: 'Public', labelBg: '#7d8a4e', labelColor: '#fff', bg: '#e7d9bf', ph: 'session still' },
