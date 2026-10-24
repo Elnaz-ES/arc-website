@@ -1261,6 +1261,18 @@ html,body{margin:0;padding:0;}
             <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#143027;margin:0 0 3px;">{{ mt.name }}</h3>
             <div style="font-size:13px;font-weight:600;color:#1f5b6e;margin-bottom:10px;">{{ mt.role }}</div>
             <p style="font-size:14px;line-height:1.55;color:#6b6456;margin:0 0 14px;">{{ mt.bio }}</p>
+            <sc-if value="{{ mt.hasHelps }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:8px;">Can help with</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
+                <sc-for list="{{ mt.helps }}" as="hp" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#123d4b;background:#eef5f7;border:1px solid rgba(31,91,110,.2);padding:4px 10px;border-radius:999px;">{{ hp }}</span></sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ mt.fullOpen }}" hint-placeholder-val="{{ false }}">
+              <p style="font-size:13.5px;line-height:1.6;color:#4c5348;margin:0 0 14px;padding:14px 16px;background:#f3ece0;border-radius:12px;">{{ mt.fullText }}</p>
+            </sc-if>
+            <sc-if value="{{ mt.hasFull }}" hint-placeholder-val="{{ false }}">
+              <span onClick="{{ mt.toggleFull }}" style="cursor:pointer;align-self:flex-start;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;color:#1f5b6e;margin-bottom:14px;">{{ mt.fullLabel }} →</span>
+            </sc-if>
             <sc-if value="{{ mt.session }}" hint-placeholder-val="{{ false }}"><span style="margin-top:auto;align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#dcebef;color:#123d4b;padding:5px 11px;border-radius:999px;">{{ mt.session }}</span></sc-if>
           </div>
         </div>
@@ -1875,21 +1887,26 @@ class Component extends DCLogic {
     // Mentors: add a photo by putting it in photos/mentors/ and setting img: 'photos/mentors/sahar.jpg'.
     const mentorDefs = [
       { name: 'Sahar',    role: 'Role coming soon', bio: '', img: '' },
-      { name: 'Shiva',    role: 'Role coming soon', bio: '', img: '' },
+      { name: "Shiva", role: "Engineering Program Manager, Apple", bio: "Hardware and Health Technology Engineering Program Manager at Apple, leading complex cross functional programs from concept to product launch.", helps: ["Interview prep", "Resumes & impact", "Promotions", "Influencing without authority"], full: "I’m a Hardware and Health Technology Engineering Program Manager at Apple, with experience leading complex, cross-functional programs from concept to product launch. I mentor aspiring and experienced professionals on career growth, interview preparation, recruiter communication, and answering behavioral questions with confidence. I also help mentees strengthen their resumes, communicate their impact, navigate the hiring process, and develop effective strategies for promotions and career advancement. Drawing on my experience in technical organizations, I offer practical guidance on stakeholder management, leadership, and influencing without authority. My goal is to help professionals communicate their value, stand out in competitive hiring processes, and take ownership of their career growth.", img: '' },
       { name: 'Masoud',   role: 'Role coming soon', bio: '', img: '' },
-      { name: 'Negin',    role: 'Role coming soon', bio: '', img: '' },
-      { name: 'Padideh',  role: 'Role coming soon', bio: '', img: '' },
+      { name: "Negin", role: "Attorney · Compliance, biotech", bio: "Attorney licensed in Iran and California. Former legal counsel and compliance officer at Heineken and Unilever, LL.M. from UCLA, now in compliance at a biotechnology company.", helps: ["Legal education", "Bar exam prep", "Legal careers abroad", "Compliance roles"], full: "Negin Nadali is an attorney licensed in both Iran and California, with experience as in-house legal counsel and compliance officer at companies including Heineken and Unilever, as well as working with startups. In 2023, she moved to the United States to pursue an LL.M. at UCLA School of Law, specializing in Business Law. Her experience also includes working at a U.S. law firm, and she currently works in-house in compliance at a biotechnology company. Beyond law, Negin has always been interested in business, technology, and science, and enjoys finding ways to bring these interests into her work. As a mentor, she hopes to offer guidance on legal education, bar exam preparation, and legal career paths, including international career transitions and opportunities in in-house legal and compliance roles.", img: '' },
+      { name: "Padideh", role: "PM/CM Lead · Transportation & water", bio: "Rail transportation engineer turned consulting leader. After five years in Iran’s rail industry and an MBA in the US, she grew from intern to project manager and now leads PM/CM teams.", helps: ["Careers across two countries", "Technical to leadership", "Career advancement"], full: "I have a background in rail transportation engineering and spent nearly 5 years working full-time in the industry in Iran. In 2011, I moved to the United States to earn an MBA focused on project management and operations strategy. I started on the construction side, working as an intern, project engineer, cost estimator, and project manager on rail transit construction projects across the country. Today, I’ve moved to the consulting side and lead project management and construction management (PM/CM) teams on transportation, rail/transit, and water/wastewater projects. I’m glad to share what I’ve learned about building a career across two countries, moving from technical roles into leadership, and navigating career advancement.", img: '' },
       { name: 'Mehdi',    role: 'Role coming soon', bio: '', img: '' },
-      { name: 'Farahnaz', role: 'Role coming soon', bio: '', img: '' },
-      { name: 'Razieh',   role: 'Role coming soon', bio: '', img: '' },
+      { name: "Farahnaz", role: "Consultant Endocrinologist, Sydney", bio: "Over 10 years in endocrinology across Iran and Australia. A former Assistant Professor at Tehran University of Medical Sciences, she rebuilt her career in Australia and became a Fellow of the RACP.", helps: ["International medical graduates", "Metabolic health", "Evidence over pseudoscience"], full: "Farahnaz S Nia, FRACP, is a Consultant Endocrinologist in private practice in Sydney, with more than 10 years of experience in endocrinology across Iran and Australia. After completing her endocrinology fellowship in Iran and serving as an Assistant Professor at Tehran University of Medical Sciences, she rebuilt her career in Australia in 2023. She had a supervised practice as a Senior Registrar of Endocrinology at Cairns Base Hospital and achieved Fellowship of the Royal Australasian College of Physicians. Then she started her career as an independent consultant endocrinologist in Sydney. She is also interested in research and has been an international peer reviewer for Wiley and Nature/Springer journals. Having made the journey from academic physician in Iran to independent specialist in Australia, she understands the challenges international medical graduates face. As an ARC mentor, she offers guidance on evidence-based practice and critical thinking in endocrinology and metabolic health. She is passionate about helping the Iranian immigrant community achieve better metabolic health and avoid pseudoscience in their life journey.", img: '' },
+      { name: "Razieh", role: "Founder & CEO, The Wellness Connection", bio: "Founder of an online fitness and nutrition coaching studio. Certified coach with nearly 10 years in health and fitness and specialized training in menopause and midlife wellness.", helps: ["Starting a coaching business", "Fitness & nutrition careers", "Sustainable habits"], full: "Hi, I’m Razie! I’m the Founder and CEO of The Wellness Connection, a fully online fitness and nutrition coaching studio. I hold a Bachelor’s degree in Physical Education and Sports Science and have nearly 10 years of experience in the health and fitness industry. I’m a certified fitness and nutrition coach, with additional specialized training in menopause and midlife wellness. My passion is helping people build healthier, stronger lives through evidence-based coaching, practical strategies, and sustainable habits. As both a coach and business owner, I’m excited to share my experiences, support aspiring professionals, and learn from others through this mentorship program!", img: '' },
       { name: 'Kamyar',   role: 'Role coming soon', bio: '', img: '' },
     ];
     const mentorSessionEvents = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'mentor')), []);
     const mentorTints = ['#1f5b6e', '#2c4a7a', '#7a4f8a', '#a8451f', '#3c8d6b', '#c5612e'];
-    const mentors = mentorDefs.map((m, i) => {
+    const mentors = mentorDefs.slice().sort((a, b) => (b.full ? 1 : 0) - (a.full ? 1 : 0)).map((m, i) => {
       const sess = mentorSessionEvents.filter(e => e.host.includes(m.name))[0];
+      const open = s.mentorOpen === m.name;
       return {
         ...m, initial: m.name.charAt(0),
+        helps: m.helps || [], hasHelps: !!(m.helps && m.helps.length),
+        hasFull: !!m.full, fullOpen: open, fullText: m.full || '',
+        fullLabel: open ? 'Hide full bio' : 'Read full bio',
+        toggleFull: () => this.setState(st => ({ mentorOpen: st.mentorOpen === m.name ? null : m.name })),
         bio: m.bio || 'A short bio is on its way: their background, what they do today, and what they can help mentees with.',
         session: sess ? 'Group session · ' + fmtDate(sess) : '',
         hasImg: !!m.img, noImg: !m.img,
