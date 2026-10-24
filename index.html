@@ -498,16 +498,16 @@ html,body{margin:0;padding:0;}
         </div>
         <p style="flex:1 1 320px;max-width:440px;font-size:16px;line-height:1.6;color:#6b6456;margin:0;">Real messages from members after Personal Finance Foundations, our three month money spotlight.</p>
       </div>
-      <div style="column-width:300px;column-gap:20px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:stretch;">
         <sc-for list="{{ memberQuotes }}" as="q" hint-placeholder-count="6">
-          <div style="break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-block;width:100%;margin-bottom:20px;background:#fbf6ec;border-radius:18px;padding:20px 22px 20px;box-shadow:0 14px 30px rgba(20,48,39,.12);transform:rotate({{ q.tilt }});border-top:4px solid {{ q.accent }};">
+          <div style="display:flex;flex-direction:column;background:#fbf6ec;border-radius:18px;padding:22px 24px;box-shadow:0 12px 28px rgba(20,48,39,.1);border-top:4px solid {{ q.accent }};">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;">
               <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:34px;line-height:.6;color:{{ q.accent }};">“</span>
               <span style="font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a7f6a;">{{ q.src }}</span>
             </div>
             <p dir="rtl" style="font-family:'Vazirmatn',sans-serif;font-size:15.5px;line-height:1.95;color:#25352c;margin:0 0 12px;text-align:right;">{{ q.fa }}</p>
             <p style="font-size:13px;line-height:1.5;color:#8a7f6a;font-style:italic;margin:0 0 12px;">{{ q.en }}</p>
-            <div style="font-size:12px;font-weight:600;color:#5b5446;">ARC member</div>
+            <div style="margin-top:auto;padding-top:12px;border-top:1px solid rgba(20,48,39,.08);font-size:12px;font-weight:600;color:#5b5446;">ARC member</div>
           </div>
         </sc-for>
       </div>
@@ -1961,11 +1961,11 @@ class Component extends DCLogic {
     // ---- members' words: real feedback from the Personal Finance Foundations spotlight ----
     const memberQuotes = [
       { fa: 'واقعاً این جلسه خیلی برام مفید بود. هم کلی چیز جدید یاد گرفتم، هم خیلی از سؤال\u200cها و گره\u200cهای ذهنی\u200cام برطرف شد. منی که همیشه بیشتر روی طلا و ملک سرمایه\u200cگذاری می\u200cکردم، مدت\u200cها در مورد استاک یک فکر خام توی ذهنم داشتم، ولی این جلسه به اون فکر خام شکل و جهت داد و باعث شد جدی\u200cتر بهش فکر کنم و بخوام به عمل تبدیلش کنم. واقعاً جلسه خیلی خوبی بود، ممنونم.', en: 'I always invested in gold and property. This session gave shape to a rough idea I had about stocks, and now I want to act on it.', src: 'Stock Market Investing', tilt: '-1deg', accent: '#2e7a52' },
-      { fa: 'هدا جان دوره\u200cهای مالی بی\u200cنظیر هستند؛ شفاف، دقیق و روان. خداییش مباحث پیچیده رو این\u200cقدر قشنگ و شسته\u200cرفته توضیح دادن هنر و استعداد خاصی می\u200cخواد. ممنون از خودت و تیمت. من جلسات رو چند بار چند بار گوش می\u200cدم. عالی می\u200cشه ادامه پیدا کنه. و اما بحث شیرین مراقبت\u200cهای پوستی!', en: 'Clear, precise and easy to follow. I listen to the sessions again and again. And now, on to skincare!', src: 'Personal Finance Foundations', tilt: '1.2deg', accent: '#d6a23f' },
-      { fa: 'دورهٔ فایننس رو متوقف نکنید. این دوره بی\u200cنظیر و طلایی بود.', en: "Please don't stop the finance course. It was one of a kind.", src: 'Personal Finance Foundations', tilt: '-0.6deg', accent: '#c5612e' },
       { fa: 'می\u200cخوام یه تجربهٔ شخصی دربارهٔ رابطه\u200cام با پول باهاتون در میون بذارم. نه به این خاطر که فکر می\u200cکنم جواب درست رو پیدا کردم یا خیلی خوب بلدم پولم رو مدیریت کنم! فقط حس می\u200cکنم بعضی چیزها رو در این یک سال و نیم بهتر از قبل فهمیدم و شاید تجربه\u200cام برای بقیه هم قابل لمس باشه.', en: 'A member opening up about their own relationship with money, so others could learn from it.', src: 'Shared in the community', tilt: '1deg', accent: '#7a4f8a' },
-      { fa: 'هدا جان این دوره طلایی بود. هر چی بگم کم گفتم.', en: 'This course was gold. Whatever I say is not enough.', src: 'Personal Finance Foundations', tilt: '-1.3deg', accent: '#2e7a52' },
+      { fa: 'هدا جان دوره\u200cهای مالی بی\u200cنظیر هستند؛ شفاف، دقیق و روان. خداییش مباحث پیچیده رو این\u200cقدر قشنگ و شسته\u200cرفته توضیح دادن هنر و استعداد خاصی می\u200cخواد. ممنون از خودت و تیمت. من جلسات رو چند بار چند بار گوش می\u200cدم.', en: 'Clear, precise and easy to follow. I listen to the sessions again and again.', src: 'Personal Finance Foundations', tilt: '1.2deg', accent: '#d6a23f' },
+      { fa: 'دورهٔ فایننس رو متوقف نکنید. این دوره بی\u200cنظیر و طلایی بود.', en: "Please don't stop the finance course. It was one of a kind.", src: 'Personal Finance Foundations', tilt: '-0.6deg', accent: '#c5612e' },
       { fa: 'سلام، منم جرئت کردم دغدغه\u200cام رو بگم. من فکر می\u200cکردم تنها منم که از تموم شدن دورهٔ مالی ناراحتم.', en: 'I thought I was the only one sad the money course was over.', src: 'Personal Finance Foundations', tilt: '0.7deg', accent: '#2c4a7a' },
+      { fa: 'هدا جان این دوره طلایی بود. هر چی بگم کم گفتم.', en: 'This course was gold. Whatever I say is not enough.', src: 'Personal Finance Foundations', tilt: '-1.3deg', accent: '#2e7a52' },
     ];
     // ---- member recommendation posts ----
     const recPosts = [
