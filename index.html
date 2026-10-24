@@ -1583,7 +1583,7 @@ class Component extends DCLogic {
         events: [
         { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Understanding Cosmetic Surgery: Options & Questions', note: 'Skin spotlight', spot: 'skin' },
         { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
-        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 4, spot: 'skin' },
+        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 4, spot: 'skin', desc: 'Four weeks to make your routine stick. Each day brings a small prompt for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
         { d: 11, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room', spot: 'money' },
         { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
         { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
@@ -1773,7 +1773,7 @@ class Component extends DCLogic {
         sessions: items.map(e => ({
           title: e.type === 'challenge' ? e.title.replace(' Begins', '') : e.title,
           date: e.type === 'challenge' ? 'Starts ' + fmtDate(e) + ' · ' + weeksWord[e.weeks] + ' weeks' : fmtWhen(e),
-          sub: e.desc ? (e.type === 'liveroom' ? 'Live Room · Members’ knowledge sharing. ' : '') + e.desc : skinKinds[e.type].sub, iconBg: skinKinds[e.type].color, iconInk: skinKinds[e.type].ink,
+          sub: e.desc ? (e.type === 'liveroom' ? 'Live Room · Members’ knowledge sharing. ' : e.type === 'challenge' ? 'Challenge. ' : '') + e.desc : skinKinds[e.type].sub, iconBg: skinKinds[e.type].color, iconInk: skinKinds[e.type].ink,
           topics: e.topics || [], hasTopics: !!(e.topics && e.topics.length),
         })),
       };
