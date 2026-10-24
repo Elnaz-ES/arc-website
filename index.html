@@ -43,6 +43,7 @@ html,body{margin:0;padding:0;}
         <span onClick="{{ goHome }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navHomeColor }};transition:color .2s;white-space:nowrap;">Home</span>
         <span onClick="{{ goCommunity }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCommunityColor }};transition:color .2s;white-space:nowrap;">Community</span>
         <span onClick="{{ goCalendar }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCalendarColor }};transition:color .2s;white-space:nowrap;">Calendar</span>
+        <span onClick="{{ goMentorship }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navMentorshipColor }};transition:color .2s;white-space:nowrap;">Mentorship</span>
         <span onClick="{{ goCourses }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navCoursesColor }};transition:color .2s;white-space:nowrap;">Courses</span>
         <span onClick="{{ goJoin }}" style="cursor:pointer;font-weight:600;font-size:15px;color:{{ navJoinColor }};transition:color .2s;white-space:nowrap;">Membership</span>
         <span onClick="{{ goJoin }}" style="cursor:pointer;background:#143027;color:#f6efe3;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;padding:11px 22px;border-radius:999px;letter-spacing:.01em;">Join ARC</span>
@@ -72,6 +73,7 @@ html,body{margin:0;padding:0;}
       <span onClick="{{ goHome }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Home</span>
       <span onClick="{{ goCommunity }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Community</span>
       <span onClick="{{ goCalendar }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Calendar</span>
+      <span onClick="{{ goMentorship }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Mentorship</span>
       <span onClick="{{ goCourses }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Courses</span>
       <span onClick="{{ goJoin }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;font-size:34px;padding:10px 0;border-bottom:1px solid rgba(246,239,227,.16);">Membership</span>
     </div>
@@ -183,9 +185,9 @@ html,body{margin:0;padding:0;}
           <span style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;opacity:.5;"><span style="position:absolute;inset:0;border:1.5px solid rgba(214,162,63,.4);border-radius:18px;"></span><span style="position:absolute;inset:0;border:1.5px solid rgba(214,162,63,.4);border-radius:18px;transform:rotate(45deg);"></span></span>
           <div style="position:relative;display:flex;flex-direction:column;height:100%;">
             <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#d6a23f;margin-bottom:26px;">
-              <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;"></span>This month at ARC
+              <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;"></span>{{ roadmap.kicker }}
             </div>
-            <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#d6a23f;margin-bottom:6px;">{{ roadmap.month }}</div>
+            <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#d6a23f;margin-bottom:6px;">{{ roadmap.monthYear }}</div>
             <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.02em;margin:0 0 16px;line-height:1.04;">{{ roadmap.theme }}</h2>
             <p style="font-size:16px;line-height:1.6;color:rgba(246,239,227,.78);margin:0 0 28px;">{{ roadmap.blurb }}</p>
             <div style="display:flex;gap:26px;margin-bottom:32px;">
@@ -219,14 +221,48 @@ html,body{margin:0;padding:0;}
                     <span style="font-size:13px;font-weight:600;color:#8a7f6a;">{{ r.date }}</span>
                     <span style="margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.04em;color:{{ r.accessColor }};">{{ r.access }}</span>
                   </div>
-                  <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:17px;color:#143027;line-height:1.3;">{{ r.title }}</div>
-                  <div style="font-size:13.5px;color:#8a7f6a;margin-top:3px;">{{ r.meta }}</div>
+                  <div dir="auto" style="font-family:'Sora','Vazirmatn',sans-serif;font-weight:600;font-size:17px;color:#143027;line-height:1.3;text-align:left;">{{ r.title }}</div>
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;">
+                    <span style="font-size:13.5px;color:#8a7f6a;">{{ r.meta }}</span>
+                    <sc-if value="{{ r.recLabel }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:{{ r.recBg }};color:{{ r.recInk }};border:1px solid {{ r.recBorder }};padding:3px 9px;border-radius:999px;white-space:nowrap;">{{ r.recLabel }}</span></sc-if>
+                  </div>
                 </div>
               </div>
             </sc-for>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW THIS SEASON -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,100px) clamp(20px,5vw,56px) clamp(16px,3vw,32px);">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:clamp(24px,3vw,36px);">
+      <div style="max-width:620px;">
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#c5612e;margin-bottom:14px;">New this season</div>
+        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-0.02em;color:#143027;margin:0;">Not just learning. Doing it, together.</h2>
+      </div>
+      <p style="flex:1 1 320px;max-width:440px;font-size:16px;line-height:1.6;color:#6b6456;margin:0;">Three new ways to take what you learn at ARC into real life, with experts and the community beside you.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+      <div onClick="{{ goLiveRooms }}" style="cursor:pointer;background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-top:4px solid #7a4f8a;border-radius:20px;padding:26px 26px 24px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-3px);box-shadow:0 16px 34px rgba(20,48,39,.1);">
+        <span style="align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#ede2f1;color:#4f2f5c;padding:5px 11px;border-radius:999px;margin-bottom:16px;">Live Rooms &amp; challenges</span>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;color:#143027;margin:0 0 10px;line-height:1.2;">Learn it, practice it, keep it.</h3>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0 0 20px;">Every spotlight now comes with interactive Live Rooms and a challenge that turns the lesson into a habit.</p>
+        <span style="margin-top:auto;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;color:#7a4f8a;">How it works →</span>
+      </div>
+      <div onClick="{{ goDorehami }}" style="cursor:pointer;background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-top:4px solid #c5612e;border-radius:20px;padding:26px 26px 24px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-3px);box-shadow:0 16px 34px rgba(20,48,39,.1);">
+        <span style="align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#f4e3d8;color:#8a3a1a;padding:5px 11px;border-radius:999px;margin-bottom:16px;">Dorehami · <span style="font-family:'Vazirmatn',sans-serif;letter-spacing:0;">دورهمی</span></span>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;color:#143027;margin:0 0 10px;line-height:1.2;">Small circles. Everyone talks.</h3>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0 0 20px;">A monthly gathering of about 12 members. Cameras on, never recorded, and a real chance to get to know each other.</p>
+        <span style="margin-top:auto;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;color:#c5612e;">Meet the idea →</span>
+      </div>
+      <div onClick="{{ goMentorship }}" style="cursor:pointer;background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-top:4px solid #1f5b6e;border-radius:20px;padding:26px 26px 24px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-3px);box-shadow:0 16px 34px rgba(20,48,39,.1);">
+        <span style="align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#dcebef;color:#123d4b;padding:5px 11px;border-radius:999px;margin-bottom:16px;">Mentorship</span>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;color:#143027;margin:0 0 10px;line-height:1.2;">Guidance from people who have been there.</h3>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0 0 20px;">{{ mentorSessionCount }} group sessions with {{ mentorCount }} mentors, then one on one matching with the mentor who fits you.</p>
+        <span style="margin-top:auto;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;color:#1f5b6e;">Meet the mentors →</span>
       </div>
     </div>
   </section>
@@ -380,16 +416,149 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
+  <!-- HOW SPOTLIGHTS WORK: learn, practice in Live Rooms, build the habit with a challenge -->
+  <section id="arc-how" style="max-width:1180px;margin:0 auto;padding:clamp(8px,2vw,24px) clamp(20px,5vw,56px) clamp(56px,8vw,96px);scroll-margin-top:90px;">
+    <div style="max-width:720px;margin-bottom:clamp(28px,4vw,44px);">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7a4f8a;margin-bottom:14px;">How Spotlights work</div>
+      <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4vw,46px);line-height:1.08;letter-spacing:-0.02em;color:#143027;margin:0 0 16px;">We don't stop at the lesson.</h2>
+      <p style="font-size:clamp(16px,1.9vw,18.5px);line-height:1.65;color:#5b5446;margin:0;">Every spotlight runs in three steps, so what you learn actually becomes part of your life. You learn from experts, you practice with them, and then we build the habit together, with the community beside you.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:18px;">
+      <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+          <span style="position:relative;width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;"><span style="position:absolute;inset:0;background:#d6a23f;border-radius:12px;"></span><span style="position:absolute;inset:0;background:#d6a23f;border-radius:12px;transform:rotate(45deg);"></span><span style="position:relative;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#143027;">01</span></span>
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#f7edd4;color:#74561c;padding:5px 11px;border-radius:999px;">Expert sessions</span>
+        </div>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:22px;color:#143027;margin:0 0 10px;">Learn</h3>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0;">Experts teach the theory in clear, practical sessions you can follow with no background at all.</p>
+      </div>
+      <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+          <span style="position:relative;width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;"><span style="position:absolute;inset:0;background:#7a4f8a;border-radius:12px;"></span><span style="position:absolute;inset:0;background:#7a4f8a;border-radius:12px;transform:rotate(45deg);"></span><span style="position:relative;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#fff;">02</span></span>
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#ede2f1;color:#4f2f5c;padding:5px 11px;border-radius:999px;">Live Rooms</span>
+        </div>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:22px;color:#143027;margin:0 0 10px;">Practice</h3>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0;">Smaller, interactive sessions where you put the lesson to work in real life, and bring the questions that only show up once you actually start.</p>
+      </div>
+      <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;padding:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+          <span style="position:relative;width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;"><span style="position:absolute;inset:0;background:#a8451f;border-radius:12px;"></span><span style="position:absolute;inset:0;background:#a8451f;border-radius:12px;transform:rotate(45deg);"></span><span style="position:relative;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#fff;">03</span></span>
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#f1ddd0;color:#7a2f12;padding:5px 11px;border-radius:999px;">Challenge</span>
+        </div>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:22px;color:#143027;margin:0 0 10px;">Build the habit</h3>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0;">A challenge of a few weeks with daily prompts and small tasks, so the new habit keeps going long after the session ends.</p>
+      </div>
+    </div>
+
+    <!-- two worked examples -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:18px;">
+      <div style="background:#efe6d6;border-radius:22px;padding:26px 28px;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#74561c;margin-bottom:10px;">For example · Money</div>
+        <p style="font-size:15.5px;line-height:1.65;color:#3a4038;margin:0;">Learn how saving and investing really work. Then try it for yourself in a Finance Live Room and ask what comes up. Then the money challenge prompts you, task by task, until saving and investing become a habit.</p>
+      </div>
+      <div style="background:#efe6d6;border-radius:22px;padding:26px 28px;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#7a2f12;margin-bottom:10px;">For example · Skin</div>
+        <p style="font-size:15.5px;line-height:1.65;color:#3a4038;margin:0;">Learn what your skin needs and how a routine works. Then build your morning and evening routine in a Skincare Live Room. Then the skincare challenge keeps you doing it, every part of the day, until it sticks.</p>
+      </div>
+    </div>
+
+    <!-- Live Rooms explained -->
+    <div style="background:#2a1f30;color:#f6efe3;border-radius:26px;padding:clamp(28px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,52px);align-items:center;background-image:repeating-linear-gradient(45deg,rgba(237,226,241,.05) 0 10px,transparent 10px 20px);">
+      <div style="flex:1 1 380px;min-width:260px;">
+        <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(237,226,241,.35);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#e3cdea;margin-bottom:18px;">
+          <span style="width:6px;height:6px;background:#e3cdea;transform:rotate(45deg);display:inline-block;"></span>Live Rooms
+        </div>
+        <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);letter-spacing:-0.02em;line-height:1.12;margin:0 0 14px;">Smaller rooms. More talking. Real practice.</h3>
+        <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0;">A Live Room is where theory meets your actual life. Fewer people, more back and forth, and time to work through your own situation with the experts and each other. Some Live Rooms are recorded and some are kept private so people can speak freely, so look for the badge on the calendar before you join.</p>
+      </div>
+      <div style="flex:0 1 300px;min-width:240px;display:flex;flex-direction:column;gap:12px;">
+        <div style="background:rgba(246,239,227,.06);border:1px solid rgba(246,239,227,.14);border-radius:16px;padding:16px 18px;">
+          <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#e2f0e8;color:#14563d;padding:4px 10px;border-radius:999px;margin-bottom:8px;">Recorded</span>
+          <div style="font-size:14px;line-height:1.5;color:rgba(246,239,227,.8);">Can't make it live? Watch it later in the community.</div>
+        </div>
+        <div style="background:rgba(246,239,227,.06);border:1px solid rgba(246,239,227,.14);border-radius:16px;padding:16px 18px;">
+          <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fbe9e0;color:#8a3a1a;padding:4px 10px;border-radius:999px;margin-bottom:8px;">Not recorded</span>
+          <div style="font-size:14px;line-height:1.5;color:rgba(246,239,227,.8);">Live only, so the room can talk openly. Be there to be part of it.</div>
+        </div>
+        <span onClick="{{ goCalendar }}" style="cursor:pointer;align-self:flex-start;margin-top:4px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;color:#e3cdea;">See Live Rooms on the calendar →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOREHAMI -->
+  <section id="arc-dorehami" style="background:#143027;color:#f6efe3;scroll-margin-top:90px;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:48px 48px;background-position:0 0,24px 24px;">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,5vw,56px);">
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,64px);align-items:flex-start;margin-bottom:clamp(32px,4vw,52px);">
+        <div style="flex:1 1 440px;min-width:280px;">
+          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:22px;">
+            <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;"></span>New · Dorehami
+          </div>
+          <div dir="rtl" style="font-family:'Vazirmatn',sans-serif;font-weight:700;font-size:clamp(30px,4vw,44px);color:#d6a23f;line-height:1.2;margin-bottom:8px;text-align:left;">دورهمی</div>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(32px,4.8vw,56px);line-height:1.02;letter-spacing:-0.025em;margin:0 0 20px;">Small circles. Real names. Everyone talks.</h2>
+          <p style="font-size:clamp(16px,1.9vw,18.5px);line-height:1.65;color:rgba(246,239,227,.82);margin:0;max-width:560px;">Until now, mostly we did the talking. Now it's time to get to know you, and for you to get to know each other. Once a month, we gather in smaller groups and simply talk: about where we came from, where we are now, and what is on our minds.</p>
+        </div>
+        <div style="flex:1 1 340px;min-width:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
+          <div style="border:1px solid rgba(214,162,63,.3);border-radius:18px;padding:20px 18px;background:rgba(246,239,227,.03);">
+            <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:30px;color:#d6a23f;line-height:1;">~12</div>
+            <div style="font-size:13px;color:rgba(246,239,227,.75);margin-top:8px;line-height:1.4;">people per circle, never more than 15</div>
+          </div>
+          <div style="border:1px solid rgba(214,162,63,.3);border-radius:18px;padding:20px 18px;background:rgba(246,239,227,.03);">
+            <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:30px;color:#d6a23f;line-height:1;">1×</div>
+            <div style="font-size:13px;color:rgba(246,239,227,.75);margin-top:8px;line-height:1.4;">a month, at a time you choose</div>
+          </div>
+          <div style="border:1px solid rgba(214,162,63,.3);border-radius:18px;padding:20px 18px;background:rgba(246,239,227,.03);">
+            <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:17px;color:#d6a23f;line-height:1.2;">Cameras on</div>
+            <div style="font-size:13px;color:rgba(246,239,227,.75);margin-top:8px;line-height:1.4;">real faces, real conversation</div>
+          </div>
+          <div style="border:1px solid rgba(214,162,63,.3);border-radius:18px;padding:20px 18px;background:rgba(246,239,227,.03);">
+            <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:17px;color:#d6a23f;line-height:1.2;">Never recorded</div>
+            <div style="font-size:13px;color:rgba(246,239,227,.75);margin-top:8px;line-height:1.4;">what's said in the circle stays in the circle</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#d6a23f;margin-bottom:16px;">How it works</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px;">
+        <div style="background:#fbf6ec;color:#21271f;border-radius:20px;padding:24px;">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#c5612e;margin-bottom:10px;">01 · Sign up</div>
+          <p style="font-size:14.5px;line-height:1.6;color:#4c5348;margin:0;">Fill in a short form: pick the time that works for you, and tell us your city, your work, how long ago you moved, and what is on your mind lately.</p>
+        </div>
+        <div style="background:#fbf6ec;color:#21271f;border-radius:20px;padding:24px;">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#c5612e;margin-bottom:10px;">02 · We build your circle</div>
+          <p style="font-size:14.5px;line-height:1.6;color:#4c5348;margin:0;">We group people by the time they picked, then mix it up: newcomers and people who moved years ago, different professions, and a good balance of voices.</p>
+        </div>
+        <div style="background:#fbf6ec;color:#21271f;border-radius:20px;padding:24px;">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#c5612e;margin-bottom:10px;">03 · The reveal</div>
+          <p style="font-size:14.5px;line-height:1.6;color:#4c5348;margin:0;">You get a personal message with your day and your circle. A reminder with the link arrives 24 hours before you meet.</p>
+        </div>
+        <div style="background:#fbf6ec;color:#21271f;border-radius:20px;padding:24px;">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#c5612e;margin-bottom:10px;">04 · Everyone talks</div>
+          <p style="font-size:14.5px;line-height:1.6;color:#4c5348;margin:0;">Each person takes a minute to introduce themselves and share a challenge they're facing. Ice breakers keep it moving, so the whole room speaks, not just one voice.</p>
+        </div>
+        <div style="background:#fbf6ec;color:#21271f;border-radius:20px;padding:24px;">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#c5612e;margin-bottom:10px;">05 · Leave connected</div>
+          <p style="font-size:14.5px;line-height:1.6;color:#4c5348;margin:0;">Before we close, we connect people by name: "you two should talk, her sister lives in Italy too." Then we set the date for next month.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;margin-top:clamp(28px,4vw,44px);padding-top:clamp(22px,3vw,32px);border-top:1px solid rgba(246,239,227,.14);">
+        <p style="flex:1 1 420px;font-size:15px;line-height:1.65;color:rgba(246,239,227,.75);margin:0;">Over time, members of each circle start hosting their own gatherings. Every six months we reshuffle the circles so new connections can form, and twice a year all the circles come together.</p>
+        <div style="flex:0 1 auto;font-size:14.5px;font-weight:600;color:#f6efe3;line-height:1.5;max-width:360px;">To join a circle, watch Hoda's video in the community and fill in the form right under it.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- hero -->
   <section id="arc-august" style="position:relative;overflow:hidden;background:#143027;color:#f6efe3;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:48px 48px;background-position:0 0,24px 24px;">
     <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) clamp(20px,5vw,56px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,52px);align-items:center;">
       <div style="flex:1 1 440px;min-width:300px;">
         <div style="display:inline-flex;align-items:center;gap:9px;white-space:nowrap;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:22px;">
-          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>This month at ARC · {{ roadmap.monthYear }}
+          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>{{ roadmap.kicker }} · {{ roadmap.monthYear }}
         </div>
         <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">{{ roadmap.month }}</div>
         <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">{{ roadmap.theme }}</h2>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. October is already planned too — see it on the Calendar. All times Eastern.</p>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 30px;">{{ roadmap.blurb }} Every session is live and all times are Eastern. The whole season is on the Calendar.</p>
         
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
@@ -426,7 +595,7 @@ html,body{margin:0;padding:0;}
             </span>
             <div style="flex:1;">
               <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:{{ c.typeTint }};color:{{ c.typeInk }};padding:5px 11px;border-radius:999px;margin-bottom:9px;">{{ c.typeLabel }}</span>
-              <h3 style="font-family:{{ cookingHeadFont }};font-weight:700;font-size:clamp(19px,1.7vw,22px);color:#143027;line-height:1.2;margin:0 0 8px;">{{ c.title }}</h3>
+              <h3 dir="auto" style="font-family:{{ cookingHeadFont }};font-weight:700;font-size:clamp(19px,1.7vw,22px);color:#143027;line-height:1.3;margin:0 0 8px;text-align:start;">{{ c.title }}</h3>
               <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13.5px;color:#8a7f6a;">
                 <sc-if value="{{ c.host }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600;color:{{ c.typeColor }};">{{ c.host }}</span></sc-if><span style="white-space:nowrap;">{{ c.date }}<span style="opacity:.45;padding:0 7px;">·</span>{{ c.time }}</span>
               </div>
@@ -435,6 +604,7 @@ html,body{margin:0;padding:0;}
               </sc-if>
             </div>
           </div>
+          <sc-if value="{{ c.hasTopics }}" hint-placeholder-val="{{ false }}">
           <div style="flex:2 1 360px;min-width:260px;">
             <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:12px;">{{ cookingCopy.inThisSession }}</div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px 22px;">
@@ -445,6 +615,8 @@ html,body{margin:0;padding:0;}
               </sc-for>
             </div>
           </div>
+          </sc-if>
+          <sc-if value="{{ c.hasResources }}" hint-placeholder-val="{{ false }}">
           <div style="flex:1 1 200px;min-width:190px;">
             <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:12px;">{{ cookingCopy.resourcesLabel }}</div>
             <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
@@ -455,6 +627,7 @@ html,body{margin:0;padding:0;}
               </sc-for>
             </div>
           </div>
+          </sc-if>
         </div>
       </sc-for>
     </div>
@@ -468,7 +641,7 @@ html,body{margin:0;padding:0;}
       <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#74561c;background:#f7edd4;padding:4px 10px;border-radius:999px;">Cypress</span>
       <span style="font-size:13px;font-weight:600;color:#8a7f6a;margin-left:2px;">{{ careerNote }}</span>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 22px;max-width:640px;line-height:1.55;">One Career Lab every month — a single, focused hour with Hoda on a Saturday at noon Eastern, exclusive to Cypress members.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 22px;max-width:640px;line-height:1.55;">One Career Lab every month, a focused hour with Hoda on the real turning points of a working life. Exclusive to Cypress members, all times Eastern.</p>
 
     <!-- month tabs: see all three at a glance, click to open -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
@@ -497,6 +670,7 @@ html,body{margin:0;padding:0;}
             <span style="font-size:14px;font-weight:600;color:#eef2fa;">{{ careerActive.date }}</span>
           </div>
         </div>
+        <sc-if value="{{ careerHasCovers }}" hint-placeholder-val="{{ false }}">
         <div style="flex:1 1 300px;min-width:260px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c8a24a;margin-bottom:14px;">What we'll cover</div>
           <div style="display:flex;flex-direction:column;gap:2px;">
@@ -507,6 +681,7 @@ html,body{margin:0;padding:0;}
             </sc-for>
           </div>
         </div>
+        </sc-if>
       </div>
     </div>
   </section>
@@ -518,7 +693,7 @@ html,body{margin:0;padding:0;}
       <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em;color:#143027;margin:0;">Spotlight sessions</h2>
       <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#74561c;background:#f7edd4;padding:4px 10px;border-radius:999px;">Cypress</span>
     </div>
-    <p style="font-size: 15.5px; color: #6b6456; margin: 0 0 28px; max-width: 680px; line-height: 1.55; position: static">Two guest-expert Saturdays a month, on one theme at a time. <strong style="color:#143027;font-weight:600;">This season’s theme is money</strong> — all six sessions are mapped out below, because the pass you buy this month carries you through October. New theme next season.</p>
+    <p style="font-size: 15.5px; color: #6b6456; margin: 0 0 28px; max-width: 680px; line-height: 1.55; position: static">One theme at a time, taught by experts. <strong style="color:#143027;font-weight:600;">This season’s spotlight is skin.</strong> Each spotlight now comes with Live Rooms to practice and ask your questions, and a challenge that turns what you learn into a habit. Everything is mapped out below.</p>
 
     <!-- series banner -->
     <div style="background:#143027;color:#f6efe3;border-radius:22px;padding:clamp(28px,3.4vw,44px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;margin-bottom:20px;">
@@ -526,9 +701,9 @@ html,body{margin:0;padding:0;}
         <div style="flex:1 1 420px;min-width:280px;">
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:16px;">
             <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#143027;background:#d6a23f;padding:5px 12px;border-radius:999px;">{{ roadmapPage.spotlight.format }}</span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#d6a23f;border:1px solid rgba(214,162,63,.5);padding:4px 11px;border-radius:999px;">Season one · Money</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#d6a23f;border:1px solid rgba(214,162,63,.5);padding:4px 11px;border-radius:999px;">{{ roadmapPage.spotlight.season }}</span>
             <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#d6a23f;border:1px solid rgba(214,162,63,.5);padding:4px 11px;border-radius:999px;">Cypress only</span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#d6a23f;border:1px solid rgba(214,162,63,.5);padding:4px 11px;border-radius:999px;">6-part series</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#d6a23f;border:1px solid rgba(214,162,63,.5);padding:4px 11px;border-radius:999px;">{{ roadmapPage.spotlight.partsLabel }}</span>
           </div>
           <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,38px);letter-spacing:-0.02em;margin:0 0 12px;line-height:1.06;">{{ roadmapPage.spotlight.title }}</h3>
           <p style="font-size:16px;line-height:1.6;color:rgba(246,239,227,.8);margin:0;max-width:560px;">{{ roadmapPage.spotlight.desc }}</p>
@@ -555,17 +730,18 @@ html,body{margin:0;padding:0;}
               <div style="background:{{ m.cardBg }};border:{{ m.cardBorder }};border-radius:20px;padding:clamp(22px,2.4vw,28px);display:flex;flex-direction:column;">
                 <div style="display:flex;gap:15px;align-items:flex-start;margin-bottom:16px;">
                   <span style="position:relative;flex:none;width:48px;height:48px;display:flex;align-items:center;justify-content:center;">
-                    <span style="position:absolute;inset:0;background:#d6a23f;border-radius:13px;"></span>
-                    <span style="position:absolute;inset:0;background:#d6a23f;border-radius:13px;transform:rotate(45deg);"></span>
-                    <span style="position:relative;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#143027;">{{ sp.n }}</span>
+                    <span style="position:absolute;inset:0;background:{{ sp.iconBg }};border-radius:13px;"></span>
+                    <span style="position:absolute;inset:0;background:{{ sp.iconBg }};border-radius:13px;transform:rotate(45deg);"></span>
+                    <span style="position:relative;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:{{ sp.iconInk }};">{{ sp.n }}</span>
                   </span>
                   <div style="flex:1;">
                     <h4 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(18px,1.7vw,21px);color:#143027;line-height:1.2;margin:3px 0 6px;">{{ sp.title }}</h4>
                     <div style="font-size:13px;font-weight:600;color:#c5612e;">{{ sp.date }}</div>
                   </div>
                 </div>
-                <p style="font-size:14.5px;line-height:1.5;color:#6b6456;margin:0 0 18px;">{{ sp.sub }}</p>
-                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:10px;">What we'll cover</div>
+                <p style="font-size:14.5px;line-height:1.5;color:#6b6456;margin:0;">{{ sp.sub }}</p>
+                <sc-if value="{{ sp.hasTopics }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin:18px 0 10px;">What we'll cover</div>
                 <div style="display:flex;flex-direction:column;gap:2px;margin-top:auto;">
                   <sc-for list="{{ sp.topics }}" as="tp" hint-placeholder-count="5">
                     <div style="display:flex;gap:11px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(20,48,39,.08);font-size:14.5px;color:#3a4038;line-height:1.4;">
@@ -573,6 +749,7 @@ html,body{margin:0;padding:0;}
                     </div>
                   </sc-for>
                 </div>
+                </sc-if>
               </div>
             </sc-for>
           </div>
@@ -611,7 +788,7 @@ html,body{margin:0;padding:0;}
     <div onClick="{{ goCalendar }}" style="cursor:pointer;background:#c5612e;color:#fff;border-radius:26px;padding:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;align-items:center;gap:20px;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 10px,transparent 10px 20px);">
       <div style="flex:1 1 320px;">
         <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:8px;">What comes next</div>
-        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,36px);margin:0;line-height:1.12;letter-spacing:-0.02em;">September and October are already planned. See the whole season.</h2>
+        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,36px);margin:0;line-height:1.12;letter-spacing:-0.02em;">{{ handoffTitle }}</h2>
       </div>
       <span style="flex:none;background:#f6efe3;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:15px 28px;border-radius:999px;">Open the calendar →</span>
     </div>
@@ -817,12 +994,12 @@ html,body{margin:0;padding:0;}
     <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(52px,7vw,92px) clamp(20px,5vw,56px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,52px);align-items:center;">
       <div style="flex:1 1 440px;min-width:300px;">
         <div style="display:inline-flex;align-items:center;gap:9px;white-space:nowrap;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:22px;">
-          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>The ARC calendar · Aug – Oct 2026
+          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>The ARC calendar · {{ seasonRangeLong }}
         </div>
-        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">Season one</div>
-        <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">Three months, planned to the day.</h1>
-        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 26px;">Every session is live. Friday workshops at 5, Spotlight Saturdays at noon, and Wednesday wellness sessions at 4 — Science in Review and Yoga, both open to every tier, free Sapling included. Pick a month, see it all. All times Eastern.</p>
-        <span onClick="{{ goAugust }}" style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:14px 26px;border-radius:999px;">See August in full →</span>
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#d6a23f;margin-bottom:10px;">Season two</div>
+        <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.4vw,64px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 18px;">The season, planned to the day.</h1>
+        <p style="font-size:clamp(16px,1.8vw,19px);line-height:1.6;color:rgba(246,239,227,.8);max-width:520px;margin:0 0 26px;">Every session is live. Skin is our new spotlight, Live Rooms and challenges help you put it into practice, and mentorship begins in November. Science in Review, Yoga and goal setting stay open to every tier, free Sapling included. All times Eastern.</p>
+        <span onClick="{{ goAugust }}" style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:#c5612e;color:#fff;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;padding:14px 26px;border-radius:999px;">{{ calHeroCta }}</span>
       </div>
       <div style="flex:0 1 340px;min-width:260px;display:flex;gap:12px;">
         <sc-for list="{{ seasonStats }}" as="st" hint-placeholder-count="3">
@@ -840,13 +1017,13 @@ html,body{margin:0;padding:0;}
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:8px;">
       <span style="position:relative;width:26px;height:26px;flex:none;"><span style="position:absolute;inset:0;background:#143027;border-radius:4px;"></span><span style="position:absolute;inset:0;background:#143027;border-radius:4px;transform:rotate(45deg);"></span></span>
       <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em;color:#143027;margin:0;">Season calendar</h2>
-      <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7f6a;border:1px solid rgba(20,48,39,.2);padding:4px 10px;border-radius:999px;">Aug – Oct 2026</span>
+      <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7f6a;border:1px solid rgba(20,48,39,.2);padding:4px 10px;border-radius:999px;">{{ seasonRangeLong }}</span>
       <div style="display:inline-flex;margin-left:auto;background:#e7d9bf;padding:4px;border-radius:999px;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;">
         <span onClick="{{ setCalCalendar }}" style="cursor:pointer;padding:8px 18px;border-radius:999px;background:{{ calCalBg }};color:{{ calCalColor }};transition:background .2s,color .2s;">Calendar</span>
         <span onClick="{{ setCalAgenda }}" style="cursor:pointer;padding:8px 18px;border-radius:999px;background:{{ calAgBg }};color:{{ calAgColor }};transition:background .2s,color .2s;">List</span>
       </div>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, three months out — all of them live. Friday workshops run 5–6:30 PM, Saturday Spotlight and Career Lab run 12–1 PM, Wednesday Science in Review and Yoga run 4–5 PM — <strong style="color:#143027;font-weight:600;">all times Eastern</strong>.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, months out, all of them live. Times change from session to session, so check each one, <strong style="color:#143027;font-weight:600;">all times Eastern</strong>. Live Rooms show a Recorded or Not recorded badge, and a striped bar marks the days a challenge is running.</p>
 
     <!-- month tabs -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
@@ -875,15 +1052,17 @@ html,body{margin:0;padding:0;}
         </div>
         <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;">
           <sc-for list="{{ calCells }}" as="cell" hint-placeholder-count="35">
-            <div style="min-height:108px;border-radius:12px;background:{{ cell.bg }};border:{{ cell.border }};padding:8px;display:flex;flex-direction:column;gap:5px;">
+            <div title="{{ cell.spanTitle }}" style="min-height:108px;border-radius:12px;background:{{ cell.bg }};border:{{ cell.border }};padding:8px;display:flex;flex-direction:column;gap:5px;">
               <span style="font-family:'Sora',sans-serif;font-size:12.5px;font-weight:{{ cell.numWeight }};color:{{ cell.numColor }};">{{ cell.num }}</span>
               <sc-for list="{{ cell.items }}" as="ev" hint-placeholder-count="0">
-                <div style="background:{{ ev.tint }};border-left:3px solid {{ ev.color }};border-radius:6px;padding:5px 6px;">
+                <div style="background:{{ ev.tint }};border-left:3px solid {{ ev.color }};outline:{{ ev.evBorder }};border-radius:6px;padding:5px 6px;">
                   <div style="font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:{{ ev.ink }};margin-bottom:2px;">{{ ev.typeLabel }}</div>
-                  <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:11.5px;line-height:1.25;color:#143027;">{{ ev.title }}</div>
-                  <div style="font-size:10px;color:#7a7364;margin-top:2px;">{{ ev.time }}</div>
+                  <div dir="auto" style="font-family:'Sora','Vazirmatn',sans-serif;font-weight:600;font-size:11.5px;line-height:1.25;color:#143027;text-align:left;">{{ ev.title }}</div>
+                  <div style="font-size:10px;color:#7a7364;margin-top:2px;">{{ ev.when }}</div>
+                  <sc-if value="{{ ev.recLabel }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;margin-top:4px;font-size:8.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:{{ ev.recBg }};color:{{ ev.recInk }};border:1px solid {{ ev.recBorder }};padding:1px 6px;border-radius:999px;">{{ ev.recLabel }}</span></sc-if>
                 </div>
               </sc-for>
+              <div style="margin-top:auto;height:4px;border-radius:2px;background:{{ cell.spanBar }};"></div>
             </div>
           </sc-for>
         </div>
@@ -894,15 +1073,19 @@ html,body{margin:0;padding:0;}
     <sc-if value="{{ calIsAgenda }}" hint-placeholder-val="{{ false }}">
       <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-radius:22px;overflow:hidden;">
         <sc-for list="{{ calAgenda }}" as="ev" hint-placeholder-count="7">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px clamp(16px,2vw,24px);border-top:1px solid rgba(20,48,39,.08);border-left:4px solid {{ ev.color }};">
-            <div style="flex:0 0 96px;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px clamp(16px,2vw,24px);border-top:1px solid rgba(20,48,39,.08);border-left:4px solid {{ ev.color }};opacity:{{ ev.rowOpacity }};">
+            <div style="flex:0 0 104px;">
               <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:#143027;">{{ ev.dateLabel }}</div>
-              <div style="font-size:12.5px;color:#8a7f6a;margin-top:2px;">{{ ev.time }}</div>
+              <div style="font-size:12.5px;color:#8a7f6a;margin-top:2px;">{{ ev.when }}</div>
             </div>
             <span style="flex:none;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ ev.tint }};color:{{ ev.ink }};padding:5px 11px;border-radius:999px;">{{ ev.typeLabel }}</span>
             <div style="flex:1 1 220px;min-width:180px;">
-              <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#143027;line-height:1.3;">{{ ev.title }}</div>
-              <div style="font-size:13px;color:#8a7f6a;margin-top:3px;">{{ ev.host }}</div>
+              <div dir="auto" style="font-family:'Sora','Vazirmatn',sans-serif;font-weight:600;font-size:16px;color:#143027;line-height:1.3;text-align:left;">{{ ev.title }}</div>
+              <div style="font-size:13px;color:#8a7f6a;margin-top:3px;line-height:1.45;">{{ ev.hostLine }}</div>
+            </div>
+            <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:6px;margin-left:auto;">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.04em;color:{{ ev.ink }};">{{ ev.access }}</span>
+              <sc-if value="{{ ev.recLabel }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:{{ ev.recBg }};color:{{ ev.recInk }};border:1px solid {{ ev.recBorder }};padding:3px 9px;border-radius:999px;white-space:nowrap;">{{ ev.recLabel }}</span></sc-if>
             </div>
           </div>
         </sc-for>
@@ -929,6 +1112,14 @@ html,body{margin:0;padding:0;}
       </sc-for>
     </div>
 
+    <!-- badge + challenge key -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:14px;padding:14px 18px;background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:14px;font-size:12.5px;font-weight:600;color:#5b5446;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;">Live Rooms</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#e2f0e8;color:#14563d;border:1px solid rgba(31,122,90,.45);padding:2px 8px;border-radius:999px;">Recorded</span>watch it later</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fbe9e0;color:#8a3a1a;border:1px solid rgba(197,97,46,.5);padding:2px 8px;border-radius:999px;">Not recorded</span>live only</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="width:28px;height:4px;border-radius:2px;background:repeating-linear-gradient(90deg,#a8451f 0 6px,transparent 6px 9px);display:inline-block;"></span>challenge running</span>
+    </div>
+
     <!-- announced, not yet dated -->
     <div style="margin-top:18px;">
       <sc-for list="{{ comingSoon }}" as="cs" hint-placeholder-count="1">
@@ -950,6 +1141,122 @@ html,body{margin:0;padding:0;}
 
   <!-- final CTA -->
   
+
+</div>
+</sc-if>
+
+<!-- ===== MENTORSHIP ===== -->
+<sc-if value="{{ isMentorship }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Mentorship">
+
+  <!-- hero -->
+  <section style="position:relative;overflow:hidden;background:#12343f;color:#f6efe3;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:48px 48px;background-position:0 0,24px 24px;">
+    <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,5vw,56px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,52px);align-items:center;">
+      <div style="flex:1 1 480px;min-width:280px;">
+        <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:22px;">
+          <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;"></span>New at ARC · Mentorship
+        </div>
+        <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(36px,5.6vw,66px);line-height:1.0;letter-spacing:-0.025em;margin:0 0 20px;">Learn from people a few steps ahead of you.</h1>
+        <p style="font-size:clamp(16px,1.9vw,19px);line-height:1.6;color:rgba(246,239,227,.82);max-width:560px;margin:0;">Our mentorship program connects members with experienced professionals from the community. It starts in a group, around one real theme at a time, and grows into one on one mentoring with the mentor who fits you best.</p>
+      </div>
+      <div style="flex:0 1 320px;min-width:240px;display:flex;gap:12px;">
+        <div style="flex:1;border:1px solid rgba(214,162,63,.3);border-radius:18px;padding:22px 14px;text-align:center;background:rgba(246,239,227,.03);">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(30px,4vw,42px);color:#d6a23f;line-height:1;">{{ mentorSessionCount }}</div>
+          <div style="font-size:12px;color:rgba(246,239,227,.7);margin-top:8px;line-height:1.3;">group sessions, {{ mentorRange }}</div>
+        </div>
+        <div style="flex:1;border:1px solid rgba(214,162,63,.3);border-radius:18px;padding:22px 14px;text-align:center;background:rgba(246,239,227,.03);">
+          <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(30px,4vw,42px);color:#d6a23f;line-height:1;">{{ mentorCount }}</div>
+          <div style="font-size:12px;color:rgba(246,239,227,.7);margin-top:8px;line-height:1.3;">mentors from the community</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- how it works -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,5vw,56px) 0;">
+    <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1f5b6e;margin-bottom:14px;">How it works</div>
+    <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);line-height:1.1;letter-spacing:-0.02em;color:#143027;margin:0 0 clamp(24px,3vw,36px);max-width:680px;">Start in a group. Find your mentor. Go one on one.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+      <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;padding:28px;">
+        <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#1f5b6e;margin-bottom:12px;">01 · Group sessions</div>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0;">Each group session has its own theme, like difficult conversations at work or deciding whether to stay or move on. Mentors teach the basics, share what they have lived, and answer your questions.</p>
+      </div>
+      <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;padding:28px;">
+        <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#1f5b6e;margin-bottom:12px;">02 · Get matched</div>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0;">After each session you can ask to be matched with the mentor you connected with. We look at what you need and who can help most.</p>
+      </div>
+      <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;padding:28px;">
+        <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:14px;color:#1f5b6e;margin-bottom:12px;">03 · One on one</div>
+        <p style="font-size:15px;line-height:1.6;color:#6b6456;margin:0;">Matched mentees and mentors meet one on one, so the guidance gets personal: your role, your situation, your next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- group sessions this season -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,56px) 0;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:8px;">
+      <span style="position:relative;width:26px;height:26px;flex:none;"><span style="position:absolute;inset:0;background:#1f5b6e;border-radius:4px;"></span><span style="position:absolute;inset:0;background:#1f5b6e;border-radius:4px;transform:rotate(45deg);"></span></span>
+      <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em;color:#143027;margin:0;">This season's group sessions</h2>
+    </div>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">One group session a month, each with three mentors. All times Eastern.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;">
+      <sc-for list="{{ mentorSessions }}" as="ms" hint-placeholder-count="3">
+        <div style="opacity:{{ ms.cardOpacity }};background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-top:4px solid #1f5b6e;border-radius:20px;padding:26px;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
+            <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1f5b6e;">{{ ms.month }}</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.04em;color:#74561c;">{{ ms.access }}</span>
+          </div>
+          <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:21px;color:#143027;margin:0 0 8px;line-height:1.2;">{{ ms.title }}</h3>
+          <p style="font-size:14.5px;line-height:1.5;color:#6b6456;margin:0 0 18px;">{{ ms.theme }}</p>
+          <div style="margin-top:auto;padding-top:14px;border-top:1px solid rgba(20,48,39,.1);">
+            <div style="font-size:13.5px;font-weight:600;color:#c5612e;">{{ ms.date }}</div>
+            <div style="font-size:13.5px;color:#5b5446;margin-top:4px;">{{ ms.mentors }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- mentor panel -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,56px) 0;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:8px;">
+      <span style="position:relative;width:26px;height:26px;flex:none;"><span style="position:absolute;inset:0;background:#d6a23f;border-radius:4px;"></span><span style="position:absolute;inset:0;background:#d6a23f;border-radius:4px;transform:rotate(45deg);"></span></span>
+      <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em;color:#143027;margin:0;">Meet the mentors</h2>
+    </div>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Professionals from our community who have built careers far from home, and want to help you build yours.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;">
+      <sc-for list="{{ mentors }}" as="mt" hint-placeholder-count="9">
+        <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;">
+          <div style="position:relative;aspect-ratio:4/3.4;background:{{ mt.photoBg }};display:flex;align-items:center;justify-content:center;">
+            <sc-if value="{{ mt.noImg }}" hint-placeholder-val="{{ true }}">
+              <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 10px,transparent 10px 20px);"></div>
+              <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;">
+                <span style="width:76px;height:76px;border-radius:999px;background:rgba(246,239,227,.16);border:1.5px solid rgba(246,239,227,.4);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:30px;color:#f6efe3;">{{ mt.initial }}</span>
+                <span style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(246,239,227,.75);">Photo coming soon</span>
+              </div>
+            </sc-if>
+          </div>
+          <div style="padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;">
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#143027;margin:0 0 3px;">{{ mt.name }}</h3>
+            <div style="font-size:13px;font-weight:600;color:#1f5b6e;margin-bottom:10px;">{{ mt.role }}</div>
+            <p style="font-size:14px;line-height:1.55;color:#6b6456;margin:0 0 14px;">{{ mt.bio }}</p>
+            <sc-if value="{{ mt.session }}" hint-placeholder-val="{{ false }}"><span style="margin-top:auto;align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#dcebef;color:#123d4b;padding:5px 11px;border-radius:999px;">{{ mt.session }}</span></sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,56px) clamp(56px,8vw,96px);">
+    <div onClick="{{ goCalendar }}" style="cursor:pointer;background:#1f5b6e;color:#fff;border-radius:26px;padding:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;align-items:center;gap:20px;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 10px,transparent 10px 20px);">
+      <div style="flex:1 1 320px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:8px;">Save the dates</div>
+        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,36px);margin:0;line-height:1.12;letter-spacing:-0.02em;">Every group session is on the calendar.</h2>
+      </div>
+      <span style="flex:none;background:#f6efe3;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:15px 28px;border-radius:999px;">Open the calendar →</span>
+    </div>
+  </section>
 
 </div>
 </sc-if>
@@ -1037,6 +1344,7 @@ html,body{margin:0;padding:0;}
             <span onClick="{{ goHome }}" style="cursor:pointer;">Home</span>
             <span onClick="{{ goCommunity }}" style="cursor:pointer;">Community</span>
             <span onClick="{{ goCalendar }}" style="cursor:pointer;">Calendar</span>
+            <span onClick="{{ goMentorship }}" style="cursor:pointer;">Mentorship</span>
             <span onClick="{{ goCourses }}" style="cursor:pointer;">Courses</span>
             <span onClick="{{ goJoin }}" style="cursor:pointer;">Membership</span>
             <a href="./trees.html" style="color:inherit;text-decoration:none;">The tier trees</a>
@@ -1046,9 +1354,9 @@ html,body{margin:0;padding:0;}
         <div>
           <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:14px;">Community</div>
           <div style="display:flex;flex-direction:column;gap:10px;font-size:14.5px;">
-            <span>Live sessions</span>
+            <span onClick="{{ goLiveRooms }}" style="cursor:pointer;">Live Rooms &amp; challenges</span>
+            <span onClick="{{ goDorehami }}" style="cursor:pointer;">Dorehami</span>
             <span>Recipes &amp; resources</span>
-            <span>Events</span>
           </div>
         </div>
       </div>
@@ -1064,7 +1372,7 @@ html,body{margin:0;padding:0;}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;basicPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 35, &quot;min&quot;: 0, &quot;max&quot;: 200, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}, &quot;premiumPrice&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 55, &quot;min&quot;: 0, &quot;max&quot;: 300, &quot;step&quot;: 5, &quot;tsType&quot;: &quot;number&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'home', mobileOpen: false, cartOpen: false, billing: 'monthly', cart: [], faqOpen: 0, vw: 1200, lightboxImg: null, cookingLang: 'en', calMonth: 'sep', calView: null };
+  state = { page: 'home', mobileOpen: false, cartOpen: false, billing: 'monthly', cart: [], faqOpen: 0, vw: 1200, lightboxImg: null, cookingLang: 'en', calMonth: null, calView: null };
 
   hasImg = (p) => !!p?.img;
 
@@ -1079,10 +1387,10 @@ class Component extends DCLogic {
   componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('hashchange', this._h); }
 
   // URL hash <-> page mapping, so pages have shareable links & back/forward works
-  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join', 'courses': 'join' };
-  _pageToHash = { home: '', join: 'membership', community: 'community', calendar: 'calendar', story: 'story' };
+  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join', 'courses': 'join', 'mentorship': 'mentorship', 'liverooms': 'community', 'dorehami': 'community' };
+  _pageToHash = { home: '', join: 'membership', community: 'community', calendar: 'calendar', story: 'story', mentorship: 'mentorship' };
   // hashes that deep-link to a section *within* a page
-  _hashToAnchor = { alacarte: 'alacarte', passes: 'alacarte', courses: 'courses' };
+  _hashToAnchor = { alacarte: 'alacarte', passes: 'alacarte', courses: 'courses', liverooms: 'arc-how', dorehami: 'arc-dorehami' };
 
   // Re-scroll (instant) until the section settles at the top, to survive
   // layout shift as content/fonts/images load; stop once stable.
@@ -1167,129 +1475,226 @@ class Component extends DCLogic {
       { title: 'Monthly Spotlight', color: '#a8451f', tint: '#f1ddd0', desc: 'One deep-dive topic a month — investing, mortgages, side hustles, skincare, entrepreneurship, retirement, and the real questions of immigrant life.', note: 'Cypress · or buy a pass' },
       { title: 'Session Archive', color: '#1b4034', tint: '#d9e4df', desc: 'Never miss out. Every session, resource, and community favorite, saved — your own growing library of recipes and hard-won know-how.' },
     ];
-    // ---- session types & the full Aug–Oct schedule ----
+    // ---- session types ----
     const sessionTypes = {
-      cooking: { label: 'Cooking',           color: '#c5612e', tint: '#f4e3d8', ink: '#8a3a1a' },
-      qa:      { label: 'Open Q&A',          color: '#7d8a4e', tint: '#e7ecd9', ink: '#4a5a2a' },
-      free:    { label: 'Open to all tiers', color: '#1f7a5a', tint: '#e2f0e8', ink: '#14563d' },
-      career:  { label: 'Career Lab',        color: '#2c4a7a', tint: '#dde4ef', ink: '#1b2f52' },
-      money:   { label: 'Spotlight',         color: '#d6a23f', tint: '#f7edd4', ink: '#74561c' },
-      // wellness strand — Wednesdays, 4–5 PM ET
-      science: { label: 'Science in Review',  color: '#2f8f7a', tint: '#ddefe9', ink: '#1c5c4c' },
-      yoga:    { label: 'Yoga',               color: '#5a9e7a', tint: '#e3f1e8', ink: '#33654a' },
-      mobility:{ label: 'Mobility & Fitness', color: '#5f6b3a', tint: '#e7ead9', ink: '#3d4624' },
+      cooking:  { label: 'Cooking',           color: '#c5612e', tint: '#f4e3d8', ink: '#8a3a1a' },
+      qa:       { label: 'Open Q&A',          color: '#7d8a4e', tint: '#e7ecd9', ink: '#4a5a2a' },
+      free:     { label: 'Open to all tiers', color: '#1f7a5a', tint: '#e2f0e8', ink: '#14563d' },
+      career:   { label: 'Career Lab',        color: '#2c4a7a', tint: '#dde4ef', ink: '#1b2f52' },
+      money:    { label: 'Spotlight',         color: '#d6a23f', tint: '#f7edd4', ink: '#74561c' },
+      spotlight:{ label: 'Spotlight',         color: '#d6a23f', tint: '#f7edd4', ink: '#74561c' },
+      liveroom: { label: 'Live Room',         color: '#7a4f8a', tint: '#ede2f1', ink: '#4f2f5c' },
+      mentor:   { label: 'Mentorship',        color: '#1f5b6e', tint: '#dcebef', ink: '#123d4b' },
+      goals:    { label: 'Goal Setting',      color: '#3c8d6b', tint: '#e0f0e7', ink: '#235a43' },
+      challenge:{ label: 'Challenge',         color: '#a8451f', tint: '#f1ddd0', ink: '#7a2f12' },
+      // wellness strand
+      science:  { label: 'Science in Review', color: '#2f8f7a', tint: '#ddefe9', ink: '#1c5c4c' },
+      yoga:     { label: 'Yoga',              color: '#5a9e7a', tint: '#e3f1e8', ink: '#33654a' },
+      mobility: { label: 'Mobility & Fitness',color: '#5f6b3a', tint: '#e7ead9', ink: '#3d4624' },
     };
-    // every tier gets into these, Sapling included
-    const openToAll = ['free', 'science', 'yoga'];
+    // who gets in: every tier (Sapling included) · Cypress only · everything else is Juniper & up
+    const openToAll = ['free', 'science', 'yoga', 'goals'];
+    const cypressOnly = ['career', 'money', 'spotlight', 'liveroom', 'mentor'];
+    const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
+    // Recorded / Not recorded badge, Live Rooms only. Set rec: true or rec: false on an event once confirmed; leave it off until then.
+    const recBadge = e => e.rec === true
+      ? { recLabel: 'Recorded', recBg: '#e2f0e8', recInk: '#14563d', recBorder: 'rgba(31,122,90,.45)' }
+      : e.rec === false
+        ? { recLabel: 'Not recorded', recBg: '#fbe9e0', recInk: '#8a3a1a', recBorder: 'rgba(197,97,46,.5)' }
+        : { recLabel: '', recBg: 'transparent', recInk: 'transparent', recBorder: 'transparent' };
+    const weeksWord = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+
+    // ---- THE SCHEDULE ----
+    // Add a session: { d: day, time: '5–6 PM', type: one of sessionTypes, host, title, note (optional detail), rec (Live Rooms only) }
+    // Challenges: { d: start day, type: 'challenge', title, weeks }. Weekdays are worked out automatically.
+    // spot: 'skin' tags an item as part of the Skin spotlight series.
     const scheduleMonths = [
-      { key: 'aug', name: 'August', short: 'Aug', y: 2026, mi: 7, label: 'August 2026', status: 'Wrapped', events: [
-        { d: 7,  dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin + Hoda', title: 'ARC Kickoff · Introduction · Kitchen Essentials' },
-        { d: 8,  dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Big Career Moves in the Era of AI' },
-        { d: 14, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'The Base of Every Stew' },
-        { d: 21, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
-        { d: 22, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Money Mindset' },
-        { d: 28, dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Dr. Behzad Sorouri Khorashad',     title: 'Sex, Gender & Relationships' },
-        { d: 29, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Money Goal Setting' },
+      { key: 'oct', name: 'October', short: 'Oct', y: 2026, mi: 9,
+        theme: 'The Money Finale',
+        blurb: 'The last session of our money spotlight, plus the Friday cooking nights and the wellness sessions every tier can join.',
+        events: [
+        { d: 2,  time: '5–6:30 PM', type: 'free',    host: 'Shervin',        title: 'Cooking the Season' },
+        { d: 3,  time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Promotion: How to Talk About It' },
+        { d: 7,  time: '4–5 PM',    type: 'science', host: '',               title: 'Science in Review: From Evidence to Practice' },
+        { d: 9,  time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Know the Meat Cuts' },
+        { d: 10, time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Investment Mindset' },
+        { d: 16, time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Chenjeh Kabab' },
+        { d: 21, time: '4–5 PM',    type: 'yoga',    host: '',               title: 'ARC Yoga' },
+        { d: 23, time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
+        { d: 25, time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Stock Market Investing', note: 'The last session of the money spotlight' },
       ] },
-      { key: 'sep', name: 'September', short: 'Sept', y: 2026, mi: 8, label: 'September 2026', status: 'Now open', events: [
-        { d: 2,  dow: 'Wed', time: '4–5 PM',    type: 'science', host: 'ARC',            title: 'Science in Review: From Evidence to Practice' },
-        { d: 9,  dow: 'Wed', time: '4–5 PM',    type: 'yoga',    host: 'ARC',            title: 'ARC Yoga' },
-        { d: 11, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Ghormeh Sabzi, Properly' },
-        { d: 12, dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Resume Writing' },
-        { d: 18, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Berenj: Rice, Done Right' },
-        { d: 19, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Budgeting & Saving' },
-        { d: 25, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
-        { d: 26, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Planning for Retirement' },
+      { key: 'nov', name: 'November', short: 'Nov', y: 2026, mi: 10,
+        theme: 'From Learning to Doing',
+        blurb: 'Skin is our new spotlight, Live Rooms open, and the money challenge turns three months of lessons into habits. Plus our first mentorship session and a Thanksgiving table with Shervin.',
+        events: [
+        { d: 6,  time: '5–6 PM',       type: 'cooking',   host: 'Shervin', title: 'در باب آش', faTitle: 'در باب آش' },
+        { d: 8,  time: '2–3 PM',       type: 'mentor',    host: 'Sahar, Shiva & Masoud', title: 'Mentorship: Let’s Talk About Your Career', note: 'Mentorship introduction and career questions' },
+        { d: 11, time: '3–4 PM',       type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice', note: 'Using AI in Obesity Treatment · Is 1.6 g/kg of Protein Enough to Maximize Muscle Growth?' },
+        { d: 12, time: '4:30–5:30 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: Is It Time to Move On?', note: 'Quitting your job',
+          desc: 'Quitting your job is a big call. How to tell when it is really time to move on, and how to leave well when you do.' },
+        { d: 13, time: '5–6 PM',       type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin: The Thanksgiving Table', faTitle: 'آشپزی با شروین: سفرهٔ شکرگزاری', note: 'Thanksgiving themed cooking' },
+        { d: 16, type: 'challenge', title: 'Money Challenge Begins', weeks: 3 },
+        { d: 20, time: '5–6 PM',       type: 'spotlight', host: '',        title: 'Skincare Foundations: Building Your Everyday Routine', note: 'Skin spotlight · Session 1', spot: 'skin' },
+        { d: 21, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv, Ors & finance package participants', title: 'Finance Live Room: Putting Learning into Practice', rec: true },
+        { d: 24, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv & Ors', title: 'Finance Live Room: Money, Work & Stress', rec: false },
+        { d: 25, time: '4–5 PM',       type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
       ] },
-      { key: 'oct', name: 'October', short: 'Oct', y: 2026, mi: 9, label: 'October 2026', status: 'Sneak peek', note: 'Full topics, hosts and resources drop Oct 1.', events: [
-        { d: 2,  dow: 'Fri', time: '5–6:30 PM', type: 'free',    host: 'Shervin',        title: 'Cooking the Season' },
-        { d: 3,  dow: 'Sat', time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Promotion: How to Talk About It' },
-        { d: 7,  dow: 'Wed', time: '4–5 PM',    type: 'science', host: 'ARC',            title: 'Science in Review: From Evidence to Practice' },
-        { d: 9,  dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Know the Meat Cuts' },
-        { d: 10, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Investment Mindset' },
-        { d: 16, dow: 'Fri', time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Chenjeh Kabab' },
-        { d: 21, dow: 'Wed', time: '4–5 PM',    type: 'yoga',    host: 'ARC',            title: 'ARC Yoga' },
-        { d: 23, dow: 'Fri', time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
-        { d: 24, dow: 'Sat', time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Stock Market Investing' },
+      { key: 'dec', name: 'December', short: 'Dec', y: 2026, mi: 11,
+        theme: 'Closing the Year Well',
+        blurb: 'Professional skin treatments and two skincare Live Rooms, a parenting Live Room, a mentorship session on difficult conversations, and a goal setting session open to everyone. The digital detox starts Dec 21.',
+        events: [
+        { d: 2,  time: '3–4 PM', type: 'science',   host: 'Damoon',     title: 'Science in Review: From Evidence to Practice' },
+        { d: 3,  time: '5–6 PM', type: 'liveroom',  host: 'Sarv & Ors', title: 'Live Room: Navigating Parenting Challenges' },
+        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room' },
+        { d: 5,  time: '5–6 PM', type: 'career',    host: 'Hoda',       title: 'Career Lab: When Life Changes Your Career Plans', note: 'Navigating circumstances outside our control',
+          desc: 'Sometimes life rewrites the plan for you. How to navigate the circumstances outside our control and still move your career forward.' },
+        { d: 10, time: '5–6 PM', type: 'spotlight', host: '',           title: 'Understanding Professional Skin Treatments', note: 'Skin spotlight · Clinical skincare', spot: 'skin' },
+        { d: 11, time: '5–6 PM', type: 'cooking',   host: 'Shervin',    title: 'Cooking with Shervin: The Christmas Table', faTitle: 'آشپزی با شروین: سفرهٔ کریسمس', note: 'Christmas themed cooking' },
+        { d: 12, time: '1–2 PM', type: 'liveroom',  host: '',           title: 'Skincare Live Room: Your Routine, Your Questions', spot: 'skin' },
+        { d: 13, time: '3–4 PM', type: 'mentor',    host: 'Negin, Padideh & Mehdi', title: 'Mentorship: Difficult Conversations at Work', note: 'Difficult conversations and workplace politics' },
+        { d: 16, time: '1–2 PM', type: 'goals',     host: '',           title: 'Your Year, Your Next Steps', note: 'New Year goal setting' },
+        { d: 18, time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Skincare Live Room: Your Routine, Your Questions', spot: 'skin' },
+        { d: 21, type: 'challenge', title: 'Digital Detox Begins', weeks: 2 },
+      ] },
+      { key: 'jan', name: 'January', short: 'Jan', y: 2027, mi: 0,
+        theme: 'A Fresh Start, With Support',
+        blurb: 'The skincare challenge begins, cosmetic surgery questions get real answers, and a mentorship session helps you decide whether to stay or move on. Plus Career Lab on work and family.',
+        events: [
+        { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Understanding Cosmetic Surgery: Options & Questions', note: 'Skin spotlight', spot: 'skin' },
+        { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
+        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 4, spot: 'skin' },
+        { d: 11, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room' },
+        { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
+        { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
+        { d: 16, time: '12–1 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: When Work and Family Meet', note: 'How children and relationships affect professional life',
+          desc: 'Children, partners and family life all shape a career. How to make room for both, and talk about it honestly at work.' },
+        { d: 20, time: '4–5 PM',  type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
+        { d: 22, time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
+        { d: 28, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Skincare Live Room: Your Routine, Your Questions', spot: 'skin' },
       ] },
     ];
-    // ---- "this month at ARC" — derived from the live month, so it moves with the schedule ----
-    const thisMonthKey = 'sep';
-    const thisMonth = scheduleMonths.filter(m => m.key === thisMonthKey)[0];
-    const accessOf = t => openToAll.includes(t) ? 'All tiers' : (t === 'career' || t === 'money') ? 'Cypress' : 'Juniper & up';
-    const countIn = (m, types) => String(m.events.filter(e => types.includes(e.type)).length);
+
+    // ---- dates: everything below follows today's date, so the site moves on its own ----
+    // (preview another day with ?today=2026-12-01 in the address bar)
+    const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const today = (() => {
+      try {
+        const q = new URLSearchParams(window.location.search).get('today');
+        if (q) { const p = q.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+      } catch (e) {}
+      const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+    })();
+    const todayTs = today.getTime();
+    scheduleMonths.forEach(m => {
+      m.label = m.name + ' ' + m.y;
+      const start = new Date(m.y, m.mi, 1).getTime(), end = new Date(m.y, m.mi + 1, 0).getTime();
+      m.status = todayTs > end ? 'Wrapped' : todayTs >= start ? 'This month' : 'Coming up';
+      m.events.forEach(e => {
+        const dt = new Date(m.y, m.mi, e.d);
+        Object.assign(e, { dow: DOW[dt.getDay()], ts: dt.getTime(), mKey: m.key, short: m.short, y: m.y, mi: m.mi });
+        if (e.type === 'challenge') e.endTs = new Date(m.y, m.mi, e.d + e.weeks * 7 - 1).getTime();
+      });
+      m.events.sort((a, b) => a.ts - b.ts || (a.type === 'challenge' ? -1 : 1));
+    });
+    const isSession = e => e.type !== 'challenge';
+    const liveMonths = scheduleMonths.filter(m => m.status !== 'Wrapped');
+    const shownMonths = liveMonths.length ? liveMonths : scheduleMonths.slice(-1);
+    const shownEvents = shownMonths.reduce((a, m) => a.concat(m.events), []);
+    const upcoming = shownEvents.filter(e => e.ts >= todayTs);
+    // the featured month: this month while it still has 2+ sessions to go, otherwise next month
+    const thisMonth = (() => {
+      const cur = shownMonths[0];
+      const left = cur.events.filter(e => isSession(e) && e.ts >= todayTs).length;
+      return (cur.status === 'This month' && left < 2 && shownMonths[1]) ? shownMonths[1] : cur;
+    })();
+    const nextMonths = shownMonths.slice(shownMonths.indexOf(thisMonth) + 1).map(m => m.name);
+    const seasonRange = shownMonths[0].short + ' to ' + shownMonths[shownMonths.length - 1].short;
+    const seasonRangeLong = shownMonths[0].short + ' ' + shownMonths[0].y + ' to ' + shownMonths[shownMonths.length - 1].short + ' ' + shownMonths[shownMonths.length - 1].y;
+
+    const decorate = e => {
+      const st = sessionTypes[e.type];
+      const isChallenge = e.type === 'challenge';
+      return {
+        ...e, typeLabel: st.label, color: st.color, tint: st.tint, ink: st.ink,
+        isFree: openToAll.includes(e.type), access: accessOf(e.type), isChallenge,
+        when: isChallenge ? weeksWord[e.weeks] + ' weeks' : e.time,
+        hostLine: isChallenge ? 'Runs ' + weeksWord[e.weeks].toLowerCase() + ' weeks, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
+        evBorder: isChallenge ? '1px dashed ' + st.color : '1px solid transparent',
+        ...recBadge(e),
+      };
+    };
+
+    // ---- "this month at ARC" ----
+    const countIn = (m, pred) => String(m.events.filter(pred).length);
+    const liveRoomCount = m => m.events.filter(e => e.type === 'liveroom').length;
     const roadmap = {
       month: thisMonth.name,
       monthYear: thisMonth.label,
-      theme: 'The Heart of the Persian Table',
-      blurb: 'The two dishes every Persian kitchen is judged by — a proper ghormeh sabzi and rice done right — plus an open Q&A night, and the wellness sessions every tier can join.',
+      theme: thisMonth.theme,
+      blurb: thisMonth.blurb,
+      kicker: thisMonth.status === 'This month' ? 'This month at ARC' : 'Coming up at ARC',
       stats: [
-        { n: countIn(thisMonth, ['cooking', 'qa']), label: 'Friday workshops' },
-        { n: countIn(thisMonth, openToAll),         label: 'Open to all tiers' },
-        { n: countIn(thisMonth, ['money']),         label: 'Spotlight sessions' },
+        { n: countIn(thisMonth, isSession), label: 'Live sessions' },
+        { n: countIn(thisMonth, e => openToAll.includes(e.type)), label: 'Open to all tiers' },
+        liveRoomCount(thisMonth)
+          ? { n: String(liveRoomCount(thisMonth)), label: 'Live Rooms' }
+          : { n: countIn(thisMonth, e => e.type === 'money' || e.type === 'spotlight'), label: 'Spotlight sessions' },
       ],
     };
-    const eventOn = d => thisMonth.events.filter(e => e.d === d)[0];
-    const itemFrom = (e, over) => {
-      const st = sessionTypes[e.type];
-      return Object.assign({
-        date: e.dow + ' ' + thisMonth.short + ' ' + e.d,
-        type: st.label,
-        title: e.title,
-        meta: (e.host && e.host !== 'ARC' ? e.host + ' · ' : '') + e.time + ' ET',
-        color: st.color, chipBg: st.tint, chipInk: st.ink,
-        access: accessOf(e.type),
-      }, over || {});
-    };
-    // one of each strand, in date order; the month's two Spotlights ride together
-    const roadmapItems = [
-      itemFrom(eventOn(2)),
-      itemFrom(eventOn(11)),
-      itemFrom(eventOn(12)),
-      itemFrom(eventOn(19), { date: 'Sat Sept 19 & 26', title: 'Budgeting & Saving · Planning for Retirement', meta: '12–1 PM ET' }),
-    ].map((it, i) => Object.assign({ week: '0' + (i + 1) }, it));
+    // home page: the next four sessions, whatever month they fall in
+    const roadmapItems = upcoming.filter(isSession).slice(0, 4).map((e, i) => {
+      const x = decorate(e);
+      return {
+        week: '0' + (i + 1),
+        date: e.dow + ' ' + e.short + ' ' + e.d,
+        type: x.typeLabel, title: e.title,
+        meta: (e.host ? e.host + ' · ' : '') + e.time + ' ET',
+        color: x.color, chipBg: x.tint, chipInk: x.ink, access: x.access,
+        recLabel: x.recLabel, recBg: x.recBg, recInk: x.recInk, recBorder: x.recBorder,
+      };
+    });
 
-    const decorate = e => ({ ...e, typeLabel: sessionTypes[e.type].label, color: sessionTypes[e.type].color, tint: sessionTypes[e.type].tint, ink: sessionTypes[e.type].ink, isFree: openToAll.includes(e.type) });
-    const calKey = s.calMonth || 'sep';
-    const calActive = scheduleMonths.filter(m => m.key === calKey)[0] || scheduleMonths[0];
-    const calTabs = scheduleMonths.map(m => ({
-      key: m.key, name: m.name, status: m.status, count: m.events.length,
+    // ---- calendar ----
+    const calKey = s.calMonth && shownMonths.some(m => m.key === s.calMonth) ? s.calMonth : thisMonth.key;
+    const calActive = shownMonths.filter(m => m.key === calKey)[0] || shownMonths[0];
+    const calTabs = shownMonths.map(m => ({
+      key: m.key, name: m.name, status: m.status, count: m.events.filter(isSession).length,
       bg: m.key === calKey ? '#143027' : 'transparent',
       color: m.key === calKey ? '#f6efe3' : '#4c5348',
       sub: m.key === calKey ? 'rgba(246,239,227,.6)' : '#8a7f6a',
       border: m.key === calKey ? '1px solid #143027' : '1px solid rgba(20,48,39,.16)',
       click: () => this.setState({ calMonth: m.key }),
     }));
+    const allChallenges = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'challenge')), []);
     const calFirst = new Date(calActive.y, calActive.mi, 1).getDay();
     const calDays = new Date(calActive.y, calActive.mi + 1, 0).getDate();
     const calCells = [];
-    for (let i = 0; i < calFirst; i++) calCells.push({ num: '', items: [], bg: 'transparent', border: '1px solid transparent', numColor: 'transparent', numWeight: '500' });
+    for (let i = 0; i < calFirst; i++) calCells.push({ num: '', items: [], bg: 'transparent', border: '1px solid transparent', numColor: 'transparent', numWeight: '500', spanBar: 'transparent', isToday: false });
     for (let d = 1; d <= calDays; d++) {
+      const ts = new Date(calActive.y, calActive.mi, d).getTime();
       const items = calActive.events.filter(e => e.d === d).map(decorate);
-      const free = items.some(e => e.isFree);
+      const running = allChallenges.filter(c => ts >= c.ts && ts <= c.endTs)[0];
+      const isToday = ts === todayTs;
       calCells.push({
-        num: d, items,
+        num: d, items, isToday,
         bg: items.length ? '#fbf6ec' : 'rgba(20,48,39,.02)',
-        border: items.length ? '1px solid rgba(20,48,39,.12)' : '1px solid rgba(20,48,39,.06)',
-        numColor: items.length ? '#143027' : '#a9a293',
-        numWeight: items.length ? '700' : '500',
+        border: isToday ? '1.5px solid #c5612e' : items.length ? '1px solid rgba(20,48,39,.12)' : '1px solid rgba(20,48,39,.06)',
+        numColor: isToday ? '#c5612e' : items.length ? '#143027' : '#a9a293',
+        numWeight: items.length || isToday ? '700' : '500',
+        spanBar: running ? 'repeating-linear-gradient(90deg,' + sessionTypes.challenge.color + ' 0 6px,transparent 6px 9px)' : 'transparent',
+        spanTitle: running ? running.title.replace(' Begins', '') : '',
       });
     }
     const calDayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const calAgenda = calActive.events.map(decorate).map(e => ({ ...e, dateLabel: e.dow + ' ' + calActive.short + ' ' + e.d }));
+    const calAgenda = calActive.events.map(decorate).map(e => ({ ...e, dateLabel: e.dow + ' ' + calActive.short + ' ' + e.d, isPast: e.ts < todayTs, rowOpacity: e.ts < todayTs ? '.55' : '1' }));
     const calView = s.calView || (isMobile ? 'agenda' : 'calendar');
     const legendOf = keys => keys.map(k => ({ label: sessionTypes[k].label, color: sessionTypes[k].color }));
     const calLegend = [
-      { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['free', 'science', 'yoga']) },
-      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'qa', 'mobility']) },
-      { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['career', 'money']) },
+      { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['science', 'yoga', 'goals']) },
+      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'challenge', 'mobility']) },
+      { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'liveroom', 'career', 'mentor']) },
     ];
-    const freeSessions = [
-      { date: 'Fri Aug 28', title: 'Sex, Gender & Relationships', host: 'with Dr. Behzad Sorouri Khorashad' },
-      { date: 'Wed Sept 2', title: 'Science in Review: From Evidence to Practice', host: 'Monthly · 4–5 PM ET' },
-      { date: 'Wed Sept 9', title: 'ARC Yoga', host: 'All levels welcome · 4–5 PM ET' },
-      { date: 'Fri Oct 2', title: 'Cooking the Season', host: 'with Shervin' },
-    ];
+    const freeSessions = upcoming.filter(e => openToAll.includes(e.type)).slice(0, 4).map(e => ({ date: e.dow + ' ' + e.short + ' ' + e.d, title: e.title, host: (e.host ? 'with ' + e.host + ' · ' : '') + e.time + ' ET' }));
     // announced, but not yet scheduled — shown under the calendar
     const comingSoon = [{
       type: 'mobility',
@@ -1297,78 +1702,54 @@ class Component extends DCLogic {
       access: 'Juniper & Cypress',
       desc: 'A live Q&A on movement, mobility and training — bring your questions and work through them with us.',
       when: 'Day and time to be announced',
-    }].map(decorate);
+    }].map(x => ({ ...decorate(x), access: x.access, when: x.when }));
 
     // ---- full roadmap page ----
+    const fmtDate = e => e.dow + ' ' + e.short + ' ' + e.d;
+    const fmtWhen = e => fmtDate(e) + ' · ' + e.time + ' ET';
+    // Skin spotlight: built from the items tagged spot: 'skin' in the schedule
+    const skinKinds = {
+      spotlight: { sub: 'Expert session. The knowledge, explained clearly.', color: '#d6a23f', ink: '#143027' },
+      liveroom:  { sub: 'Live Room. Bring your routine and the questions that come up once you start.', color: '#7a4f8a', ink: '#fff' },
+      challenge: { sub: 'Challenge. Daily prompts and small tasks, so the routine becomes a habit.', color: '#a8451f', ink: '#fff' },
+    };
+    const skinMonths = scheduleMonths.filter(m => m.status !== 'Wrapped').map(m => {
+      const items = m.events.filter(e => e.spot === 'skin');
+      const nSessions = items.filter(e => e.type === 'spotlight').length;
+      const nRooms = items.filter(e => e.type === 'liveroom').length;
+      const nChall = items.filter(e => e.type === 'challenge').length;
+      return {
+        month: m.name,
+        label: [nSessions ? nSessions + (nSessions > 1 ? ' sessions' : ' session') : '', nRooms ? nRooms + (nRooms > 1 ? ' Live Rooms' : ' Live Room') : '', nChall ? 'Challenge' : ''].filter(Boolean).join(' · '),
+        sessions: items.map(e => ({
+          title: e.type === 'challenge' ? e.title.replace(' Begins', '') : e.title,
+          date: e.type === 'challenge' ? 'Starts ' + fmtDate(e) + ' · ' + weeksWord[e.weeks] + ' weeks' : fmtWhen(e),
+          sub: skinKinds[e.type].sub, iconBg: skinKinds[e.type].color, iconInk: skinKinds[e.type].ink,
+          topics: e.topics || [], hasTopics: !!(e.topics && e.topics.length),
+        })),
+      };
+    }).filter(m => m.sessions.length);
+    let skinN = 0;
+    skinMonths.forEach(m => m.sessions.forEach(sp => { skinN += 1; sp.n = (skinN < 10 ? '0' : '') + skinN; }));
+
     const roadmapPage = {
-      month: 'September',
-      dateRange: 'September 2026',
-      cooking: [
-        { n: '01', type: 'cooking', date: 'Fri Sept 11', time: '5–6:30 PM ET', title: 'Ghormeh Sabzi', host: '',
-          topics: ['The Predicament: why is it such a production to make?', 'Philosophy Corner: what actually is ghormeh sabzi?', 'What We Suggest: practical shortcuts for making ghormeh sabzi abroad'],
-          resources: ['Practical shortcuts for ghormeh sabzi abroad'] },
-        { n: '02', type: 'cooking', date: 'Fri Sept 18', time: '5–6:30 PM ET', title: 'On Rice', host: '',
-          topics: ['The Predicament: why did the rice I bought yesterday turn to mush?', 'Philosophy Corner: making sense of the rice aisle in a foreign supermarket', 'What We Suggest: what to do with the rice you can actually buy'],
-          resources: ['Rice Guide'] },
-        { n: '03', type: 'qa', date: 'Fri Sept 25', time: '5–6:30 PM ET', title: 'Open Q&A Night', host: '',
-          topics: ['Open floor: bring every question you’ve been saving', 'Anything from this month’s sessions — no question too small'],
-          resources: ['Q&A Recording'] },
-      ],
+      month: thisMonth.name,
+      dateRange: thisMonth.label,
       recipes: [
         { name: 'Japanese Salmon: quick, flavorful, no fuss', kind: 'Easy dish of the month', dir: 'ltr', font: "'Sora', sans-serif", cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#e7d9bf url('photos/recipe-salmon.jpg') center/cover no-repeat" },
         { name: 'میان‌برهای عملی در تهیهٔ قورمه سبزی در غربت', kind: 'Live doc', dir: 'rtl', font: "'Vazirmatn', 'Sora', sans-serif", cursor: 'default', hoverTransform: 'none', hoverShadow: 'none', cardBg: "#dcc8a4 url('photos/recipe-ghormeh-sabzi.jpg') center/cover no-repeat" },
       ],
-      career: {
-        months: [
-          { key: 'aug', month: 'August',
-            title: 'Big Career Moves in the Era of AI',
-            date: 'Sat Aug 8 · 12–1 PM ET',
-            format: 'Career Lab · Monthly',
-            desc: 'This month\u2019s Career Lab with Hoda: what AI is actually changing about hiring, and how to aim for a bigger move instead of a sideways one.',
-            covers: ['What AI is really changing about hiring right now', 'Reading the market: which roles are growing, which are shrinking', 'Positioning yourself for a step up, not a step sideways', 'The skills worth learning this year — and the ones that aren\u2019t'],
-          },
-          { key: 'sep', month: 'September',
-            title: 'Resume Writing with Hoda',
-            date: 'Sat Sept 12 · 12–1 PM ET',
-            format: 'Career Lab · Monthly',
-            desc: 'Build a résumé that gets read — structure, wording, and knowing what to cut. Bring your draft and leave with a sharper one.',
-            covers: ['Structure that gets read in the first 10 seconds', 'Wording that shows impact, not just duties', 'What to cut — and what never belongs on a résumé', 'Live feedback on your draft'],
-          },
-          { key: 'oct', month: 'October',
-            title: 'Promotion: How to Talk About It',
-            date: 'Sat Oct 3 · 12–1 PM ET',
-            format: 'Career Lab · Monthly',
-            desc: 'This month\u2019s Career Lab with Hoda: building the case for your promotion — and actually saying it out loud.',
-            covers: ['Building your case with evidence, not vibes', 'When to raise it, and how to time the ask', 'The exact words for the conversation with your manager', 'What to do if the answer is “not yet”'],
-          },
-        ],
-      },
       spotlight: {
-        title: 'Personal Finance Foundations', format: 'Guest Expert Series', date: 'Aug – Oct · Saturdays 12–1 PM ET',
-        desc: 'A six-part money course, made simple — from how you think about money to buying your first index fund. Two live sessions a month, August through October. No prior knowledge needed.',
-        months: [
-          { month: 'August', label: 'Sessions 1 & 2', sessions: [
-            { n: '01', title: 'Money Mindset', sub: 'How to think about money — before you manage it.', date: 'Sat Aug 22 · 12–1 PM ET',
-              topics: ['Behavior beats math — it\u2019s 80/20', 'Scarcity vs. growth thinking', 'Pay yourself first, automatically', 'Assets vs. liabilities', 'The real cost of waiting'] },
-            { n: '02', title: 'Money Goal Setting', sub: 'Turn “I should save more” into numbers with dates on them.', date: 'Sat Aug 29 · 12–1 PM ET',
-              topics: ['Name the goal, then price it', 'Short, medium & long-term buckets', 'Sinking funds for the predictable stuff', 'One account per goal', 'Course-correcting without quitting'] },
-          ]},
-          { month: 'September', label: 'Sessions 3 & 4', sessions: [
-            { n: '03', title: 'Budgeting & Saving', sub: 'Tell your money where to go — instead of wondering where it went.', date: 'Sat Sept 19 · 12–1 PM ET',
-              topics: ['Know your three numbers', 'The 50/30/20 rule', 'Build an emergency fund', 'Cut the Big Three first', 'Automate everything on payday'] },
-            { n: '04', title: 'Planning for Retirement', sub: 'What “enough” looks like, and the math to get there.', date: 'Sat Sept 26 · 12–1 PM ET',
-              topics: ['Retirement planning considerations', 'Your number = yearly spending × 25', 'Starting late, and starting over abroad', 'The 4% rule and what it assumes'] },
-          ]},
-          { month: 'October', label: 'Sessions 5 & 6', sessions: [
-            { n: '05', title: 'Investment Mindset', sub: 'Make your money work while you sleep.', date: 'Sat Oct 10 · 12–1 PM ET',
-              topics: ['Compound interest, the snowball', 'Risk vs. return, honestly', 'Time in the market beats timing it', 'Dollar-cost averaging', 'The real cost of waiting a year'] },
-            { n: '06', title: 'Stock Market Investing', sub: 'From “I don\u2019t understand stocks” to your first position.', date: 'Sat Oct 24 · 12–1 PM ET',
-              topics: ['Index funds: owning everything at once', 'Stocks, bonds, ETFs & mutual funds', 'How to open and fund a brokerage', 'Fees, taxes & what quietly eats returns', 'Building a portfolio you can ignore'] },
-          ]},
-        ],
+        title: 'Skin: From Knowledge to Routine',
+        format: 'Spotlight · Expert series',
+        season: 'Season two · Skin',
+        partsLabel: '3 expert sessions + Live Rooms',
+        date: 'November to January',
+        desc: 'Three expert sessions take you from an everyday routine to professional treatments and cosmetic surgery questions. Live Rooms give you space to practice and ask, and a four week challenge turns your routine into a habit.',
+        months: skinMonths,
       },
     };
-    // Spotlight: the live month is highlighted, the rest sit back — follows thisMonth
+    // Spotlight: the live month is highlighted, the rest sit back, follows thisMonth
     roadmapPage.spotlight.months.forEach(m => {
       const live = m.month === thisMonth.name;
       m.tag = live ? 'Live this month' : '';
@@ -1378,11 +1759,20 @@ class Component extends DCLogic {
       m.cardBorder = live ? '1.5px solid rgba(214,162,63,.55)' : '1px solid rgba(20,48,39,.1)';
     });
 
-    const careerKey = s.careerMonth || 'sep';
-    const careerMonths = roadmapPage.career.months;
-    const careerActive = careerMonths.filter(m => m.key === careerKey)[0] || careerMonths[0];
+    // ---- Career Lab: the upcoming ones, straight from the schedule ----
+    const careerMonths = upcoming.filter(e => e.type === 'career').map(e => ({
+      key: e.mKey + e.d,
+      month: scheduleMonths.filter(m => m.key === e.mKey)[0].name,
+      title: e.title.replace(/^Career Lab:\s*/, ''),
+      date: fmtWhen(e),
+      format: 'Career Lab · Monthly',
+      desc: e.desc || e.note || '',
+      covers: e.covers || [], hasCovers: !!(e.covers && e.covers.length),
+    }));
+    const careerKey = s.careerMonth && careerMonths.some(m => m.key === s.careerMonth) ? s.careerMonth : (careerMonths[0] || {}).key;
+    const careerActive = careerMonths.filter(m => m.key === careerKey)[0] || careerMonths[0] || { title: '', desc: '', date: '', format: 'Career Lab', covers: [], hasCovers: false };
     const careerTabs = careerMonths.map(m => ({
-      key: m.key, month: m.month, title: m.title, date: m.date,
+      key: m.key, month: m.month, title: m.title, date: m.date.split(' · ')[0],
       bg: m.key === careerKey ? '#1b2f52' : 'transparent',
       color: m.key === careerKey ? '#eef2fa' : '#143027',
       sub: m.key === careerKey ? 'rgba(238,242,250,.65)' : '#8a7f6a',
@@ -1390,60 +1780,84 @@ class Component extends DCLogic {
       click: () => this.setState({ careerMonth: m.key }),
     }));
     // counted off the schedule itself, so these never drift when sessions are added
-    const allSeasonEvents = scheduleMonths.reduce((a, m) => a.concat(m.events), []);
     const seasonStats = [
-      { n: String(allSeasonEvents.length), label: 'live sessions, Aug \u2013 Oct' },
-      { n: String(allSeasonEvents.filter(e => openToAll.includes(e.type)).length), label: 'open to all tiers' },
-      { n: String(allSeasonEvents.filter(e => e.type === 'money').length), label: 'Spotlight sessions, Aug \u2013 Oct' },
+      { n: String(shownEvents.filter(isSession).length), label: 'live sessions, ' + seasonRange },
+      { n: String(shownEvents.filter(e => openToAll.includes(e.type)).length), label: 'open to all tiers' },
+      { n: String(shownEvents.filter(e => e.type === 'challenge').length), label: 'challenges to build habits' },
     ];
 
-    // ---- live cooking sessions: EN / FA ----
-    const cookingFa = {
-      heading: 'کارگاه‌های جمعه',
-      members: 'ویژهٔ اعضا',
-      intro: 'سه شب جمعه در ماه سپتامبر — قورمه سبزی و برنج با شروین، و بعد شب پرسش و پاسخ. همهٔ جلسات ARC زنده برگزار می‌شوند؛ این‌ها کارگاه‌های شب‌های هفته‌اند. همهٔ ساعت‌ها به وقت شرق آمریکا.',
-      inThisSession: 'در این جلسه',
-      resourcesLabel: 'منابع',
-      sessions: [
-        { title: 'قورمه سبزی', host: '', date: 'جمعه ۱۱ سپتامبر', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'آشپزی',
-          topics: ['شرح مصیبت: چرا درست کردنش این قدر کار داره؟', 'بحث فلسفی: قورمه سبزی چیست؟', 'راهکارهای پیشنهادی: میان‌برهای عملی در تهیهٔ قورمه سبزی در غربت.'],
-          resources: ['میان‌برهای عملی در تهیهٔ قورمه سبزی در غربت'] },
-        { title: 'در باب برنج', host: '', date: 'جمعه ۱۸ سپتامبر', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'آشپزی',
-          topics: ['شرح مصیبت: چرا این برنجی که دیروز خریدم شفته شد؟', 'بحث فلسفی: انواع و اقسام برنج در سوپرمارکت‌های خارجی چیست؟', 'راهکارهای پیشنهادی: با این برنج چه کنیم؟'],
-          resources: ['راهنمای برنج'] },
-        { title: 'پرسش و پاسخ', host: '', date: 'جمعه ۲۵ سپتامبر', time: '۵ تا ۶:۳۰ عصر', typeLabel: 'پرسش و پاسخ',
-          topics: ['میدان باز — هر پرسشی را که ذخیره کرده‌اید بیاورید', 'هر چیزی از جلسات این ماه؛ هیچ سؤالی کوچک نیست'],
-          resources: ['ضبط پرسش و پاسخ'] },
-      ],
-    };
+    // ---- cooking nights: EN / FA, from the featured month ----
+    const faMonthNames = { oct: 'اکتبر', nov: 'نوامبر', dec: 'دسامبر', jan: 'ژانویه' };
+    const faDow = { Sun: 'یکشنبه', Mon: 'دوشنبه', Tue: 'سه‌شنبه', Wed: 'چهارشنبه', Thu: 'پنجشنبه', Fri: 'جمعه', Sat: 'شنبه' };
+    const faDigits = x => String(x).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    const faTime = t => faDigits(t.replace(/\s*(AM|PM)/g, '').replace('–', ' تا ')) + (/PM/.test(t) ? ' عصر' : '');
     const cookingLang = s.cookingLang || 'en';
     const cookingRtl = cookingLang === 'fa';
-    const cookingSrc = cookingRtl ? cookingFa.sessions : roadmapPage.cooking;
-    const cookingList = cookingSrc.map((c, i) => {
-      const base = roadmapPage.cooking[i];
-      const t = sessionTypes[base.type];
-      const isFree = base.type === 'free';
+    const cookingEvents = thisMonth.events.filter(e => e.type === 'cooking' || e.type === 'qa' || (e.type === 'free' && e.host === 'Shervin'));
+    const cookingList = cookingEvents.map((e, i) => {
+      const t = sessionTypes[e.type === 'free' ? 'cooking' : e.type];
+      const topics = e.topics || [], resources = e.resources || [];
       return {
-        n: base.n, title: c.title, host: c.host, date: c.date, time: c.time || base.time, topics: c.topics, resources: c.resources,
-        typeLabel: c.typeLabel || t.label, typeColor: t.color, typeTint: t.tint, typeInk: t.ink,
-        cardBg: '#fbf6ec',
-        cardBorder: '1px solid rgba(20,48,39,.1)',
-        cardShadow: 'none',
-        freeNote: '',
+        n: '0' + (i + 1),
+        title: cookingRtl ? (e.faTitle || e.title) : e.title,
+        host: '',
+        date: cookingRtl ? faDow[e.dow] + ' ' + faDigits(e.d) + ' ' + faMonthNames[e.mKey] : fmtDate(e),
+        time: cookingRtl ? faTime(e.time) : e.time + ' ET',
+        topics, resources, hasTopics: topics.length > 0, hasResources: resources.length > 0,
+        typeLabel: cookingRtl ? (e.type === 'qa' ? 'پرسش و پاسخ' : 'آشپزی') : t.label,
+        typeColor: t.color, typeTint: t.tint, typeInk: t.ink,
+        cardBg: '#fbf6ec', cardBorder: '1px solid rgba(20,48,39,.1)', cardShadow: 'none', freeNote: '',
       };
     });
     const cookingCopy = cookingRtl
-      ? cookingFa
-      : { heading: 'Friday workshops', members: 'Members', intro: 'Three Friday nights in September — ghormeh sabzi and rice with Shervin, then an open Q&A night. Every ARC session is live; these are the weeknight workshops. All times Eastern.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
+      ? { heading: 'شب‌های آشپزی', members: 'ویژهٔ اعضا', intro: 'شب‌های آشپزی با شروین در ماه ' + faMonthNames[thisMonth.key] + '. همهٔ جلسات ARC زنده برگزار می‌شوند و همهٔ ساعت‌ها به وقت شرق آمریکاست.', inThisSession: 'در این جلسه', resourcesLabel: 'منابع' }
+      : { heading: 'Cooking nights', members: 'Members', intro: 'Cooking with Shervin in ' + thisMonth.name + '. Every ARC session is live, and all times are Eastern.', inThisSession: 'In this session', resourcesLabel: 'Resources' };
     const cookingDir = cookingRtl ? 'rtl' : 'ltr';
     const cookingFont = cookingRtl ? "'Vazirmatn', 'Hanken Grotesk', system-ui, sans-serif" : "'Hanken Grotesk', system-ui, sans-serif";
-    const cookingHeadFont = cookingRtl ? "'Vazirmatn', 'Sora', sans-serif" : "'Sora', sans-serif";
+    const cookingHeadFont = cookingRtl ? "'Vazirmatn', 'Sora', sans-serif" : "'Sora', 'Vazirmatn', sans-serif";
     const setCookingEn = () => this.setState({ cookingLang: 'en' });
     const setCookingFa = () => this.setState({ cookingLang: 'fa' });
     const cookingEnBg = cookingRtl ? 'transparent' : '#143027';
     const cookingEnColor = cookingRtl ? '#143027' : '#f6efe3';
     const cookingFaBg = cookingRtl ? '#143027' : 'transparent';
     const cookingFaColor = cookingRtl ? '#f6efe3' : '#143027';
+
+    // ---- mentorship ----
+    // Mentors: add a photo by putting it in photos/mentors/ and setting img: 'photos/mentors/sahar.jpg'.
+    const mentorDefs = [
+      { name: 'Sahar',    role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Shiva',    role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Masoud',   role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Negin',    role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Padideh',  role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Mehdi',    role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Farahnaz', role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Razieh',   role: 'Role coming soon', bio: '', img: '' },
+      { name: 'Kamyar',   role: 'Role coming soon', bio: '', img: '' },
+    ];
+    const mentorSessionEvents = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'mentor')), []);
+    const mentorTints = ['#1f5b6e', '#2c4a7a', '#7a4f8a', '#a8451f', '#3c8d6b', '#c5612e'];
+    const mentors = mentorDefs.map((m, i) => {
+      const sess = mentorSessionEvents.filter(e => e.host.includes(m.name))[0];
+      return {
+        ...m, initial: m.name.charAt(0),
+        bio: m.bio || 'A short bio is on its way: their background, what they do today, and what they can help mentees with.',
+        session: sess ? 'Group session · ' + fmtDate(sess) : '',
+        hasImg: !!m.img, noImg: !m.img,
+        photoBg: m.img ? "url('" + m.img + "') center 25%/cover no-repeat" : mentorTints[i % mentorTints.length],
+      };
+    });
+    const mentorSessions = mentorSessionEvents.map((e, i) => ({
+      n: '0' + (i + 1),
+      title: e.title.replace(/^Mentorship:\s*/, ''),
+      theme: e.note || '',
+      date: fmtWhen(e),
+      mentors: 'With ' + e.host,
+      month: scheduleMonths.filter(m => m.key === e.mKey)[0].name,
+      isPast: e.ts < todayTs,
+      cardOpacity: e.ts < todayTs ? '.6' : '1',
+      access: accessOf('mentor'),
+    }));
     const pastSessions = [
       { category: 'Recipe', title: 'The perfect tahdig, three ways', label: 'Public', labelBg: '#7d8a4e', labelColor: '#fff', bg: '#e7d9bf', ph: 'session still' },
       { category: 'Culture', title: 'Nowruz traditions, reimagined abroad', label: 'Members', labelBg: '#d6a23f', labelColor: '#143027', bg: '#dcc8a4', ph: 'session still' },
@@ -1459,7 +1873,7 @@ class Component extends DCLogic {
     const benefits = [
       { title: 'Community access', desc: 'A welcoming space hosted on Circle, active every day of the week.' },
       { title: 'Resource library', desc: 'Recipes, guides, and templates that keep growing month over month.' },
-      { title: 'Session recordings', desc: 'Miss a live? Catch every session on your own schedule.' },
+      { title: 'Session recordings', desc: 'Miss a live? Catch the recorded sessions on your own schedule.' },
       { title: 'HodaFit discounts', desc: '20–25% off wellness plans, depending on your tier.' },
       { title: 'Monthly roadmap', desc: 'Always know what is coming next and never miss a favorite topic.' },
       { title: 'Members-only events', desc: 'Seasonal celebrations and meetups made for the diaspora.' },
@@ -1607,9 +2021,10 @@ class Component extends DCLogic {
       { id: 'sp-guest', who: 'Members', price: 80, note: 'All 6 sessions, Aug–Oct + 30-day recordings', accent: '#1f7a5a', url: 'https://ancient-roots-circle.circle.so/checkout/personal-finance-foundations' },
     ];
     const spotlightPass = {
-      title: roadmapPage.spotlight.title,
-      format: roadmapPage.spotlight.format,
-      date: roadmapPage.spotlight.date,
+      // the money series pass (Aug to Oct), kept separate from the current spotlight
+      title: 'Personal Finance Foundations',
+      format: 'Guest Expert Series',
+      date: 'Aug to Oct · Saturdays 12–1 PM ET',
       options: passDefs.map(p => ({ ...p, priceLabel: '$' + p.price,
         go: () => window.open(p.url, '_blank', 'noopener') })),
     };
@@ -1666,9 +2081,14 @@ class Component extends DCLogic {
 
     return {
       year: 2026,
-      isHome: s.page === 'home', isCommunity: s.page === 'community', isCalendarPage: s.page === 'calendar', isJoin: s.page === 'join', isRoadmap: s.page === 'roadmap', isStory: s.page === 'story',
+      isHome: s.page === 'home', isCommunity: s.page === 'community', isCalendarPage: s.page === 'calendar', isJoin: s.page === 'join', isRoadmap: s.page === 'roadmap', isStory: s.page === 'story', isMentorship: s.page === 'mentorship',
       isMobile, notMobile: !isMobile, mobileOpen: s.mobileOpen,
-      goHome: () => this.go('home'), goCommunity: () => this.go('community'), goJoin: () => this.go('join'), goStory: () => this.go('story'), goCalendar: () => this.go('calendar'),
+      goHome: () => this.go('home'), goCommunity: () => this.go('community'), goJoin: () => this.go('join'), goStory: () => this.go('story'), goCalendar: () => this.go('calendar'), goMentorship: () => this.go('mentorship'),
+      goLiveRooms: () => this.goSection('community', 'liverooms', 'arc-how'),
+      goDorehami: () => this.goSection('community', 'dorehami', 'arc-dorehami'),
+      mentorRange: mentorSessionEvents.length ? mentorSessionEvents[0].short + ' to ' + mentorSessionEvents[mentorSessionEvents.length - 1].short : '', mentors, mentorSessions, mentorCount: String(mentors.length), mentorSessionCount: String(mentorSessions.length),
+      seasonRange, seasonRangeLong, calHeroCta: 'See ' + thisMonth.name + ' in full →',
+      handoffTitle: (nextMonths.length ? nextMonths.slice(0, 2).join(' and ') + (nextMonths.length > 1 ? ' are' : ' is') + ' already planned. ' : '') + 'See the whole season.',
       goAugust: () => {
         this.setState({ page: 'community', mobileOpen: false });
         setTimeout(() => {
@@ -1677,11 +2097,11 @@ class Component extends DCLogic {
         }, 60);
       }, goRoadmap: () => this.go('calendar'),
       toggleMobile: () => this.setState(st => ({ mobileOpen: !st.mobileOpen })),
-      navHomeColor: navColor('home'), navCommunityColor: navColor('community'), navJoinColor: navColor('join'), navCalendarColor: navColor('calendar'), navRoadmapColor: navColor('roadmap'), navCoursesColor: navColor('courses'),
+      navHomeColor: navColor('home'), navCommunityColor: navColor('community'), navJoinColor: navColor('join'), navCalendarColor: navColor('calendar'), navRoadmapColor: navColor('roadmap'), navCoursesColor: navColor('courses'), navMentorshipColor: navColor('mentorship'),
       roadmapPage,
       calTabs, calCells, calDayNames, calAgenda, calLegend, freeSessions, comingSoon,
       calMonthLabel: calActive.label, calMonthName: calActive.name, calMonthStatus: calActive.status,
-      calIsSneak: calActive.status === 'Sneak peek', calSneakNote: calActive.note || '',
+      calIsSneak: false, calSneakNote: '',
       calIsCalendar: calView === 'calendar', calIsAgenda: calView === 'agenda',
       setCalCalendar: () => this.setState({ calView: 'calendar' }),
       setCalAgenda: () => this.setState({ calView: 'agenda' }),
@@ -1702,7 +2122,7 @@ class Component extends DCLogic {
       shervinTextOrder: (s.vw || 1200) < 820 ? 2 : 1,
       shervinPhotoOrder: (s.vw || 1200) < 820 ? 1 : 2,
       cookGridCols: 'repeat(' + ((s.vw || 1200) < 640 ? 1 : (s.vw || 1200) < 1080 ? 2 : 4) + ',minmax(0,1fr))',
-      careerNote: 'Once a month · with Hoda',
+      careerNote: 'Once a month · with Hoda', careerHasCovers: !!careerActive.hasCovers, careerHasAny: careerMonths.length > 0,
       careerTabs, careerActive,
       cartCount, cartItems, cartTotal, cartEmpty: s.cart.length === 0,
       cartOpen: s.cartOpen, toggleCart: () => this.setState(st => ({ cartOpen: !st.cartOpen })), closeCart: () => this.setState({ cartOpen: false }),
