@@ -1044,6 +1044,17 @@ html,body{margin:0;padding:0;}
       </div>
     </sc-if>
 
+    <!-- follow a spotlight -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0 0 16px;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-right:4px;">Follow a spotlight</span>
+      <sc-for list="{{ spotFilters }}" as="sf" hint-placeholder-count="3">
+        <span onClick="{{ sf.click }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;background:{{ sf.bg }};border:{{ sf.border }};color:{{ sf.ink }};font-family:'Sora',sans-serif;font-weight:600;font-size:13px;transition:background .2s,color .2s;">
+          <span style="width:7px;height:7px;background:{{ sf.dot }};transform:rotate(45deg);display:inline-block;flex:none;"></span>{{ sf.label }}
+        </span>
+      </sc-for>
+      <span style="font-size:12.5px;color:#8a7f6a;">Each spotlight's sessions, Live Rooms and challenge share one colour.</span>
+    </div>
+
     <!-- calendar grid -->
     <sc-if value="{{ calIsCalendar }}" hint-placeholder-val="{{ true }}">
       <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-radius:22px;padding:clamp(16px,2vw,24px);">
@@ -1057,7 +1068,8 @@ html,body{margin:0;padding:0;}
             <div title="{{ cell.spanTitle }}" style="min-height:108px;border-radius:12px;background:{{ cell.bg }};border:{{ cell.border }};padding:8px;display:flex;flex-direction:column;gap:5px;">
               <span style="font-family:'Sora',sans-serif;font-size:12.5px;font-weight:{{ cell.numWeight }};color:{{ cell.numColor }};">{{ cell.num }}</span>
               <sc-for list="{{ cell.items }}" as="ev" hint-placeholder-count="0">
-                <div style="background:{{ ev.evBg }};border-left:3px solid {{ ev.color }};border-radius:6px;padding:5px 6px;">
+                <div style="background:{{ ev.evBg }};border-left:3px solid {{ ev.color }};border-radius:6px;padding:5px 6px;opacity:{{ ev.dim }};box-shadow:{{ ev.evRing }};transition:opacity .2s;">
+                  <sc-if value="{{ ev.hasSeries }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;gap:4px;margin-bottom:3px;font-size:8.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:{{ ev.seriesColor }};color:#fff;padding:1px 6px 1px 5px;border-radius:999px;"><span style="width:5px;height:5px;background:#fff;transform:rotate(45deg);display:inline-block;"></span>{{ ev.seriesLabel }}</div></sc-if>
                   <div style="font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:{{ ev.evLabelInk }};margin-bottom:2px;">{{ ev.evLabel }}</div>
                   <div dir="auto" style="font-family:'Sora','Vazirmatn',sans-serif;font-weight:600;font-size:11.5px;line-height:1.25;color:{{ ev.evTitleInk }};text-align:left;">{{ ev.title }}</div>
                   <div style="font-size:10px;color:{{ ev.evSubInk }};margin-top:2px;">{{ ev.when }}</div>
@@ -1065,7 +1077,7 @@ html,body{margin:0;padding:0;}
                 </div>
               </sc-for>
               <sc-if value="{{ cell.hasRibbon }}" hint-placeholder-val="{{ false }}">
-                <div style="margin-top:auto;margin-left:{{ cell.ribbonMl }};margin-right:{{ cell.ribbonMr }};margin-bottom:-2px;background:#f1ddd0;border-top:2px solid #a8451f;border-radius:{{ cell.ribbonRadius }};padding:3px 6px;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#7a2f12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cell.ribbonText }}</div>
+                <div style="margin-top:auto;margin-left:{{ cell.ribbonMl }};margin-right:{{ cell.ribbonMr }};margin-bottom:-2px;opacity:{{ cell.ribbonDim }};background:{{ cell.ribbonBg }};border-top:2px solid {{ cell.ribbonEdge }};border-radius:{{ cell.ribbonRadius }};padding:3px 6px;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:{{ cell.ribbonInk }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ cell.ribbonText }}</div>
               </sc-if>
             </div>
           </sc-for>
@@ -1077,12 +1089,15 @@ html,body{margin:0;padding:0;}
     <sc-if value="{{ calIsAgenda }}" hint-placeholder-val="{{ false }}">
       <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-radius:22px;overflow:hidden;">
         <sc-for list="{{ calAgenda }}" as="ev" hint-placeholder-count="7">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px clamp(16px,2vw,24px);border-top:1px solid rgba(20,48,39,.08);border-left:4px solid {{ ev.color }};opacity:{{ ev.rowOpacity }};">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px clamp(16px,2vw,24px);border-top:1px solid rgba(20,48,39,.08);border-left:4px solid {{ ev.color }};opacity:{{ ev.rowDim }};">
             <div style="flex:0 0 104px;">
               <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:#143027;">{{ ev.dateLabel }}</div>
               <div style="font-size:12.5px;color:#8a7f6a;margin-top:2px;">{{ ev.when }}</div>
             </div>
-            <span style="flex:none;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ ev.tint }};color:{{ ev.ink }};padding:5px 11px;border-radius:999px;">{{ ev.typeLabel }}</span>
+            <span style="flex:none;display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;">
+              <span style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ ev.tint }};color:{{ ev.ink }};padding:5px 11px;border-radius:999px;">{{ ev.typeLabel }}</span>
+              <sc-if value="{{ ev.hasSeries }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:{{ ev.seriesColor }};color:#fff;padding:3px 9px 3px 7px;border-radius:999px;"><span style="width:5px;height:5px;background:#fff;transform:rotate(45deg);display:inline-block;"></span>{{ ev.seriesLabel }} spotlight</span></sc-if>
+            </span>
             <div style="flex:1 1 220px;min-width:180px;">
               <div dir="auto" style="font-family:'Sora','Vazirmatn',sans-serif;font-weight:600;font-size:16px;color:#143027;line-height:1.3;text-align:left;">{{ ev.title }}</div>
               <div style="font-size:13px;color:#8a7f6a;margin-top:3px;line-height:1.45;">{{ ev.hostLine }}</div>
@@ -1121,7 +1136,7 @@ html,body{margin:0;padding:0;}
       <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;">Live Rooms</span>
       <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#e2f0e8;color:#14563d;border:1px solid rgba(31,122,90,.45);padding:2px 8px;border-radius:999px;">Recorded</span>watch it later</span>
       <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fbe9e0;color:#8a3a1a;border:1px solid rgba(197,97,46,.5);padding:2px 8px;border-radius:999px;">Not recorded</span>live only</span>
-      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:9.5px;font-weight:700;background:#f1ddd0;border-top:2px solid #a8451f;color:#7a2f12;padding:2px 8px;border-radius:5px;">Day 4 of 21</span>challenge running</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:9.5px;font-weight:700;background:#e0efe6;border-top:2px solid #2e7a52;color:#1c5236;padding:2px 8px;border-radius:5px;">Day 4 of 21</span>challenge running, in its spotlight's colour</span>
     </div>
 
     <!-- announced, not yet dated -->
@@ -1511,7 +1526,7 @@ class Component extends DCLogic {
     // ---- THE SCHEDULE ----
     // Add a session: { d: day, time: '5–6 PM', type: one of sessionTypes, host, title, note (optional detail), rec (Live Rooms only) }
     // Challenges: { d: start day, type: 'challenge', title, weeks }. Weekdays are worked out automatically.
-    // spot: 'skin' tags an item as part of the Skin spotlight series.
+    // spot: 'skin' or 'money' ties an item to its spotlight series, so its sessions, Live Rooms and challenge share one colour.
     const scheduleMonths = [
       { key: 'oct', name: 'October', short: 'Oct', y: 2026, mi: 9,
         theme: 'The Money Finale',
@@ -1521,11 +1536,11 @@ class Component extends DCLogic {
         { d: 3,  time: '12–1 PM',   type: 'career',  host: 'Hoda',           title: 'Promotion: How to Talk About It' },
         { d: 7,  time: '4–5 PM',    type: 'science', host: '',               title: 'Science in Review: From Evidence to Practice' },
         { d: 9,  time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Know the Meat Cuts' },
-        { d: 10, time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Investment Mindset' },
+        { d: 10, time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Investment Mindset', spot: 'money' },
         { d: 16, time: '5–6:30 PM', type: 'cooking', host: 'Shervin',        title: 'Chenjeh Kabab' },
         { d: 21, time: '4–5 PM',    type: 'yoga',    host: '',               title: 'ARC Yoga' },
         { d: 23, time: '5–6:30 PM', type: 'qa',      host: 'Hoda & Shervin', title: 'Open Q&A Night' },
-        { d: 25, time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Stock Market Investing', note: 'The last session of the money spotlight' },
+        { d: 25, time: '12–1 PM',   type: 'money',   host: 'Guest expert',   title: 'Stock Market Investing', note: 'The last session of the money spotlight', spot: 'money' },
       ] },
       { key: 'nov', name: 'November', short: 'Nov', y: 2026, mi: 10,
         theme: 'From Learning to Doing',
@@ -1537,10 +1552,10 @@ class Component extends DCLogic {
         { d: 12, time: '4:30–5:30 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: Is It Time to Move On?', note: 'Quitting your job',
           desc: 'Quitting your job is a big call. How to tell when it is really time to move on, and how to leave well when you do.' },
         { d: 13, time: '5–6 PM',       type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin: The Thanksgiving Table', faTitle: 'آشپزی با شروین: سفرهٔ شکرگزاری', note: 'Thanksgiving themed cooking' },
-        { d: 16, type: 'challenge', title: 'Money Challenge Begins', weeks: 3 },
+        { d: 16, type: 'challenge', title: 'Money Challenge Begins', weeks: 3, spot: 'money' },
         { d: 20, time: '5–6 PM',       type: 'spotlight', host: '',        title: 'Skincare Foundations: Building Your Everyday Routine', note: 'Skin spotlight · Session 1', spot: 'skin' },
-        { d: 21, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv, Ors & finance package participants', title: 'Finance Live Room: Putting Learning into Practice', rec: true },
-        { d: 24, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv & Ors', title: 'Finance Live Room: Money, Work & Stress', rec: false },
+        { d: 21, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv, Ors & finance package participants', title: 'Finance Live Room: Putting Learning into Practice', rec: true, spot: 'money' },
+        { d: 24, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv & Ors', title: 'Finance Live Room: Money, Work & Stress', rec: false, spot: 'money' },
         { d: 25, time: '4–5 PM',       type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
       ] },
       { key: 'dec', name: 'December', short: 'Dec', y: 2026, mi: 11,
@@ -1549,7 +1564,7 @@ class Component extends DCLogic {
         events: [
         { d: 2,  time: '3–4 PM', type: 'science',   host: 'Damoon',     title: 'Science in Review: From Evidence to Practice' },
         { d: 3,  time: '5–6 PM', type: 'liveroom',  host: 'Sarv & Ors', title: 'Live Room: Navigating Parenting Challenges' },
-        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room' },
+        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room', spot: 'money' },
         { d: 5,  time: '5–6 PM', type: 'career',    host: 'Hoda',       title: 'Career Lab: When Life Changes Your Career Plans', note: 'Navigating circumstances outside our control',
           desc: 'Sometimes life rewrites the plan for you. How to navigate the circumstances outside our control and still move your career forward.' },
         { d: 10, time: '5–6 PM', type: 'spotlight', host: '',           title: 'Understanding Professional Skin Treatments', note: 'Skin spotlight · Clinical skincare', spot: 'skin' },
@@ -1567,7 +1582,7 @@ class Component extends DCLogic {
         { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Understanding Cosmetic Surgery: Options & Questions', note: 'Skin spotlight', spot: 'skin' },
         { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
         { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 4, spot: 'skin' },
-        { d: 11, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room' },
+        { d: 11, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room', spot: 'money' },
         { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
         { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
         { d: 16, time: '12–1 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: When Work and Family Meet', note: 'How children and relationships affect professional life',
@@ -1615,6 +1630,12 @@ class Component extends DCLogic {
     const seasonRange = shownMonths[0].short + ' to ' + shownMonths[shownMonths.length - 1].short;
     const seasonRangeLong = shownMonths[0].short + ' ' + shownMonths[0].y + ' to ' + shownMonths[shownMonths.length - 1].short + ' ' + shownMonths[shownMonths.length - 1].y;
 
+    // ---- spotlight series: one colour per spotlight, shared by its sessions, Live Rooms and challenge ----
+    const spotSeries = {
+      money: { label: 'Money spotlight', short: 'Money', color: '#2e7a52', tint: '#e0efe6', ink: '#1c5236' },
+      skin:  { label: 'Skin spotlight',  short: 'Skin',  color: '#c0567a', tint: '#f7e3ea', ink: '#8a3354' },
+    };
+    const spotFilter = s.calSpot && spotSeries[s.calSpot] ? s.calSpot : '';
     const decorate = e => {
       const st = sessionTypes[e.type];
       const isChallenge = e.type === 'challenge';
@@ -1624,11 +1645,18 @@ class Component extends DCLogic {
         when: isChallenge ? weeksWord[e.weeks] + ' weeks' : e.time,
         hostLine: isChallenge ? 'Runs ' + weeksWord[e.weeks].toLowerCase() + ' weeks, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
         evBorder: '1px solid transparent',
-        evBg: isChallenge ? st.color : st.tint,
+        evBg: isChallenge ? (spotSeries[e.spot] ? spotSeries[e.spot].color : st.color) : st.tint,
         evLabelInk: isChallenge ? 'rgba(255,255,255,.85)' : st.ink,
         evTitleInk: isChallenge ? '#fff' : '#143027',
         evSubInk: isChallenge ? 'rgba(255,255,255,.8)' : '#7a7364',
         evLabel: isChallenge ? 'Challenge starts' : st.label,
+        hasSeries: !!spotSeries[e.spot],
+        seriesLabel: spotSeries[e.spot] ? spotSeries[e.spot].short : '',
+        seriesColor: spotSeries[e.spot] ? spotSeries[e.spot].color : 'transparent',
+        seriesTint: spotSeries[e.spot] ? spotSeries[e.spot].tint : 'transparent',
+        seriesInk: spotSeries[e.spot] ? spotSeries[e.spot].ink : 'transparent',
+        dim: spotFilter && e.spot !== spotFilter ? '.22' : '1',
+        evRing: spotFilter && e.spot === spotFilter ? '0 0 0 2px ' + spotSeries[spotFilter].color : 'none',
         ...recBadge(e),
       };
     };
@@ -1692,6 +1720,10 @@ class Component extends DCLogic {
         numWeight: items.length || isToday ? '700' : '500',
         spanTitle: running ? running.title.replace(' Begins', '') : '',
         hasRibbon: !!running,
+        ribbonBg: running && spotSeries[running.spot] ? spotSeries[running.spot].tint : '#f1ddd0',
+        ribbonEdge: running && spotSeries[running.spot] ? spotSeries[running.spot].color : '#a8451f',
+        ribbonInk: running && spotSeries[running.spot] ? spotSeries[running.spot].ink : '#7a2f12',
+        ribbonDim: spotFilter && !(running && running.spot === spotFilter) ? '.22' : '1',
         ribbonText: running ? 'Day ' + (Math.round((ts - running.ts) / 864e5) + 1) + ' of ' + (running.weeks * 7) : '',
         ribbonRadius: running ? ((ts === running.ts || calFirst + d - 1 === 0 || (calFirst + d - 1) % 7 === 0 ? '6px' : '0') + ' ' + (ts === running.endTs || d === calDays || (calFirst + d) % 7 === 0 ? '6px 6px' : '0 0') + ' ' + (ts === running.ts || (calFirst + d - 1) % 7 === 0 ? '6px' : '0')) : '0',
         ribbonMl: running && !(ts === running.ts || (calFirst + d - 1) % 7 === 0) ? '-11px' : '0',
@@ -1699,7 +1731,15 @@ class Component extends DCLogic {
       });
     }
     const calDayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const calAgenda = calActive.events.map(decorate).map(e => ({ ...e, dateLabel: e.dow + ' ' + calActive.short + ' ' + e.d, isPast: e.ts < todayTs, rowOpacity: e.ts < todayTs ? '.55' : '1' }));
+    const calAgenda = calActive.events.map(decorate).map(e => ({ ...e, dateLabel: e.dow + ' ' + calActive.short + ' ' + e.d, isPast: e.ts < todayTs, rowDim: spotFilter ? (e.spot === spotFilter ? '1' : '.22') : (e.ts < todayTs ? '.55' : '1') }));
+    const spotFilters = [{ key: '', label: 'Everything', color: '#143027' }].concat(Object.keys(spotSeries).map(k => ({ key: k, label: spotSeries[k].label, color: spotSeries[k].color }))).map(f => ({
+      ...f, on: spotFilter === f.key,
+      bg: spotFilter === f.key ? f.color : 'transparent',
+      ink: spotFilter === f.key ? '#fff' : '#3a4038',
+      border: '1.5px solid ' + (spotFilter === f.key ? f.color : 'rgba(20,48,39,.18)'),
+      dot: spotFilter === f.key ? '#fff' : f.color,
+      click: () => this.setState({ calSpot: f.key }),
+    }));
     const calView = s.calView || (isMobile ? 'agenda' : 'calendar');
     const legendOf = keys => keys.map(k => ({ label: sessionTypes[k].label, color: sessionTypes[k].color }));
     const calLegend = [
@@ -2113,7 +2153,7 @@ class Component extends DCLogic {
       toggleMobile: () => this.setState(st => ({ mobileOpen: !st.mobileOpen })),
       navHomeColor: navColor('home'), navCommunityColor: navColor('community'), navJoinColor: navColor('join'), navCalendarColor: navColor('calendar'), navRoadmapColor: navColor('roadmap'), navCoursesColor: navColor('courses'), navMentorshipColor: navColor('mentorship'),
       roadmapPage,
-      calTabs, calCells, calDayNames, calAgenda, calLegend, freeSessions, comingSoon,
+      calTabs, spotFilters, calCells, calDayNames, calAgenda, calLegend, freeSessions, comingSoon,
       calMonthLabel: calActive.label, calMonthName: calActive.name, calMonthStatus: calActive.status,
       calIsSneak: false, calSneakNote: '',
       calIsCalendar: calView === 'calendar', calIsAgenda: calView === 'agenda',
