@@ -1517,6 +1517,7 @@ class Component extends DCLogic {
       money:    { label: 'Spotlight',         color: '#d6a23f', tint: '#f7edd4', ink: '#74561c' },
       spotlight:{ label: 'Spotlight',         color: '#d6a23f', tint: '#f7edd4', ink: '#74561c' },
       liveroom: { label: 'Live Room',         color: '#7a4f8a', tint: '#ede2f1', ink: '#4f2f5c' },
+      dorehami: { label: 'Dorehami',          color: '#b0612f', tint: '#f6e6d8', ink: '#7a3f17' },
       mentor:   { label: 'Mentorship',        color: '#1f5b6e', tint: '#dcebef', ink: '#123d4b' },
       goals:    { label: 'Goal Setting',      color: '#3c8d6b', tint: '#e0f0e7', ink: '#235a43' },
       challenge:{ label: 'Challenge',         color: '#a8451f', tint: '#f1ddd0', ink: '#7a2f12' },
@@ -1527,7 +1528,7 @@ class Component extends DCLogic {
     };
     // who gets in: every tier (Sapling included) · Cypress only · everything else is Juniper & up
     const openToAll = ['free', 'science', 'yoga', 'goals'];
-    const cypressOnly = ['career', 'money', 'spotlight', 'liveroom', 'mentor'];
+    const cypressOnly = ['career', 'money', 'spotlight', 'liveroom', 'mentor', 'dorehami'];
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
     // a single session can be opened to everyone with open: true, whatever its type
     const isOpen = e => !!e.open || openToAll.includes(e.type);
@@ -1580,7 +1581,7 @@ class Component extends DCLogic {
         blurb: 'Professional skin treatments and two skincare Live Rooms, a parenting Live Room, a mentorship session on difficult conversations, and a goal setting session open to everyone. The digital detox starts Dec 21.',
         events: [
         { d: 2,  time: '3–4 PM', type: 'science',   host: 'Damoon',     title: 'Science in Review: From Evidence to Practice' },
-        { d: 3,  time: '5–6 PM', type: 'liveroom',  host: 'Sarv & Ors', title: 'Live Room: Navigating Parenting Challenges' },
+        { d: 3,  time: '5–6 PM', type: 'dorehami',  host: 'Sarv & Ors', title: 'Dorehami: Navigating Parenting Challenges', note: 'Small circle · cameras on · never recorded' },
         { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room', spot: 'money' },
         { d: 5,  time: '5–6 PM', type: 'career',    host: 'Hoda',       title: 'Career Lab: When Life Changes Your Career Plans', note: 'Navigating circumstances outside our control',
           desc: 'Sometimes life rewrites the plan for you. How to navigate the circumstances outside our control and still move your career forward.' },
@@ -1762,7 +1763,7 @@ class Component extends DCLogic {
     const calLegend = [
       { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['science', 'yoga', 'goals']) },
       { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'challenge']) },
-      { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'liveroom', 'career', 'mentor']) },
+      { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'liveroom', 'dorehami', 'career', 'mentor']) },
     ];
     const freeSessions = upcoming.filter(isOpen).slice(0, 4).map(e => ({ date: e.dow + ' ' + e.short + ' ' + e.d, title: e.title, host: (e.host ? 'with ' + e.host + ' · ' : '') + e.time + ' ET' }));
     // announced, but not yet scheduled — shown under the calendar
