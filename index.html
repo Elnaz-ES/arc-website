@@ -1691,18 +1691,12 @@ class Component extends DCLogic {
     const legendOf = keys => keys.map(k => ({ label: sessionTypes[k].label, color: sessionTypes[k].color }));
     const calLegend = [
       { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['science', 'yoga', 'goals']) },
-      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'challenge', 'mobility']) },
+      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'challenge']) },
       { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'liveroom', 'career', 'mentor']) },
     ];
     const freeSessions = upcoming.filter(e => openToAll.includes(e.type)).slice(0, 4).map(e => ({ date: e.dow + ' ' + e.short + ' ' + e.d, title: e.title, host: (e.host ? 'with ' + e.host + ' · ' : '') + e.time + ' ET' }));
     // announced, but not yet scheduled — shown under the calendar
-    const comingSoon = [{
-      type: 'mobility',
-      title: 'Mobility & Fitness Q&A',
-      access: 'Juniper & Cypress',
-      desc: 'A live Q&A on movement, mobility and training — bring your questions and work through them with us.',
-      when: 'Day and time to be announced',
-    }].map(x => ({ ...decorate(x), access: x.access, when: x.when }));
+    const comingSoon = [];
 
     // ---- full roadmap page ----
     const fmtDate = e => e.dow + ' ' + e.short + ' ' + e.d;
