@@ -1898,7 +1898,7 @@ class Component extends DCLogic {
     ];
     const mentorSessionEvents = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'mentor')), []);
     const mentorTints = ['#1f5b6e', '#2c4a7a', '#7a4f8a', '#a8451f', '#3c8d6b', '#c5612e'];
-    const mentors = mentorDefs.slice().sort((a, b) => (b.full ? 1 : 0) - (a.full ? 1 : 0)).map((m, i) => {
+    const mentors = mentorDefs.map((m, i) => {
       const sess = mentorSessionEvents.filter(e => e.host.includes(m.name))[0];
       const open = s.mentorOpen === m.name;
       return {
