@@ -1615,10 +1615,10 @@ class Component extends DCLogic {
           desc: 'Sometimes life rewrites the plan for you. How to navigate the circumstances outside our control and still move your career forward.' },
         { d: 10, time: '5–6 PM', type: 'spotlight', host: '',           title: 'Understanding Professional Skin Treatments', note: 'Skin spotlight · Clinical skincare', spot: 'skin' },
         { d: 11, time: '5–6 PM', type: 'cooking',   host: 'Shervin',    title: 'Cooking with Shervin: The Christmas Table', faTitle: 'آشپزی با شروین: سفرهٔ کریسمس', note: 'Christmas themed cooking' },
-        { d: 12, time: '1–2 PM', type: 'liveroom',  host: '',           title: 'Skin Live Room: The Products We Swear By', note: 'Members’ knowledge sharing · 1 of 3: Products', desc: 'The products that actually work for you, what you stopped using, and why. Bring your shelf and your questions.', spot: 'skin' },
+        { d: 12, time: '1–2 PM', type: 'liveroom',  host: '',           title: 'The Skincare Exchange: Products & Routines', note: 'Member-to-Member: What Worked, What Didn’t & Why · 1 of 3', desc: 'Member-to-Member: What Worked, What Didn’t & Why', spot: 'skin' },
         { d: 13, time: '3–4 PM', type: 'mentor',    host: 'Negin, Padideh & Mehdi', title: 'Mentorship: Difficult Conversations at Work', note: 'Difficult conversations and workplace politics' },
         { d: 16, time: '1–2 PM', type: 'goals',     host: '',           title: 'Your Year, Your Next Steps', note: 'New Year goal setting' },
-        { d: 18, time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Skin Live Room: Clinical Treatments, Firsthand', note: 'Members’ knowledge sharing · 2 of 3: Clinical procedures', desc: 'If you have tried a clinical procedure, tell us what it was really like, what it cost, and what you would do differently.', spot: 'skin' },
+        { d: 18, time: '5–6 PM', type: 'liveroom',  host: '',           title: 'The Skincare Exchange: Botox, Fillers & Lasers', note: 'Member-to-Member: Experiences, Results & Regrets · 2 of 3', desc: 'Member-to-Member: Experiences, Results & Regrets', spot: 'skin' },
         { d: 21, type: 'challenge', title: 'Digital Detox Begins', weeks: 2 },
       ] },
       { key: 'jan', name: 'January', short: 'Jan', y: 2027, mi: 0,
@@ -1635,7 +1635,7 @@ class Component extends DCLogic {
           desc: 'Children, partners and family life all shape a career. How to make room for both, and talk about it honestly at work.' },
         { d: 20, time: '4–5 PM',  type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
         { d: 22, time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
-        { d: 28, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Skin Live Room: Plastic Surgery, Real Stories', note: 'Members’ knowledge sharing · 3 of 3: Plastic surgery', desc: 'Honest stories about plastic surgery: the decision, the recovery, and what nobody tells you beforehand.', spot: 'skin' },
+        { d: 28, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'The Skincare Exchange: Plastic Surgery', note: 'Member-to-Member: Real Stories, Expectations & Lessons Learned · 3 of 3', desc: 'Member-to-Member: Real Stories, Expectations & Lessons Learned', spot: 'skin' },
       ] },
     ];
 
@@ -1817,7 +1817,7 @@ class Component extends DCLogic {
         sessions: items.map(e => ({
           title: e.type === 'challenge' ? e.title.replace(' Begins', '') : e.title,
           date: e.type === 'challenge' ? 'Starts ' + fmtDate(e) + ' · ' + weeksWord[e.weeks] + ' weeks' : fmtWhen(e),
-          sub: e.desc ? (e.type === 'liveroom' ? 'Live Room · Members’ knowledge sharing. ' : e.type === 'challenge' ? 'Challenge. ' : '') + e.desc : skinKinds[e.type].sub, iconBg: skinKinds[e.type].color, iconInk: skinKinds[e.type].ink,
+          sub: e.desc ? (e.type === 'liveroom' ? 'Live Room · ' : e.type === 'challenge' ? 'Challenge. ' : '') + e.desc : skinKinds[e.type].sub, iconBg: skinKinds[e.type].color, iconInk: skinKinds[e.type].ink,
           topics: e.topics || [], hasTopics: !!(e.topics && e.topics.length),
         })),
       };
