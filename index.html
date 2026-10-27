@@ -1664,7 +1664,7 @@ class Component extends DCLogic {
     };
     // who gets in: every tier (Sapling included) · Cypress only · everything else is Juniper & up
     const openToAll = ['free', 'science', 'yoga', 'goals'];
-    const cypressOnly = ['career', 'money', 'spotlight', 'liveroom', 'mentor', 'dorehami'];
+    const cypressOnly = ['career', 'money', 'spotlight', 'mentor'];
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
     // a single session can be opened to everyone with open: true, whatever its type
     const isOpen = e => !!e.open || openToAll.includes(e.type);
@@ -1901,8 +1901,8 @@ class Component extends DCLogic {
     const legendOf = keys => keys.map(k => ({ label: sessionTypes[k].label, color: sessionTypes[k].color }));
     const calLegend = [
       { tier: 'Sapling', note: 'Free', dot: '#1f7a5a', bg: '#eef6f1', border: 'rgba(31,122,90,.35)', noteColor: '#1f7a5a', types: legendOf(['science', 'yoga', 'goals']) },
-      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'challenge']) },
-      { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'liveroom', 'dorehami', 'career', 'mentor']) },
+      { tier: 'Juniper', note: '', dot: '#c5612e', bg: '#fbf1e9', border: 'rgba(197,97,46,.3)', noteColor: '#a8451f', types: legendOf(['cooking', 'liveroom', 'dorehami', 'challenge']) },
+      { tier: 'Cypress', note: 'Everything, plus growth', dot: '#d6a23f', bg: '#fdf4e0', border: 'rgba(214,162,63,.45)', noteColor: '#74561c', types: legendOf(['spotlight', 'career', 'mentor']) },
     ];
     const freeSessions = upcoming.filter(isOpen).slice(0, 4).map(e => ({ date: e.dow + ' ' + e.short + ' ' + e.d, title: e.title, host: (e.host ? 'with ' + e.host + ' · ' : '') + e.time + ' ET' }));
     // announced, but not yet scheduled — shown under the calendar
@@ -2160,10 +2160,10 @@ class Component extends DCLogic {
       { img: 'illustrations/recipes.jpg', title: 'Recipes & resources', tag: 'Library', tagBg: '#e3ecd6', tagColor: '#4a5a2a', color: '#7d8a4e', desc: 'A growing library of recipe PDFs and supporting materials, organized clearly so you can easily find what you need before, during, and after each session.' },
       { img: 'illustrations/conversations.png', title: 'Community conversations', tag: 'Daily', tagBg: '#f3e6c6', tagColor: '#7a5a1f', color: '#d6a23f', desc: 'Connect with members to ask questions, share experiences, exchange recommendations, and learn from community leaders.' },
       { img: 'illustrations/special-events.jpg', title: 'Spotlight Sessions', tag: 'Cypress', tagBg: '#f7edd4', tagColor: '#74561c', color: '#d6a23f', desc: 'One expert theme at a time, now with Live Rooms to practice and a challenge to build the habit. This season, the spotlight is skin.' },
-      { img: 'illustrations/live-rooms.jpg', title: 'Live Rooms & Challenges', tag: 'Cypress', tagBg: '#ede2f1', tagColor: '#4f2f5c', color: '#7a4f8a', phBg: '#ede2f1', phInk: '#7a4f8a', go: 'liverooms', desc: 'Smaller, interactive sessions where you put each spotlight into practice and ask the questions that come up once you start. Then a challenge with daily prompts turns it into a habit.' },
+      { img: 'illustrations/live-rooms.jpg', title: 'Live Rooms & Challenges', tag: 'Juniper & Cypress', tagBg: '#ede2f1', tagColor: '#4f2f5c', color: '#7a4f8a', phBg: '#ede2f1', phInk: '#7a4f8a', go: 'liverooms', desc: 'Smaller, interactive sessions where you put each spotlight into practice and ask the questions that come up once you start. Then a challenge with daily prompts turns it into a habit.' },
       { img: 'illustrations/career.jpg', title: 'Career & professional growth', tag: 'Cypress', tagBg: '#dfe6f2', tagColor: '#2c4a7a', color: '#2c4a7a', desc: 'A monthly Career Lab with Hoda on interviews, resumes, promotions and the real turning points of a working life. Plus group mentorship and one on one matching.' },
       { img: 'illustrations/mentorship.jpg', title: 'Mentorship', tag: 'Cypress', tagBg: '#dcebef', tagColor: '#123d4b', color: '#1f5b6e', phBg: '#dcebef', phInk: '#1f5b6e', go: 'mentorship', desc: 'Themed group sessions with mentors from the community, from difficult conversations at work to deciding whether to stay or move on. Then we match you one on one with the mentor who fits.' },
-      { img: 'illustrations/dorehami.jpg', title: 'Dorehami · دورهمی', tag: 'Monthly', tagBg: '#e5e6f8', tagColor: '#2f3388', color: '#5157c4', phBg: '#e5e6f8', phInk: '#5157c4', go: 'dorehami', desc: 'A monthly circle of about 12 members. Cameras on, never recorded, and everyone gets to talk, so you leave knowing a few people by name.' },
+      { img: 'illustrations/dorehami.jpg', title: 'Dorehami · دورهمی', tag: 'Juniper & Cypress', tagBg: '#e5e6f8', tagColor: '#2f3388', color: '#5157c4', phBg: '#e5e6f8', phInk: '#5157c4', go: 'dorehami', desc: 'A monthly circle of about 12 members. Cameras on, never recorded, and everyone gets to talk, so you leave knowing a few people by name.' },
       { img: 'illustrations/mobility.jpg', title: 'Mobility & Fitness Q&A', tag: 'Juniper & up', tagBg: '#e7ead9', tagColor: '#3d4624', color: '#5f6b3a', desc: 'Bring the questions you actually have about your body — a stiff back, a nagging knee, starting to move again — and leave with something you can practise at home. Day and time to be announced.' },
     ];
 
@@ -2250,7 +2250,7 @@ class Component extends DCLogic {
       {
         id: 'basic', name: 'Juniper', monthly: basicPrice, annual: Math.round(basicPrice * 12 * 0.85), cta: 'Choose Juniper',
         blurb: 'The full ARC cooking and community experience.',
-        features: ['All cooking workshops and monthly Q&A sessions', 'Science in Review, Yoga & the Mobility & Fitness Q&A', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '20% off HodaFit Workout Plans'],
+        features: ['All cooking workshops and monthly Q&A sessions', 'Science in Review, Yoga & the Mobility & Fitness Q&A', 'Live Rooms, challenges & monthly Dorehami circles', 'Featured recipes every month', 'Full community conversations', 'Session recordings & resources', '20% off HodaFit Workout Plans'],
       },
       {
         id: 'premium', name: 'Cypress', monthly: premiumPrice, annual: Math.round(premiumPrice * 12 * 0.85), cta: 'Choose Cypress',
@@ -2336,6 +2336,8 @@ class Component extends DCLogic {
       { feature: 'Science in Review (monthly paper session)', free: '✓', basic: '✓', premium: '✓' },
       { feature: 'ARC Yoga', free: '✓', basic: '✓', premium: '✓' },
       { feature: 'Mobility & Fitness Q&A', free: '—', basic: '✓', premium: '✓' },
+      { feature: 'Live Rooms & challenges', free: '—', basic: '✓', premium: '✓' },
+      { feature: 'Dorehami circles', free: '—', basic: 'Monthly', premium: 'Monthly' },
       { feature: 'Community conversations', free: '1 group', basic: 'All groups', premium: 'All groups' },
       { feature: 'Session recordings', free: '1 / mo (open session)', basic: '✓', premium: '✓' },
       { feature: 'Career Lab (with Hoda)', free: '—', basic: '—', premium: 'Monthly' },
