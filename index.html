@@ -922,40 +922,38 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
-  <!-- spotlight a-la-carte -->
+  <!-- PFF practice series (à la carte) -->
   <section id="alacarte" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="background:#143027;color:#f6efe3;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
-      <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px);align-items:center;">
-        <div style="flex:1 1 360px;min-width:280px;">
+      <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px);align-items:flex-start;">
+        <div style="flex:1 1 380px;min-width:280px;">
           <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:18px;">
-            <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>À la carte
+            <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>For Personal Finance Foundations graduates
           </div>
-          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 12px;line-height:1.1;">Not ready for Cypress? Buy the Personal Finance Foundations series on its own.</h2>
-          <p style="font-size:16px;line-height:1.6;color:rgba(246,239,227,.8);margin:0 0 18px;max-width:480px;">Grab the full <strong style="color:#f6efe3;font-weight:600;">{{ spotlightPass.title }}</strong> series — all six live sessions, two a month from August through October. Buy once now, and you're in for the whole run. No membership change required.</p>
-          <p style="font-size:14px;line-height:1.6;color:#d6a23f;margin:0 0 18px;max-width:480px;">Already a Juniper member? Contact us for a $30 discount.</p>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:13.5px;color:rgba(246,239,227,.7);">
-            <span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;"></span>{{ spotlightPass.format }}</span>
-            <span style="opacity:.4;">·</span>
-            <span>{{ spotlightPass.date }}</span>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 14px;line-height:1.1;">You learned it. Now make it a habit.</h2>
+          <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0 0 14px;max-width:500px;">The next step after <strong style="color:#f6efe3;font-weight:600;">Personal Finance Foundations</strong>: three Finance Live Rooms in smaller groups, where you ask the experts your own questions and get advice on the spot, plus a 21 day Money Challenge to start saving and investing for real.</p>
+          <p style="font-size:14.5px;line-height:1.6;color:rgba(246,239,227,.65);margin:0 0 24px;max-width:500px;">Learn more, practise what you learned, and leave with habits that last. All times Eastern, and every Live Room is recorded.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+            <span onClick="{{ pffPass.go }}" style="cursor:{{ pffPass.btnCursor }};display:inline-flex;align-items:center;gap:12px;background:#d6a23f;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;padding:15px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.25);">Join the practice series<span style="font-weight:800;font-size:17px;">{{ pffPass.price }}</span></span>
+            <span style="font-size:13px;color:rgba(246,239,227,.6);">Included for Cypress members</span>
           </div>
         </div>
-        <div style="flex:1 1 320px;min-width:280px;display:flex;flex-direction:column;gap:12px;">
-          <sc-for list="{{ spotlightPass.options }}" as="o" hint-placeholder-count="1">
-            <div style="display:flex;align-items:center;gap:16px;background:rgba(246,239,227,.06);border:1px solid rgba(214,162,63,.22);border-radius:16px;padding:18px 20px;">
-              <div style="flex:1;">
-                <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#f6efe3;">{{ o.who }}</div>
-                <div style="font-size:12.5px;color:rgba(246,239,227,.65);margin-top:3px;">{{ o.note }}</div>
+        <div style="flex:1 1 320px;min-width:280px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#d6a23f;margin-bottom:12px;">What's included</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ pffPass.items }}" as="pi" hint-placeholder-count="4">
+              <div style="display:flex;gap:14px;align-items:flex-start;background:rgba(246,239,227,.06);border:1px solid rgba(214,162,63,.22);border-radius:16px;padding:15px 18px;">
+                <span style="flex:none;width:9px;height:9px;margin-top:6px;background:{{ pi.dot }};transform:rotate(45deg);display:inline-block;"></span>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:3px;">
+                    <span style="font-size:12.5px;font-weight:700;color:#d6a23f;">{{ pi.date }}</span>
+                    <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(246,239,227,.6);">{{ pi.kind }}</span>
+                  </div>
+                  <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#f6efe3;line-height:1.3;">{{ pi.title }}</div>
+                  <div style="font-size:12.5px;color:rgba(246,239,227,.62);margin-top:3px;">{{ pi.meta }}</div>
+                </div>
               </div>
-              <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:24px;color:rgba(214,162,63,.5);flex:none;text-decoration:line-through;">{{ o.priceLabel }}</div>
-              <span style="flex:none;background:rgba(246,239,227,.14);color:rgba(246,239,227,.85);border:1px solid rgba(246,239,227,.32);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px;white-space:nowrap;">Sold out</span>
-            </div>
-          </sc-for>
-          <div style="display:flex;align-items:center;gap:14px;background:rgba(214,162,63,.12);border:1px solid rgba(214,162,63,.35);border-radius:16px;padding:18px 20px;">
-            <div style="flex:1;">
-              <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:16px;color:#f6efe3;">Cypress members</div>
-              <div style="font-size:12.5px;color:rgba(246,239,227,.65);margin-top:3px;">Expert spotlight sessions, always included</div>
-            </div>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#143027;background:#d6a23f;padding:7px 14px;border-radius:999px;white-space:nowrap;flex:none;">Included</span>
+            </sc-for>
           </div>
         </div>
       </div>
@@ -1668,7 +1666,7 @@ class Component extends DCLogic {
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
     // a single session can be opened to everyone with open: true, whatever its type
     const isOpen = e => !!e.open || openToAll.includes(e.type);
-    const accessOfEv = e => e.open ? 'All tiers' : accessOf(e.type);
+    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge')) ? 'Cypress · PFF pass' : accessOf(e.type);
     // Recorded / Not recorded badge, Live Rooms only. Set rec: true or rec: false on an event once confirmed; leave it off until then.
     const recBadge = e => e.rec === true
       ? { recLabel: 'Recorded', recBg: '#e2f0e8', recInk: '#14563d', recBorder: 'rgba(31,122,90,.45)' }
@@ -2291,16 +2289,24 @@ class Component extends DCLogic {
     });
 
     // ---- à-la-carte spotlight pass ----
-    const passDefs = [
-      { id: 'sp-guest', who: 'Members', price: 80, note: 'All 6 sessions, Aug–Oct + 30-day recordings', accent: '#1f7a5a', url: 'https://ancient-roots-circle.circle.so/checkout/personal-finance-foundations' },
-    ];
-    const spotlightPass = {
-      // the money series pass (Aug to Oct), kept separate from the current spotlight
-      title: 'Personal Finance Foundations',
-      format: 'Guest Expert Series',
-      date: 'Aug to Oct · Saturdays 12–1 PM ET',
-      options: passDefs.map(p => ({ ...p, priceLabel: '$' + p.price,
-        go: () => window.open(p.url, '_blank', 'noopener') })),
+    // ---- PFF practice series: 3 Finance Live Rooms + the Money Challenge, sold to PFF graduates ----
+    const pffPracticeUrl = '';   // paste the checkout link here when it's ready
+    const pffItems = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge'))), [])
+      .sort((x, y) => x.ts - y.ts).map(e => {
+        const isCh = e.type === 'challenge';
+        const end = isCh ? new Date(e.endTs) : null;
+        return {
+          date: e.dow + ' ' + e.short + ' ' + e.d,
+          title: isCh ? 'Money Challenge · ' + (e.weeks * 7) + ' days' : e.title,
+          meta: isCh ? 'Starts ' + e.dow + ' ' + e.short + ' ' + e.d + ', ends ' + DOW[end.getDay()] + ' ' + scheduleMonths.filter(x => x.mi === end.getMonth() && x.y === end.getFullYear())[0].short + ' ' + end.getDate() : e.time + ' ET · Recorded',
+          dot: isCh ? '#a8451f' : '#7a4f8a', kind: isCh ? 'Challenge' : 'Live Room',
+        };
+      });
+    const pffPass = {
+      price: '$160', items: pffItems,
+      hasUrl: !!pffPracticeUrl,
+      btnCursor: pffPracticeUrl ? 'pointer' : 'default',
+      go: () => { if (pffPracticeUrl) this.setState({ agreeUrl: pffPracticeUrl, agreePaid: true, agreeChecked: false }); },
     };
 
     // ---- ARC courses (self-paced, one-time purchase, no membership required) ----
@@ -2396,7 +2402,7 @@ class Component extends DCLogic {
       calAgColor: calView === 'agenda' ? '#f6efe3' : '#5b5446',
       cookingList, cookingCopy, cookingDir, cookingFont, cookingHeadFont, cookingLang,
       setCookingEn, setCookingFa, cookingEnBg, cookingEnColor, cookingFaBg, cookingFaColor,
-      spotlightPass,
+      pffPass,
       courses, featuredCourse,
       goCourses: () => this.goSection('join', 'courses', 'courses'),
       courseCols: (s.vw || 1200) < 900 ? '1fr' : '1.05fr 1fr',
