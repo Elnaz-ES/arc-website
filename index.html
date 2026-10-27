@@ -1216,7 +1216,7 @@ html,body{margin:0;padding:0;}
         <div onClick="{{ jumpExperts }}" style="cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c5612e;margin-bottom:12px;"><span style="width:7px;height:7px;background:#c5612e;transform:rotate(45deg);display:inline-block;"></span>Experts · {{ expertCount }} <span style="opacity:.6;">↓</span></div>
         <div class="face-row" style="display:flex;flex-wrap:wrap;gap:12px;">
           <sc-for list="{{ experts }}" as="fx" hint-placeholder-count="3">
-            <div onClick="{{ fx.open }}" class="face-item" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;width:66px;">
+            <div onClick="{{ fx.open }}" class="face-item" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;width:66px;" style-hover="transform:translateY(-3px);">
               <span class="face-img" style="width:62px;height:62px;border-radius:999px;background:{{ fx.avatarBg }};border:2.5px solid #fbf6ec;box-shadow:0 0 0 1.5px rgba(197,97,46,.4),0 6px 14px rgba(20,48,39,.14);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#f6efe3;">{{ fx.avatarInitial }}</span>
               <span class="face-name" style="font-size:12px;font-weight:600;color:#143027;white-space:nowrap;">{{ fx.short }}</span>
             </div>
@@ -1557,7 +1557,7 @@ class Component extends DCLogic {
   _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join', 'courses': 'join', 'experts': 'mentorship', 'people': 'mentorship', 'mentors': 'mentorship', 'mentorship': 'mentorship', 'liverooms': 'community', 'dorehami': 'community' };
   _pageToHash = { home: '', join: 'membership', community: 'community', calendar: 'calendar', story: 'story', mentorship: 'people' };
   // hashes that deep-link to a section *within* a page
-  _hashToAnchor = { alacarte: 'alacarte', passes: 'alacarte', courses: 'courses', liverooms: 'arc-how', dorehami: 'arc-dorehami', experts: 'arc-experts' };
+  _hashToAnchor = { alacarte: 'alacarte', passes: 'alacarte', courses: 'alacarte', liverooms: 'arc-how', dorehami: 'arc-dorehami', experts: 'arc-experts' };
 
   // Re-scroll (instant) until the section settles at the top, to survive
   // layout shift as content/fonts/images load; stop once stable.
@@ -2404,7 +2404,7 @@ class Component extends DCLogic {
       setCookingEn, setCookingFa, cookingEnBg, cookingEnColor, cookingFaBg, cookingFaColor,
       pffPass,
       courses, featuredCourse,
-      goCourses: () => this.goSection('join', 'courses', 'courses'),
+      goCourses: () => this.goSection('join', 'courses', 'alacarte'),
       courseCols: (s.vw || 1200) < 900 ? '1fr' : '1.05fr 1fr',
       insideGridCols: 'repeat(' + ((s.vw || 1200) < 600 ? 1 : (s.vw || 1200) < 860 ? 2 : 3) + ',minmax(0,1fr))',
       storyCols: (s.vw || 1200) < 820 ? '1fr' : '1.2fr 1fr',
