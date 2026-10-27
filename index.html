@@ -1232,7 +1232,7 @@ html,body{margin:0;padding:0;}
             </sc-if>
           </div>
           <div style="padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;">
-            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#143027;margin:0 0 3px;">{{ mt.name }}</h3>
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#143027;margin:0 0 3px;">{{ mt.fullName }}</h3>
             <div style="font-size:13px;font-weight:600;color:#1f5b6e;margin-bottom:10px;">{{ mt.role }}</div>
             <p style="font-size:14px;line-height:1.55;color:#6b6456;margin:0 0 14px;">{{ mt.bio }}</p>
             <sc-if value="{{ mt.hasHelps }}" hint-placeholder-val="{{ false }}">
@@ -1307,7 +1307,7 @@ html,body{margin:0;padding:0;}
             <sc-if value="{{ mentorModal.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:76px;height:76px;border-radius:999px;background:rgba(246,239,227,.16);border:1.5px solid rgba(246,239,227,.4);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:30px;color:#f6efe3;">{{ mentorModal.initial }}</span></sc-if>
           </div>
           <div style="flex:1 1 280px;padding:28px 28px 20px;">
-            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:#143027;margin:0 0 4px;">{{ mentorModal.name }}</h3>
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:#143027;margin:0 0 4px;">{{ mentorModal.fullName }}</h3>
             <div style="font-size:14px;font-weight:600;color:#1f5b6e;margin-bottom:14px;">{{ mentorModal.role }}</div>
             <sc-if value="{{ mentorModal.session }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#dcebef;color:#123d4b;padding:5px 11px;border-radius:999px;margin-bottom:14px;">{{ mentorModal.session }}</span></sc-if>
             <sc-if value="{{ mentorModal.hasHelps }}" hint-placeholder-val="{{ false }}">
@@ -2051,13 +2051,15 @@ class Component extends DCLogic {
       { name: "Razieh", role: "Founder & CEO, The Wellness Connection", bio: "Founder of an online fitness and nutrition coaching studio. Certified coach with nearly 10 years in health and fitness and specialized training in menopause and midlife wellness.", helps: ["Starting a coaching business", "Fitness & nutrition careers", "Sustainable habits"], full: "Hi, I’m Razie! I’m the Founder and CEO of The Wellness Connection, a fully online fitness and nutrition coaching studio. I hold a Bachelor’s degree in Physical Education and Sports Science and have nearly 10 years of experience in the health and fitness industry. I’m a certified fitness and nutrition coach, with additional specialized training in menopause and midlife wellness. My passion is helping people build healthier, stronger lives through evidence-based coaching, practical strategies, and sustainable habits. As both a coach and business owner, I’m excited to share my experiences, support aspiring professionals, and learn from others through this mentorship program!", img: 'photos/mentors/razieh.jpg' },
       { name: "Kamyar", role: "Senior Software Engineer · GenAI & LLMs", bio: "Over 9 years of engineering across Iran and Canada, building scalable AI pipelines and high load distributed systems at Geotab and Snapp. Master’s in Computer Science from the University of Waterloo.", helps: ["AI system design", "North American resumes", "Technical interview prep", "Promotion to Senior"], full: "Kamyar Ghajar is a Senior Software Engineer specializing in Generative AI and LLMs, with 9+ years of engineering experience across both Iran and Canada. Holding a Master’s in Computer Science from the University of Waterloo, he has architected scalable AI pipelines and high-load distributed systems at companies like Geotab and Snapp. Having built his career across both ecosystems, he uniquely understands how to bridge the gap between Iranian tech experience and North American market standards. As an ARC mentor, he provides targeted guidance on AI system design, North American resume standards, technical interview prep, and career strategies for promotion to Senior roles. He is passionate about empowering the Iranian immigrant community and fellow engineers to navigate their professional growth with clarity and confidence.", img: 'photos/mentors/kamyar.jpg' },
     ];
+    // full names shown on cards and pop-ups; the face strip keeps first names
+    const mentorFullNames = { Masoud: 'Masoud Tavazoei', Negin: 'Negin Nadali', Farahnaz: 'Farahnaz S Nia', Kamyar: 'Kamyar Ghajar' };
     const mentorSessionEvents = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'mentor')), []);
     const mentorTints = ['#1f5b6e', '#2c4a7a', '#7a4f8a', '#a8451f', '#3c8d6b', '#c5612e'];
     const mentors = mentorDefs.map((m, i) => {
       const sess = mentorSessionEvents.filter(e => e.host.includes(m.name))[0];
       const open = s.mentorOpen === m.name;
       return {
-        ...m, initial: m.name.charAt(0),
+        ...m, initial: m.name.charAt(0), fullName: mentorFullNames[m.name] || m.name,
         helps: m.helps || [], hasHelps: !!(m.helps && m.helps.length),
         hasFull: !!m.full, fullOpen: open, fullText: m.full || m.bio || 'A short bio is on its way.',
         avatarBg: m.img ? "url('" + m.img + "') center 22%/cover no-repeat" : mentorTints[i % mentorTints.length], avatarInitial: m.img ? '' : m.name.charAt(0),
@@ -2332,7 +2334,7 @@ class Component extends DCLogic {
       jumpMentors: () => this._scrollToAnchor('arc-mentors'),
       jumpExperts: () => this._scrollToAnchor('arc-experts'),
       expertCount: String(experts.length),
-      mentorModal: mentors.filter(m => m.name === s.mentorOpen)[0] || { name: '', role: '', fullText: '', helps: [], hasHelps: false, hasLinkedin: false, linkedin: '', photoBg: 'transparent', noImg: false, initial: '', session: '' },
+      mentorModal: mentors.filter(m => m.name === s.mentorOpen)[0] || { name: '', fullName: '', role: '', fullText: '', helps: [], hasHelps: false, hasLinkedin: false, linkedin: '', photoBg: 'transparent', noImg: false, initial: '', session: '' },
       mentorModalOpen: !!mentors.filter(m => m.name === s.mentorOpen)[0],
       closeMentor: () => this.setState({ mentorOpen: null }),
       mentorRange: mentorSessionEvents.length ? mentorSessionEvents[0].short + ' to ' + mentorSessionEvents[mentorSessionEvents.length - 1].short : '', mentors, mentorSessions, mentorCount: String(mentors.length), mentorSessionCount: String(mentorSessions.length),
