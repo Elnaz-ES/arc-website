@@ -474,16 +474,16 @@ html,body{margin:0;padding:0;}
           <span style="width:6px;height:6px;background:#e3cdea;transform:rotate(45deg);display:inline-block;"></span>Live Rooms
         </div>
         <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);letter-spacing:-0.02em;line-height:1.12;margin:0 0 14px;">Smaller rooms. More talking. Real practice.</h3>
-        <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0;">A Live Room is where theory meets your actual life. Fewer people, more back and forth, and time to work through your own situation with the experts and each other. Some Live Rooms are recorded and some are kept private so people can speak freely, so look for the badge on the calendar before you join.</p>
+        <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0;">A Live Room is where theory meets your actual life. Fewer people, more back and forth, and time to work through your own situation with the experts and each other. Live Rooms are recorded, so you can catch up if you miss one. Dorehami circles are never recorded, so people can speak freely. Look for the badge on the calendar.</p>
       </div>
       <div style="flex:0 1 300px;min-width:240px;display:flex;flex-direction:column;gap:12px;">
         <div style="background:rgba(246,239,227,.06);border:1px solid rgba(246,239,227,.14);border-radius:16px;padding:16px 18px;">
           <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#e2f0e8;color:#14563d;padding:4px 10px;border-radius:999px;margin-bottom:8px;">Recorded</span>
-          <div style="font-size:14px;line-height:1.5;color:rgba(246,239,227,.8);">Can't make it live? Watch it later in the community.</div>
+          <div style="font-size:14px;line-height:1.5;color:rgba(246,239,227,.8);">Live Rooms. Can't make it live? Watch it later in the community.</div>
         </div>
         <div style="background:rgba(246,239,227,.06);border:1px solid rgba(246,239,227,.14);border-radius:16px;padding:16px 18px;">
           <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fbe9e0;color:#8a3a1a;padding:4px 10px;border-radius:999px;margin-bottom:8px;">Not recorded</span>
-          <div style="font-size:14px;line-height:1.5;color:rgba(246,239,227,.8);">Live only, so the room can talk openly. Be there to be part of it.</div>
+          <div style="font-size:14px;line-height:1.5;color:rgba(246,239,227,.8);">Dorehami. Live only, so the circle can talk openly. Be there to be part of it.</div>
         </div>
         <span onClick="{{ goCalendar }}" style="cursor:pointer;align-self:flex-start;margin-top:4px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;color:#e3cdea;">See Live Rooms on the calendar →</span>
       </div>
@@ -1029,7 +1029,7 @@ html,body{margin:0;padding:0;}
         <span onClick="{{ setCalAgenda }}" style="cursor:pointer;padding:8px 18px;border-radius:999px;background:{{ calAgBg }};color:{{ calAgColor }};transition:background .2s,color .2s;">List</span>
       </div>
     </div>
-    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, months out, all of them live. Times change from session to session, so check each one, <strong style="color:#143027;font-weight:600;">all times Eastern</strong>. Live Rooms show a Recorded or Not recorded badge, and a ribbon counts the days while a challenge is running.</p>
+    <p style="font-size:15.5px;color:#6b6456;margin:0 0 24px;max-width:640px;line-height:1.55;">Every session, months out, all of them live. Times change from session to session, so check each one, <strong style="color:#143027;font-weight:600;">all times Eastern</strong>. Live Rooms and Dorehami show a Recorded or Not recorded badge, and a ribbon counts the days while a challenge is running.</p>
 
     <!-- month tabs -->
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
@@ -1137,9 +1137,9 @@ html,body{margin:0;padding:0;}
 
     <!-- badge + challenge key -->
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:14px;padding:14px 18px;background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:14px;font-size:12.5px;font-weight:600;color:#5b5446;">
-      <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;">Live Rooms</span>
-      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#e2f0e8;color:#14563d;border:1px solid rgba(31,122,90,.45);padding:2px 8px;border-radius:999px;">Recorded</span>watch it later</span>
-      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fbe9e0;color:#8a3a1a;border:1px solid rgba(197,97,46,.5);padding:2px 8px;border-radius:999px;">Not recorded</span>live only</span>
+      <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;">Recording</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#e2f0e8;color:#14563d;border:1px solid rgba(31,122,90,.45);padding:2px 8px;border-radius:999px;">Recorded</span>Live Rooms, watch it later</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fbe9e0;color:#8a3a1a;border:1px solid rgba(197,97,46,.5);padding:2px 8px;border-radius:999px;">Not recorded</span>Dorehami, live only</span>
       <span style="display:inline-flex;align-items:center;gap:8px;"><span style="font-size:9.5px;font-weight:700;background:#e0efe6;border-top:2px solid #2e7a52;color:#1c5236;padding:2px 8px;border-radius:5px;">Day 4 of 21</span>challenge running, in its spotlight's colour</span>
     </div>
 
@@ -1593,52 +1593,54 @@ class Component extends DCLogic {
       ] },
       { key: 'nov', name: 'November', short: 'Nov', y: 2026, mi: 10,
         theme: 'From Learning to Doing',
-        blurb: 'Skin is our new spotlight, Live Rooms open, and the money challenge turns three months of lessons into habits. Plus our first mentorship session and a Thanksgiving table with Shervin.',
+        blurb: 'Skin is our new spotlight, Live Rooms open, and the money challenge turns three months of lessons into habits. Plus our first mentorship session, our first Dorehami and a Thanksgiving table with Shervin.',
         events: [
         { d: 6,  time: '5–6 PM',       type: 'cooking',   host: 'Shervin', title: 'در باب آش', faTitle: 'در باب آش' },
-        { d: 8,  time: '2–3 PM',       type: 'mentor',    host: 'Sahar, Shiva & Masoud', title: 'Mentorship: Let’s Talk About Your Career', note: 'Mentorship introduction and career questions', open: true },
-        { d: 11, time: '3–4 PM',       type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice', note: 'Using AI in Obesity Treatment · Is 1.6 g/kg of Protein Enough to Maximize Muscle Growth?' },
-        { d: 12, time: '4:30–5:30 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: Is It Time to Move On?', note: 'Quitting your job',
-          desc: 'Quitting your job is a big call. How to tell when it is really time to move on, and how to leave well when you do.' },
+        { d: 8,  time: '2–3 PM',       type: 'mentor',    host: 'Sahar, Shiva & Masoud', title: 'Mentorship: Let’s Talk About Your Career', note: 'Introduction to mentorship', open: true },
+        { d: 11, time: '3–4 PM',       type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice', note: 'AI in Obesity Treatment · Is 1.6 g/kg of Protein Enough to Maximize Muscle Growth?' },
+        { d: 12, time: '4:30–5:30 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: Is It Time to Leave Your Job?', note: 'Quitting your job',
+          desc: 'Leaving a job is a big call. How to tell when it is really time to go, and how to leave well when you do.' },
         { d: 13, time: '5–6 PM',       type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin: The Thanksgiving Table', faTitle: 'آشپزی با شروین: سفرهٔ شکرگزاری', note: 'Thanksgiving themed cooking' },
-        { d: 16, type: 'challenge', title: 'Money Challenge Begins', weeks: 3, spot: 'money' },
-        { d: 20, time: '5–6 PM',       type: 'spotlight', host: '',        title: 'Skincare Foundations: Building Your Everyday Routine', note: 'Skin spotlight · Session 1', spot: 'skin' },
+        { d: 16, type: 'challenge', title: 'Money Challenge Begins', weeks: 3, spot: 'money', sub: 'Practising financial habits' },
+        { d: 20, time: '5–6 PM',       type: 'spotlight', host: '',        title: 'Skincare Foundations: Your Everyday Routine', note: 'Skin spotlight · Session 1', spot: 'skin' },
         { d: 21, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv, Ors & finance package participants', title: 'Finance Live Room: Putting Learning into Practice', rec: true, spot: 'money' },
-        { d: 24, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv & Ors', title: 'Finance Live Room: Money, Work & Stress', rec: false, spot: 'money' },
+        { d: 23, time: '5–6 PM',       type: 'liveroom',  host: '',        title: 'Skincare Live Room: What’s on Your Shelf?', note: 'Members share their skincare products · 1 of 3', desc: 'Members share their skincare products', rec: true, spot: 'skin' },
+        { d: 24, time: '8–9 PM',       type: 'dorehami',  host: '',        title: 'Dorehami: Making Friends', rec: false },
         { d: 25, time: '4–5 PM',       type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
       ] },
       { key: 'dec', name: 'December', short: 'Dec', y: 2026, mi: 11,
         theme: 'Closing the Year Well',
-        blurb: 'Professional skin treatments and two skincare Live Rooms, a parenting Live Room, a mentorship session on difficult conversations, and a goal setting session open to everyone. The digital detox starts Dec 21.',
+        blurb: 'Professional skin treatments and a skincare Live Room, a parenting Live Room, a mentorship session on difficult conversations, and a goal setting session open to everyone. The digital detox starts Dec 21.',
         events: [
         { d: 2,  time: '3–4 PM', type: 'science',   host: 'Damoon',     title: 'Science in Review: From Evidence to Practice' },
-        { d: 3,  time: '5–6 PM', type: 'dorehami',  host: 'Sarv & Ors', title: 'Dorehami: Navigating Parenting Challenges', note: 'Small circle · cameras on · never recorded' },
-        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room', spot: 'money' },
-        { d: 5,  time: '5–6 PM', type: 'career',    host: 'Hoda',       title: 'Career Lab: When Life Changes Your Career Plans', note: 'Navigating circumstances outside our control',
+        { d: 3,  time: '5–6 PM', type: 'liveroom',  host: 'Sarv & Ors', title: 'Live Room: Everyday Parenting Challenges', rec: true },
+        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room', rec: true, spot: 'money' },
+        { d: 5,  time: '3–4 PM', type: 'career',    host: 'Hoda',       title: 'Career Lab: When Life Changes Your Career Plans', note: 'Navigating circumstances outside our control',
           desc: 'Sometimes life rewrites the plan for you. How to navigate the circumstances outside our control and still move your career forward.' },
-        { d: 10, time: '5–6 PM', type: 'spotlight', host: '',           title: 'Understanding Professional Skin Treatments', note: 'Skin spotlight · Clinical skincare', spot: 'skin' },
+        { d: 10, time: '5–6 PM', type: 'spotlight', host: '',           title: 'Skincare: Understanding Professional Treatments', note: 'Skin spotlight · Clinical skincare', spot: 'skin' },
         { d: 11, time: '5–6 PM', type: 'cooking',   host: 'Shervin',    title: 'Cooking with Shervin: The Christmas Table', faTitle: 'آشپزی با شروین: سفرهٔ کریسمس', note: 'Christmas themed cooking' },
-        { d: 12, time: '1–2 PM', type: 'liveroom',  host: '',           title: 'The Skincare Exchange: Products & Routines', note: 'Member-to-Member: What Worked, What Didn’t & Why · 1 of 3', desc: 'Member-to-Member: What Worked, What Didn’t & Why', spot: 'skin' },
-        { d: 13, time: '3–4 PM', type: 'mentor',    host: 'Negin, Padideh & Mehdi', title: 'Mentorship: Difficult Conversations at Work', note: 'Difficult conversations and workplace politics' },
-        { d: 16, time: '1–2 PM', type: 'goals',     host: '',           title: 'Your Year, Your Next Steps', note: 'New Year goal setting' },
-        { d: 18, time: '5–6 PM', type: 'liveroom',  host: '',           title: 'The Skincare Exchange: Botox, Fillers & Lasers', note: 'Member-to-Member: Experiences, Results & Regrets · 2 of 3', desc: 'Member-to-Member: Experiences, Results & Regrets', spot: 'skin' },
+        { d: 12, time: '1–2 PM', type: 'liveroom',  host: '',           title: 'The Skincare Exchange: Botox, Fillers & Lasers', note: 'Member-to-Member: Experiences, Results & Regrets · 2 of 3', desc: 'Member-to-Member: Experiences, Results & Regrets', rec: true, spot: 'skin' },
+        { d: 13, time: '3–4 PM', type: 'mentor',    host: 'Negin, Padideh & Mehdi', title: 'Mentorship: Difficult Conversations at Work', note: 'Workplace conversations and politics' },
+        { d: 16, time: '1–2 PM', type: 'goals',     host: '',           title: 'Planning Your Year Ahead', note: 'New Year goal setting' },
         { d: 21, type: 'challenge', title: 'Digital Detox Begins', weeks: 2 },
       ] },
       { key: 'jan', name: 'January', short: 'Jan', y: 2027, mi: 0,
         theme: 'A Fresh Start, With Support',
-        blurb: 'The skincare challenge begins, cosmetic surgery questions get real answers, and a mentorship session helps you decide whether to stay or move on. Plus Career Lab on work and family.',
+        blurb: 'The skincare challenge begins, cosmetic surgery questions get real answers, two Dorehami circles meet, and a mentorship session helps you decide whether to stay or move on. Plus Career Lab on work and family.',
         events: [
-        { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Understanding Cosmetic Surgery: Options & Questions', note: 'Skin spotlight', spot: 'skin' },
+        { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Skincare: Understanding Cosmetic Surgery', note: 'Skin spotlight', spot: 'skin' },
         { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
-        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 4, spot: 'skin', desc: 'Four weeks to make your routine stick. Each day brings a small prompt for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
-        { d: 11, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room', spot: 'money' },
+        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 4, spot: 'skin', sub: 'Building a consistent routine', desc: 'Building a consistent routine. Four weeks of small daily prompts for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
+        { d: 11, time: '8–9 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room', rec: true, spot: 'money' },
         { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
         { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
-        { d: 16, time: '12–1 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: When Work and Family Meet', note: 'How children and relationships affect professional life',
+        { d: 16, time: '12–1 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: When Work and Family Meet', note: 'How children and relationships affect our careers',
           desc: 'Children, partners and family life all shape a career. How to make room for both, and talk about it honestly at work.' },
         { d: 20, time: '4–5 PM',  type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
         { d: 22, time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
-        { d: 28, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'The Skincare Exchange: Plastic Surgery', note: 'Member-to-Member: Real Stories, Expectations & Lessons Learned · 3 of 3', desc: 'Member-to-Member: Real Stories, Expectations & Lessons Learned', spot: 'skin' },
+        { d: 27, time: '8–9 PM',  type: 'dorehami',  host: '',        title: 'Dorehami: Breaking the Social Media Habit', rec: false },
+        { d: 28, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'The Skincare Exchange: Plastic Surgery', note: 'Member-to-Member: Real Stories, Expectations & Lessons Learned · 3 of 3', desc: 'Member-to-Member: Real Stories, Expectations & Lessons Learned', rec: true, spot: 'skin' },
+        { d: 29, time: '5–6 PM',  type: 'dorehami',  host: '',        title: 'Dorehami: Relationships After Immigration', rec: false, open: true },
       ] },
     ];
 
@@ -1692,7 +1694,7 @@ class Component extends DCLogic {
         ...e, typeLabel: st.label, color: st.color, tint: st.tint, ink: st.ink,
         isFree: isOpen(e), access: accessOfEv(e), isChallenge,
         when: isChallenge ? weeksWord[e.weeks] + ' weeks' : e.time,
-        hostLine: isChallenge ? 'Runs ' + weeksWord[e.weeks].toLowerCase() + ' weeks, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
+        hostLine: isChallenge ? (e.sub ? e.sub + ' · ' : '') + 'Runs ' + weeksWord[e.weeks].toLowerCase() + ' weeks, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
         evBorder: '1px solid transparent',
         evBg: isChallenge ? (spotSeries[e.spot] ? spotSeries[e.spot].color : st.color) : st.tint,
         evLabelInk: isChallenge ? 'rgba(255,255,255,.85)' : st.ink,
