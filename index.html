@@ -878,6 +878,44 @@ html,body{margin:0;padding:0;}
     <p style="max-width:760px;margin:clamp(20px,3vw,30px) auto 0;text-align:center;font-size:14.5px;line-height:1.6;color:#8a7f6a;">If you downgrade — for example, from Cypress to Juniper — you'll immediately lose access to Cypress-exclusive content.</p>
   </section>
 
+  <!-- PFF practice series (à la carte) -->
+  <section id="alacarte" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
+    <div style="background:#143027;color:#f6efe3;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
+      <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px);align-items:flex-start;">
+        <div style="flex:1 1 380px;min-width:280px;">
+          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:18px;">
+            <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>For Personal Finance Foundations graduates
+          </div>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 14px;line-height:1.1;">You learned it. Now make it a habit.</h2>
+          <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0 0 14px;max-width:500px;">The next step after <strong style="color:#f6efe3;font-weight:600;">Personal Finance Foundations</strong>: three Finance Live Rooms in smaller groups, where you ask the experts your own questions and get advice on the spot, plus a 21 day Money Challenge to start saving and investing for real.</p>
+          <p style="font-size:14.5px;line-height:1.6;color:rgba(246,239,227,.65);margin:0 0 24px;max-width:500px;">Learn more, practise what you learned, and leave with habits that last. All times Eastern, and every Live Room is recorded.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+            <span onClick="{{ pffPass.go }}" style="cursor:{{ pffPass.btnCursor }};display:inline-flex;align-items:center;gap:12px;background:#d6a23f;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;padding:15px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.25);">Join the practice series<span style="font-weight:800;font-size:17px;">{{ pffPass.price }}</span></span>
+            <span style="font-size:13px;color:rgba(246,239,227,.6);">Included for Cypress members</span>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#d6a23f;margin-bottom:12px;">What's included</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ pffPass.items }}" as="pi" hint-placeholder-count="4">
+              <div style="display:flex;gap:14px;align-items:flex-start;background:rgba(246,239,227,.06);border:1px solid rgba(214,162,63,.22);border-radius:16px;padding:15px 18px;">
+                <span style="flex:none;width:9px;height:9px;margin-top:6px;background:{{ pi.dot }};transform:rotate(45deg);display:inline-block;"></span>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:3px;">
+                    <span style="font-size:12.5px;font-weight:700;color:#d6a23f;">{{ pi.date }}</span>
+                    <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(246,239,227,.6);">{{ pi.kind }}</span>
+                  </div>
+                  <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#f6efe3;line-height:1.3;">{{ pi.title }}</div>
+                  <div style="font-size:12.5px;color:rgba(246,239,227,.62);margin-top:3px;">{{ pi.meta }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ARC COURSES -->
   <section id="courses" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:8px;">
@@ -919,44 +957,6 @@ html,body{margin:0;padding:0;}
           </div>
         </div>
       </sc-for>
-    </div>
-  </section>
-
-  <!-- PFF practice series (à la carte) -->
-  <section id="alacarte" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
-    <div style="background:#143027;color:#f6efe3;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
-      <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px);align-items:flex-start;">
-        <div style="flex:1 1 380px;min-width:280px;">
-          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:18px;">
-            <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>For Personal Finance Foundations graduates
-          </div>
-          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 14px;line-height:1.1;">You learned it. Now make it a habit.</h2>
-          <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0 0 14px;max-width:500px;">The next step after <strong style="color:#f6efe3;font-weight:600;">Personal Finance Foundations</strong>: three Finance Live Rooms in smaller groups, where you ask the experts your own questions and get advice on the spot, plus a 21 day Money Challenge to start saving and investing for real.</p>
-          <p style="font-size:14.5px;line-height:1.6;color:rgba(246,239,227,.65);margin:0 0 24px;max-width:500px;">Learn more, practise what you learned, and leave with habits that last. All times Eastern, and every Live Room is recorded.</p>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
-            <span onClick="{{ pffPass.go }}" style="cursor:{{ pffPass.btnCursor }};display:inline-flex;align-items:center;gap:12px;background:#d6a23f;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;padding:15px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.25);">Join the practice series<span style="font-weight:800;font-size:17px;">{{ pffPass.price }}</span></span>
-            <span style="font-size:13px;color:rgba(246,239,227,.6);">Included for Cypress members</span>
-          </div>
-        </div>
-        <div style="flex:1 1 320px;min-width:280px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#d6a23f;margin-bottom:12px;">What's included</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <sc-for list="{{ pffPass.items }}" as="pi" hint-placeholder-count="4">
-              <div style="display:flex;gap:14px;align-items:flex-start;background:rgba(246,239,227,.06);border:1px solid rgba(214,162,63,.22);border-radius:16px;padding:15px 18px;">
-                <span style="flex:none;width:9px;height:9px;margin-top:6px;background:{{ pi.dot }};transform:rotate(45deg);display:inline-block;"></span>
-                <div style="flex:1;min-width:0;">
-                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:3px;">
-                    <span style="font-size:12.5px;font-weight:700;color:#d6a23f;">{{ pi.date }}</span>
-                    <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(246,239,227,.6);">{{ pi.kind }}</span>
-                  </div>
-                  <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#f6efe3;line-height:1.3;">{{ pi.title }}</div>
-                  <div style="font-size:12.5px;color:rgba(246,239,227,.62);margin-top:3px;">{{ pi.meta }}</div>
-                </div>
-              </div>
-            </sc-for>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
