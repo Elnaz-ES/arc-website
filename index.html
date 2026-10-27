@@ -729,6 +729,28 @@ html,body{margin:0;padding:0;}
               </div>
             </sc-for>
           </div>
+          <sc-for list="{{ m.challenges }}" as="ch" hint-placeholder-count="1">
+            <div style="margin-top:16px;background:#a8451f;color:#fff;border-radius:20px;padding:clamp(22px,2.6vw,30px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(18px,3vw,40px);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 10px,transparent 10px 20px);">
+              <div style="flex:1 1 360px;min-width:260px;">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:12px;">
+                  <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#fff;color:#a8451f;padding:5px 11px;border-radius:999px;">Challenge</span>
+                  <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.5);padding:4px 11px;border-radius:999px;">{{ ch.days }}</span>
+                </div>
+                <h4 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,28px);line-height:1.15;margin:0 0 8px;">{{ ch.title }}</h4>
+                <p style="font-size:15px;line-height:1.55;color:rgba(255,255,255,.88);margin:0;max-width:620px;">{{ ch.desc }}</p>
+              </div>
+              <div style="flex:0 0 auto;display:flex;gap:10px;">
+                <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:12px 18px;text-align:center;min-width:110px;">
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:4px;">Starts</div>
+                  <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;">{{ ch.starts }}</div>
+                </div>
+                <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:12px 18px;text-align:center;min-width:110px;">
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:4px;">Ends</div>
+                  <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:16px;">{{ ch.ends }}</div>
+                </div>
+              </div>
+            </div>
+          </sc-for>
         </div>
       </sc-for>
     </div>
@@ -1713,7 +1735,7 @@ class Component extends DCLogic {
         events: [
         { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Skincare: Understanding Cosmetic Surgery', note: 'Skin spotlight', spot: 'skin' },
         { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
-        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 3, spot: 'skin', sub: 'Building a consistent routine', desc: 'Building a consistent routine. 21 days of small daily prompts for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
+        { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 3, spot: 'skin', sub: 'Building a consistent routine', desc: 'Build a consistent routine with small daily prompts for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
         { d: 11, time: '8–9 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room', rec: true, spot: 'money' },
         { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
         { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
@@ -1777,8 +1799,8 @@ class Component extends DCLogic {
         ...e, typeLabel: st.label, color: st.color, tint: st.tint, ink: st.ink,
         isFree: isOpen(e), access: accessOfEv(e), isChallenge,
         openTag: !!e.open,
-        when: isChallenge ? weeksWord[e.weeks] + ' weeks' : e.time,
-        hostLine: isChallenge ? (e.sub ? e.sub + ' · ' : '') + 'Runs ' + weeksWord[e.weeks].toLowerCase() + ' weeks, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
+        when: isChallenge ? (e.weeks * 7) + ' days · ends ' + (() => { const d = new Date(e.endTs); return DOW[d.getDay()] + ' ' + d.getDate(); })() : e.time,
+        hostLine: isChallenge ? (e.sub ? e.sub + ' · ' : '') + 'Runs ' + (e.weeks * 7) + ' days, with daily prompts and small tasks' : [e.host, e.note].filter(Boolean).join(' · '),
         evBorder: '1px solid transparent',
         evBg: isChallenge ? (spotSeries[e.spot] ? spotSeries[e.spot].color : st.color) : st.tint,
         evLabelInk: isChallenge ? 'rgba(255,255,255,.85)' : st.ink,
@@ -1859,7 +1881,7 @@ class Component extends DCLogic {
         ribbonEdge: running && spotSeries[running.spot] ? spotSeries[running.spot].color : '#a8451f',
         ribbonInk: running && spotSeries[running.spot] ? spotSeries[running.spot].ink : '#7a2f12',
         ribbonDim: spotFilter && !(running && running.spot === spotFilter) ? '.22' : '1',
-        ribbonText: running ? 'Day ' + (Math.round((ts - running.ts) / 864e5) + 1) + ' of ' + (running.weeks * 7) : '',
+        ribbonText: running ? (ts === running.endTs ? 'Last day · ' : '') + 'Day ' + (Math.round((ts - running.ts) / 864e5) + 1) + ' of ' + (running.weeks * 7) : '',
         ribbonRadius: running ? ((ts === running.ts || calFirst + d - 1 === 0 || (calFirst + d - 1) % 7 === 0 ? '6px' : '0') + ' ' + (ts === running.endTs || d === calDays || (calFirst + d) % 7 === 0 ? '6px 6px' : '0 0') + ' ' + (ts === running.ts || (calFirst + d - 1) % 7 === 0 ? '6px' : '0')) : '0',
         ribbonMl: running && !(ts === running.ts || (calFirst + d - 1) % 7 === 0) ? '-11px' : '0',
         ribbonMr: running && !(ts === running.endTs || d === calDays || (calFirst + d) % 7 === 0) ? '-11px' : '0',
@@ -1903,14 +1925,25 @@ class Component extends DCLogic {
       return {
         month: m.name,
         label: [nSessions ? nSessions + (nSessions > 1 ? ' sessions' : ' session') : '', nRooms ? nRooms + (nRooms > 1 ? ' Live Rooms' : ' Live Room') : '', nChall ? 'Challenge' : ''].filter(Boolean).join(' · '),
-        sessions: items.map(e => ({
+        sessions: items.filter(e => e.type !== 'challenge').map(e => ({
           title: e.type === 'challenge' ? e.title.replace(' Begins', '') : e.title,
           date: e.type === 'challenge' ? 'Starts ' + fmtDate(e) + ' · ' + weeksWord[e.weeks] + ' weeks' : fmtWhen(e),
           sub: e.desc ? (e.type === 'liveroom' ? 'Live Room · ' : e.type === 'challenge' ? 'Challenge. ' : '') + e.desc : skinKinds[e.type].sub, iconBg: skinKinds[e.type].color, iconInk: skinKinds[e.type].ink,
           topics: e.topics || [], hasTopics: !!(e.topics && e.topics.length),
         })),
+        challenges: items.filter(e => e.type === 'challenge').map(e => {
+          const end = new Date(e.endTs);
+          return {
+            title: e.title.replace(' Begins', ''),
+            days: (e.weeks * 7) + ' days',
+            starts: fmtDate(e),
+            ends: DOW[end.getDay()] + ' ' + scheduleMonths.filter(x => x.mi === end.getMonth() && x.y === end.getFullYear())[0].short + ' ' + end.getDate(),
+            desc: e.desc || '',
+          };
+        }),
       };
-    }).filter(m => m.sessions.length);
+    }).filter(m => m.sessions.length || m.challenges.length);
+    skinMonths.forEach(m => { m.hasChallenge = m.challenges.length > 0; });
     let skinN = 0;
     skinMonths.forEach(m => m.sessions.forEach(sp => { skinN += 1; sp.n = (skinN < 10 ? '0' : '') + skinN; }));
 
