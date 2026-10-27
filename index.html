@@ -878,7 +878,7 @@ html,body{margin:0;padding:0;}
     <p style="max-width:760px;margin:clamp(20px,3vw,30px) auto 0;text-align:center;font-size:14.5px;line-height:1.6;color:#8a7f6a;">If you downgrade — for example, from Cypress to Juniper — you'll immediately lose access to Cypress-exclusive content.</p>
   </section>
 
-  <!-- PFF practice series (à la carte) -->
+  <!-- Personal Finance Bootcamp (à la carte) -->
   <section id="alacarte" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="background:#143027;color:#f6efe3;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%),linear-gradient(45deg,rgba(214,162,63,.05) 25%,transparent 25%,transparent 75%,rgba(214,162,63,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
       <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px);align-items:flex-start;">
@@ -886,11 +886,12 @@ html,body{margin:0;padding:0;}
           <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,162,63,.45);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d6a23f;margin-bottom:18px;">
             <span style="width:6px;height:6px;background:#d6a23f;transform:rotate(45deg);display:inline-block;flex:none;"></span>For Personal Finance Foundations graduates
           </div>
-          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 14px;line-height:1.1;">You learned it. Now make it a habit.</h2>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 8px;line-height:1.1;">Personal Finance Bootcamp</h2>
+          <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(17px,1.8vw,20px);color:#d6a23f;margin:0 0 16px;">You learned it. Now make it a habit.</div>
           <p style="font-size:16px;line-height:1.65;color:rgba(246,239,227,.82);margin:0 0 14px;max-width:500px;">The next step after <strong style="color:#f6efe3;font-weight:600;">Personal Finance Foundations</strong>: three Finance Live Rooms in smaller groups, where you ask the experts your own questions and get advice on the spot, plus a 21 day Money Challenge to start saving and investing for real.</p>
           <p style="font-size:14.5px;line-height:1.6;color:rgba(246,239,227,.65);margin:0 0 24px;max-width:500px;">Learn more, practise what you learned, and leave with habits that last. All times Eastern, and every Live Room is recorded.</p>
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
-            <span onClick="{{ pffPass.go }}" style="cursor:{{ pffPass.btnCursor }};display:inline-flex;align-items:center;gap:12px;background:#d6a23f;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;padding:15px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.25);">Join the practice series<span style="font-weight:800;font-size:17px;">{{ pffPass.price }}</span></span>
+            <span onClick="{{ pffPass.go }}" style="cursor:{{ pffPass.btnCursor }};display:inline-flex;align-items:center;gap:12px;background:#d6a23f;color:#143027;font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;padding:15px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.25);">Join the Bootcamp<span style="font-weight:800;font-size:17px;">{{ pffPass.price }}</span></span>
             <span style="font-size:13px;color:rgba(246,239,227,.6);">Included for Cypress members</span>
           </div>
         </div>
@@ -1666,7 +1667,7 @@ class Component extends DCLogic {
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
     // a single session can be opened to everyone with open: true, whatever its type
     const isOpen = e => !!e.open || openToAll.includes(e.type);
-    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge')) ? 'Cypress · PFF pass' : accessOf(e.type);
+    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge')) ? 'Cypress · Bootcamp' : accessOf(e.type);
     // Recorded / Not recorded badge, Live Rooms only. Set rec: true or rec: false on an event once confirmed; leave it off until then.
     const recBadge = e => e.rec === true
       ? { recLabel: 'Recorded', recBg: '#e2f0e8', recInk: '#14563d', recBorder: 'rgba(31,122,90,.45)' }
@@ -2289,7 +2290,7 @@ class Component extends DCLogic {
     });
 
     // ---- à-la-carte spotlight pass ----
-    // ---- PFF practice series: 3 Finance Live Rooms + the Money Challenge, sold to PFF graduates ----
+    // ---- Personal Finance Bootcamp: 3 Finance Live Rooms + the Money Challenge, sold to PFF graduates ----
     const pffPracticeUrl = '';   // paste the checkout link here when it's ready
     const pffItems = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge'))), [])
       .sort((x, y) => x.ts - y.ts).map(e => {
