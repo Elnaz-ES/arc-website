@@ -388,6 +388,65 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
+  <!-- ARC EXPERTS -->
+  <section id="arc-experts" style="scroll-margin-top:90px;">
+    <div style="max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(56px,8vw,96px);">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:clamp(28px,4vw,44px);">
+        <div style="max-width:640px;">
+          <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#c5612e;margin-bottom:14px;">ARC experts</div>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-0.02em;color:#143027;margin:0;">The experts who teach with us.</h2>
+        </div>
+        <p style="flex:1 1 320px;max-width:440px;font-size:16px;line-height:1.6;color:#6b6456;margin:0;">Specialists who lead ARC sessions month after month, bringing real expertise into the community.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;">
+        <sc-for list="{{ experts }}" as="xp" hint-placeholder-count="2">
+          <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;">
+            <div style="position:relative;aspect-ratio:4/3.4;background:{{ xp.photoBg }};display:flex;align-items:center;justify-content:center;">
+              <sc-if value="{{ xp.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:76px;height:76px;border-radius:999px;background:rgba(246,239,227,.16);border:1.5px solid rgba(246,239,227,.4);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:30px;color:#f6efe3;">{{ xp.initial }}</span></sc-if>
+              <span style="position:absolute;left:14px;bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ xp.leadsBg }};color:{{ xp.leadsInk }};padding:5px 11px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.15);">Leads {{ xp.leads }}</span>
+            </div>
+            <div style="padding:20px 22px 22px;display:flex;flex-direction:column;flex:1;">
+              <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#143027;margin:0 0 3px;">{{ xp.name }}</h3>
+              <div style="font-size:13px;font-weight:600;color:#c5612e;margin-bottom:10px;">{{ xp.role }}</div>
+              <p style="font-size:14px;line-height:1.55;color:#6b6456;margin:0 0 14px;">{{ xp.bio }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
+                <sc-for list="{{ xp.tags }}" as="tg" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#7a3f17;background:#f6e6d8;border:1px solid rgba(197,97,46,.2);padding:4px 10px;border-radius:999px;">{{ tg }}</span></sc-for>
+              </div>
+              <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+                <sc-if value="{{ xp.hasFull }}" hint-placeholder-val="{{ true }}"><span onClick="{{ xp.open }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;color:#c5612e;">Read full bio →</span></sc-if>
+                <span style="font-size:11.5px;font-weight:600;color:#8a7f6a;">{{ xp.nextLine }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- expert bio pop-up -->
+  <sc-if value="{{ expertModalOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;animation:arcFade .2s ease;">
+      <div onClick="{{ closeExpert }}" style="position:absolute;inset:0;background:rgba(20,48,39,.72);backdrop-filter:blur(4px);cursor:pointer;"></div>
+      <div style="position:relative;background:#fbf6ec;border-radius:24px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+        <span onClick="{{ closeExpert }}" style="position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border-radius:999px;background:rgba(251,246,236,.92);color:#143027;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);">×</span>
+        <div style="display:flex;flex-wrap:wrap;">
+          <div class="mentor-pop-photo" style="flex:0 0 200px;min-height:220px;background:{{ expertModal.photoBg }};border-radius:24px 0 0 0;"></div>
+          <div style="flex:1 1 280px;padding:28px 28px 20px;">
+            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:#143027;margin:0 0 4px;">{{ expertModal.name }}</h3>
+            <div style="font-size:14px;font-weight:600;color:#c5612e;margin-bottom:14px;">{{ expertModal.role }}</div>
+            <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ expertModal.leadsBg }};color:{{ expertModal.leadsInk }};padding:5px 11px;border-radius:999px;margin-bottom:14px;">Leads {{ expertModal.leads }}</span>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;">
+              <sc-for list="{{ expertModal.tags }}" as="tg" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#7a3f17;background:#f6e6d8;border:1px solid rgba(197,97,46,.2);padding:4px 10px;border-radius:999px;">{{ tg }}</span></sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="padding:22px 28px 30px;border-top:1px solid rgba(20,48,39,.1);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:10px;">About {{ expertModal.first }}</div>
+          <sc-for list="{{ expertModal.paras }}" as="pa" hint-placeholder-count="2"><p style="font-size:15.5px;line-height:1.7;color:#3a4038;margin:0 0 14px;">{{ pa }}</p></sc-for>
+          <sc-if value="{{ expertModal.hasLink }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ expertModal.link }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:4px;background:#143027;color:#f6efe3;text-decoration:none;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:999px;">{{ expertModal.linkLabel }} →</a>
+          </sc-if>
+
   <!-- TRUSTED RECOMMENDATIONS / PREFERRED VENDORS -->
   <section style="max-width:1180px;margin:0 auto;padding:clamp(20px,3vw,40px) clamp(20px,5vw,56px) clamp(56px,8vw,96px);">
     <div style="background:#143027;border-radius:30px;padding:clamp(30px,4.5vw,60px) clamp(24px,4vw,56px) clamp(40px,5vw,64px);position:relative;overflow:hidden;background-image:repeating-linear-gradient(45deg,rgba(214,162,63,.06) 0 10px,transparent 10px 20px);">
@@ -1384,64 +1443,6 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
-  <!-- ARC EXPERTS -->
-  <section id="arc-experts" style="background:#f6efe3;scroll-margin-top:90px;">
-    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(20px,5vw,56px);">
-      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:clamp(28px,4vw,44px);">
-        <div style="max-width:640px;">
-          <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#c5612e;margin-bottom:14px;">ARC experts</div>
-          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-0.02em;color:#143027;margin:0;">The experts who teach with us.</h2>
-        </div>
-        <p style="flex:1 1 320px;max-width:440px;font-size:16px;line-height:1.6;color:#6b6456;margin:0;">Specialists who lead ARC sessions month after month, bringing real expertise into the community.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;">
-        <sc-for list="{{ experts }}" as="xp" hint-placeholder-count="2">
-          <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.1);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;">
-            <div style="position:relative;aspect-ratio:4/3.4;background:{{ xp.photoBg }};display:flex;align-items:center;justify-content:center;">
-              <sc-if value="{{ xp.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:76px;height:76px;border-radius:999px;background:rgba(246,239,227,.16);border:1.5px solid rgba(246,239,227,.4);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:30px;color:#f6efe3;">{{ xp.initial }}</span></sc-if>
-              <span style="position:absolute;left:14px;bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ xp.leadsBg }};color:{{ xp.leadsInk }};padding:5px 11px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.15);">Leads {{ xp.leads }}</span>
-            </div>
-            <div style="padding:20px 22px 22px;display:flex;flex-direction:column;flex:1;">
-              <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:#143027;margin:0 0 3px;">{{ xp.name }}</h3>
-              <div style="font-size:13px;font-weight:600;color:#c5612e;margin-bottom:10px;">{{ xp.role }}</div>
-              <p style="font-size:14px;line-height:1.55;color:#6b6456;margin:0 0 14px;">{{ xp.bio }}</p>
-              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
-                <sc-for list="{{ xp.tags }}" as="tg" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#7a3f17;background:#f6e6d8;border:1px solid rgba(197,97,46,.2);padding:4px 10px;border-radius:999px;">{{ tg }}</span></sc-for>
-              </div>
-              <div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
-                <sc-if value="{{ xp.hasFull }}" hint-placeholder-val="{{ true }}"><span onClick="{{ xp.open }}" style="cursor:pointer;font-family:'Sora',sans-serif;font-weight:600;font-size:13px;color:#c5612e;">Read full bio →</span></sc-if>
-                <span style="font-size:11.5px;font-weight:600;color:#8a7f6a;">{{ xp.nextLine }}</span>
-              </div>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <!-- expert bio pop-up -->
-  <sc-if value="{{ expertModalOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;animation:arcFade .2s ease;">
-      <div onClick="{{ closeExpert }}" style="position:absolute;inset:0;background:rgba(20,48,39,.72);backdrop-filter:blur(4px);cursor:pointer;"></div>
-      <div style="position:relative;background:#fbf6ec;border-radius:24px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45);">
-        <span onClick="{{ closeExpert }}" style="position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border-radius:999px;background:rgba(251,246,236,.92);color:#143027;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);">×</span>
-        <div style="display:flex;flex-wrap:wrap;">
-          <div class="mentor-pop-photo" style="flex:0 0 200px;min-height:220px;background:{{ expertModal.photoBg }};border-radius:24px 0 0 0;"></div>
-          <div style="flex:1 1 280px;padding:28px 28px 20px;">
-            <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:26px;color:#143027;margin:0 0 4px;">{{ expertModal.name }}</h3>
-            <div style="font-size:14px;font-weight:600;color:#c5612e;margin-bottom:14px;">{{ expertModal.role }}</div>
-            <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:{{ expertModal.leadsBg }};color:{{ expertModal.leadsInk }};padding:5px 11px;border-radius:999px;margin-bottom:14px;">Leads {{ expertModal.leads }}</span>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;">
-              <sc-for list="{{ expertModal.tags }}" as="tg" hint-placeholder-count="3"><span style="font-size:12px;font-weight:600;color:#7a3f17;background:#f6e6d8;border:1px solid rgba(197,97,46,.2);padding:4px 10px;border-radius:999px;">{{ tg }}</span></sc-for>
-            </div>
-          </div>
-        </div>
-        <div style="padding:22px 28px 30px;border-top:1px solid rgba(20,48,39,.1);">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7f6a;margin-bottom:10px;">About {{ expertModal.first }}</div>
-          <sc-for list="{{ expertModal.paras }}" as="pa" hint-placeholder-count="2"><p style="font-size:15.5px;line-height:1.7;color:#3a4038;margin:0 0 14px;">{{ pa }}</p></sc-for>
-          <sc-if value="{{ expertModal.hasLink }}" hint-placeholder-val="{{ false }}">
-            <a href="{{ expertModal.link }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:4px;background:#143027;color:#f6efe3;text-decoration:none;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:999px;">{{ expertModal.linkLabel }} →</a>
-          </sc-if>
         </div>
       </div>
     </div>
@@ -1515,7 +1516,7 @@ class Component extends DCLogic {
   componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('hashchange', this._h); }
 
   // URL hash <-> page mapping, so pages have shareable links & back/forward works
-  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join', 'courses': 'join', 'experts': 'story', 'mentorship': 'mentorship', 'liverooms': 'community', 'dorehami': 'community' };
+  _hashToPage = { '': 'home', 'home': 'home', 'membership': 'join', 'join': 'join', 'community': 'community', 'calendar': 'calendar', 'story': 'story', 'alacarte': 'join', 'passes': 'join', 'courses': 'join', 'experts': 'community', 'mentorship': 'mentorship', 'liverooms': 'community', 'dorehami': 'community' };
   _pageToHash = { home: '', join: 'membership', community: 'community', calendar: 'calendar', story: 'story', mentorship: 'mentorship' };
   // hashes that deep-link to a section *within* a page
   _hashToAnchor = { alacarte: 'alacarte', passes: 'alacarte', courses: 'courses', liverooms: 'arc-how', dorehami: 'arc-dorehami', experts: 'arc-experts' };
@@ -1990,7 +1991,7 @@ class Component extends DCLogic {
       { name: 'Damoon Ashtary', first: 'Damoon', role: 'Nutritionist & researcher', leads: 'Science in Review', leadsType: 'science',
         bio: 'Nutritionist, resistance training coach and researcher with over 15 years in nutrition and exercise coaching and more than 140 published scientific articles.',
         tags: ['Evidence based nutrition', 'Weight management', 'Muscle growth', 'Supplements'],
-        full: "Damoon Ashtary is a nutritionist, resistance training coach, and researcher in nutrition and exercise science. He has over 15 years of professional experience in nutrition, sports nutrition, and nutrition and exercise coaching, focusing on improving body composition, weight and body fat reduction, and increasing muscle mass. He also has approximately 12 years of teaching experience at various educational institutions and has delivered specialized courses and workshops in nutrition and exercise.\n\nHe has published more than 140 scientific articles in reputable international journals and collaborated with leading researchers in nutrition and exercise science worldwide. His primary research interests include obesity and weight management, muscle hypertrophy, dietary and sports supplements, and evidence-based nutrition. He also has extensive experience designing and conducting clinical studies on nutrition, sports supplements, and body composition. His research has been cited thousands of times by researchers around the world.", link: 'https://scholar.google.com/citations?hl=en&user=HxDBLxMAAAAJ&view_op=list_works', linkLabel: 'Google Scholar profile', img: 'photos/experts/damoon.jpg' },
+        full: "Damoon Ashtary is a nutritionist, resistance training coach, and researcher in nutrition and exercise science. He has over 15 years of professional experience in nutrition, sports nutrition, and nutrition and exercise coaching, focusing on improving body composition, weight and body fat reduction, and increasing muscle mass. He also has approximately 12 years of teaching experience at various educational institutions and has delivered specialized courses and workshops in nutrition and exercise.\n\nHe has published more than 140 scientific articles in reputable international journals and collaborated with leading researchers in nutrition and exercise science worldwide. His primary research interests include obesity and weight management, muscle hypertrophy, dietary and sports supplements, and evidence-based nutrition. He also has extensive experience designing and conducting clinical studies on nutrition, sports supplements, and body composition. His research has been cited thousands of times by researchers around the world.", link: 'https://scholar.google.com/citations?hl=en&user=HxDBLxMAAAAJ&view_op=list_works', linkLabel: 'Google Scholar profile', img: 'photos/experts/damoon-v2.jpg' },
       { name: 'Yasaman Avazpour', first: 'Yasi', role: 'Yoga teacher · E-RYT 500, YACEP', leads: 'ARC Yoga', leadsType: 'yoga',
         bio: 'Over 16 years of teaching, a Master’s in Physiology, and owner and lead trainer of Omology Yoga School, where she has mentored over 1,000 yoga teachers.',
         tags: ['Vinyasa & Power Yoga', 'Yin Yoga', 'Meditation & breathwork', 'Sound healing'],
@@ -2303,7 +2304,7 @@ class Component extends DCLogic {
       goDorehami: () => this.goSection('community', 'dorehami', 'arc-dorehami'),
       experts, expertModalOpen: !!expertModal, closeExpert: () => this.setState({ expertOpen: null }),
       expertModal: expertModal || { name: '', first: '', role: '', leads: '', leadsBg: 'transparent', leadsInk: 'transparent', tags: [], paras: [], photoBg: 'transparent', noImg: false, initial: '', hasLink: false, link: '', linkLabel: '', nextLine: '' },
-      goExperts: () => this.goSection('story', 'experts', 'arc-experts'),
+      goExperts: () => this.goSection('community', 'experts', 'arc-experts'),
       mentorModal: mentors.filter(m => m.name === s.mentorOpen)[0] || { name: '', role: '', fullText: '', helps: [], hasHelps: false, hasLinkedin: false, linkedin: '', photoBg: 'transparent', noImg: false, initial: '', session: '' },
       mentorModalOpen: !!mentors.filter(m => m.name === s.mentorOpen)[0],
       closeMentor: () => this.setState({ mentorOpen: null }),
