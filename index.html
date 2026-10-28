@@ -957,18 +957,11 @@ html,body{margin:0;padding:0;}
   </section>
 
   <!-- ARC COURSES -->
-  <section id="courses" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
-    <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:8px;">
-      <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(26px,4vw,40px);letter-spacing:-0.02em;color:#143027;margin:0;">ARC Courses</h2>
-      <span style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c5612e;">Buy on their own</span>
-    </div>
-    <p style="font-size:16px;line-height:1.6;color:#6b6456;margin:0 0 clamp(22px,3vw,30px);max-width:620px;">Self-paced courses you can buy once and watch at your own pace — no membership required, and no change to the plan you're already on.</p>
-
+  <section id="courses" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="display:flex;flex-direction:column;gap:22px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="1">
         <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-radius:26px;overflow:hidden;box-shadow:0 18px 40px rgba(20,48,39,.07);display:grid;grid-template-columns:{{ courseCols }};align-items:stretch;">
           <div style="position:relative;min-height:268px;background:{{ c.cardImgTint }} {{ c.cardImgBg }} center/contain no-repeat;">
-            <span style="position:absolute;top:16px;left:16px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#143027;background:#d6a23f;padding:6px 13px;border-radius:999px;">{{ c.badge }}</span>
           </div>
           <div style="padding:clamp(26px,3.2vw,38px);display:flex;flex-direction:column;">
             <h3 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,28px);letter-spacing:-0.015em;color:#143027;margin:0 0 5px;line-height:1.15;">{{ c.title }}</h3>
