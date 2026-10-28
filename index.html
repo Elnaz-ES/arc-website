@@ -917,6 +917,45 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
+  <!-- Skin Spotlight (standalone) -->
+  <section id="skin-spotlight" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
+    <div style="background:#5c2238;color:#fbeff3;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 10px,transparent 10px 20px);">
+      <div style="position:relative;display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px);align-items:flex-start;">
+        <div style="flex:1 1 380px;min-width:280px;">
+          <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(247,214,226,.45);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f3c1d2;margin-bottom:18px;">
+            <span style="width:6px;height:6px;background:#f3c1d2;transform:rotate(45deg);display:inline-block;flex:none;"></span>Spotlight · Open to everyone
+          </div>
+          <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);letter-spacing:-0.02em;margin:0 0 8px;line-height:1.1;">Skin Spotlight</h2>
+          <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(17px,1.8vw,20px);color:#f3c1d2;margin:0 0 16px;">From your daily routine to clinical choices.</div>
+          <p style="font-size:16px;line-height:1.65;color:rgba(251,239,243,.85);margin:0 0 14px;max-width:500px;">Three expert sessions that take you from your everyday routine to professional treatments and cosmetic surgery, plus a 21 day Skincare Challenge to turn what you learn into a routine that sticks.</p>
+          <p style="font-size:14.5px;line-height:1.6;color:rgba(251,239,243,.65);margin:0 0 24px;max-width:500px;">No membership needed. Buy it on its own and join every session live. All times Eastern.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+            <span onClick="{{ skinPass.go }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:12px;background:#f3c1d2;color:#5c2238;font-family:'Sora',sans-serif;font-weight:700;font-size:15.5px;padding:15px 26px;border-radius:999px;box-shadow:0 10px 24px rgba(0,0,0,.25);">Get the Skin Spotlight<span style="font-weight:800;font-size:17px;">{{ skinPass.price }}</span></span>
+            <span style="font-size:13px;color:rgba(251,239,243,.6);">Included for Cypress members</span>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f3c1d2;margin-bottom:12px;">What's included</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ skinPass.items }}" as="si" hint-placeholder-count="4">
+              <div style="display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(247,214,226,.25);border-radius:16px;padding:15px 18px;">
+                <span style="flex:none;width:9px;height:9px;margin-top:6px;background:{{ si.dot }};transform:rotate(45deg);display:inline-block;"></span>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:3px;">
+                    <span style="font-size:12.5px;font-weight:700;color:#f3c1d2;">{{ si.date }}</span>
+                    <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(251,239,243,.6);">{{ si.kind }}</span>
+                  </div>
+                  <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#fbeff3;line-height:1.3;">{{ si.title }}</div>
+                  <div style="font-size:12.5px;color:rgba(251,239,243,.62);margin-top:3px;">{{ si.meta }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ARC COURSES -->
   <section id="courses" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:8px;">
@@ -1667,7 +1706,7 @@ class Component extends DCLogic {
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
     // a single session can be opened to everyone with open: true, whatever its type
     const isOpen = e => !!e.open || openToAll.includes(e.type);
-    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge')) ? 'Cypress · Bootcamp' : accessOf(e.type);
+    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge')) ? 'Cypress · Bootcamp' : (e.spot === 'skin' && e.type === 'spotlight') ? 'Cypress · Skin pass' : accessOf(e.type);
     // Recorded / Not recorded badge, Live Rooms only. Set rec: true or rec: false on an event once confirmed; leave it off until then.
     const recBadge = e => e.rec === true
       ? { recLabel: 'Recorded', recBg: '#e2f0e8', recInk: '#14563d', recBorder: 'rgba(31,122,90,.45)' }
@@ -2300,6 +2339,23 @@ class Component extends DCLogic {
           dot: isCh ? '#a8451f' : '#7a4f8a', kind: isCh ? 'Challenge' : 'Live Room',
         };
       });
+    // ---- Skin Spotlight: 3 expert sessions + the Skincare Challenge, $100 standalone ----
+    const skinSpotUrl = 'https://ancient-roots-circle.circle.so/checkout/skin-spotlight';
+    const skinPassItems = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.spot === 'skin' && (e.type === 'spotlight' || e.type === 'challenge'))), [])
+      .sort((x, y) => x.ts - y.ts).map(e => {
+        const isCh = e.type === 'challenge';
+        const end = isCh ? new Date(e.endTs) : null;
+        return {
+          date: e.dow + ' ' + e.short + ' ' + e.d,
+          title: isCh ? 'Skincare Challenge · ' + (e.weeks * 7) + ' days' : e.title,
+          meta: isCh ? 'Starts ' + e.dow + ' ' + e.short + ' ' + e.d + ', ends ' + DOW[end.getDay()] + ' ' + scheduleMonths.filter(x => x.mi === end.getMonth() && x.y === end.getFullYear())[0].short + ' ' + end.getDate() : e.time + ' ET · Expert session',
+          dot: isCh ? '#a8451f' : '#d6a23f', kind: isCh ? 'Challenge' : 'Session',
+        };
+      });
+    const skinPass = {
+      price: '$100', items: skinPassItems,
+      go: () => this.setState({ agreeUrl: skinSpotUrl, agreePaid: true, agreeChecked: false }),
+    };
     const pffPass = {
       price: '$160', items: pffItems,
       hasUrl: !!pffPracticeUrl,
@@ -2400,7 +2456,7 @@ class Component extends DCLogic {
       calAgColor: calView === 'agenda' ? '#f6efe3' : '#5b5446',
       cookingList, cookingCopy, cookingDir, cookingFont, cookingHeadFont, cookingLang,
       setCookingEn, setCookingFa, cookingEnBg, cookingEnColor, cookingFaBg, cookingFaColor,
-      pffPass,
+      pffPass, skinPass,
       courses, featuredCourse,
       goCourses: () => this.goSection('join', 'courses', 'alacarte'),
       courseCols: (s.vw || 1200) < 900 ? '1fr' : '1.05fr 1fr',
