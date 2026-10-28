@@ -1757,6 +1757,7 @@ class Component extends DCLogic {
         { d: 11, time: '5–6 PM', type: 'cooking',   host: 'Shervin',    title: 'Cooking with Shervin: The Christmas Table', faTitle: 'آشپزی با شروین: سفرهٔ کریسمس', note: 'Christmas themed cooking' },
         { d: 12, time: '1–2 PM', type: 'liveroom',  host: '',           title: 'The Skincare Exchange: Botox, Fillers & Lasers', note: 'Member-to-Member: Experiences, Results & Regrets · 2 of 3', desc: 'Member-to-Member: Experiences, Results & Regrets', rec: true, spot: 'skin' },
         { d: 13, time: '3–4 PM', type: 'mentor',    host: 'Negin, Padideh & Mehdi', title: 'Mentorship: Difficult Conversations at Work', note: 'Workplace conversations and politics' },
+        { d: 15, time: '8–9 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room: Financial Fears and Freedom', rec: true, spot: 'money' },
         { d: 16, time: '1–2 PM', type: 'goals',     host: '',           title: 'Planning Your Year Ahead', note: 'New Year goal setting' },
         { d: 21, type: 'challenge', title: 'Digital Detox Begins', weeks: 2 },
       ] },
@@ -1767,7 +1768,6 @@ class Component extends DCLogic {
         { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Skincare: Understanding Cosmetic Surgery', note: 'Skin spotlight', spot: 'skin' },
         { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
         { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 3, spot: 'skin', sub: 'Building a consistent routine', desc: 'Build a consistent routine with small daily prompts for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
-        { d: 11, time: '8–9 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room: Financial Fears and Freedom', rec: true, spot: 'money' },
         { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
         { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
         { d: 16, time: '12–1 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: When Work and Family Meet', note: 'How children and relationships affect our careers',
@@ -2350,7 +2350,7 @@ class Component extends DCLogic {
       go: () => this.setState({ agreeUrl: skinSpotUrl, agreePaid: true, agreeChecked: false }),
     };
     const pffPass = {
-      price: '$160', items: pffItems,
+      price: '$100', items: pffItems,
       hasUrl: !!pffPracticeUrl,
       btnCursor: pffPracticeUrl ? 'pointer' : 'default',
       go: () => { if (pffPracticeUrl) this.setState({ agreeUrl: pffPracticeUrl, agreePaid: true, agreeChecked: false }); },
