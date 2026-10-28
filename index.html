@@ -2288,7 +2288,7 @@ class Component extends DCLogic {
 
     // ---- à-la-carte spotlight pass ----
     // ---- Personal Finance Bootcamp: 3 Finance Live Rooms + the Money Challenge, sold to PFF graduates ----
-    const pffPracticeUrl = '';   // paste the checkout link here when it's ready
+    const pffPracticeUrl = 'https://ancient-roots-circle.circle.so/checkout/personal-finance-bootcamp';   // paste the checkout link here when it's ready
     const pffItems = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge'))), [])
       .sort((x, y) => x.ts - y.ts).map(e => {
         const isCh = e.type === 'challenge';
