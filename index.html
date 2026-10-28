@@ -1718,7 +1718,7 @@ class Component extends DCLogic {
         events: [
         { d: 2,  time: '3–4 PM', type: 'science',   host: 'Damoon',     title: 'Science in Review: From Evidence to Practice' },
         { d: 3,  time: '5–6 PM', type: 'dorehami',  host: 'Sarv & Ors', title: 'Dorehami: Everyday Parenting Challenges', rec: false },
-        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room', rec: true, spot: 'money' },
+        { d: 4,  time: '5–6 PM', type: 'liveroom',  host: '',           title: 'Finance Live Room: Practical Financial Goal Setting', rec: true, spot: 'money' },
         { d: 5,  time: '3–4 PM', type: 'career',    host: 'Hoda',       title: 'Career Lab: When Life Changes Your Career Plans', note: 'Navigating circumstances outside our control',
           desc: 'Sometimes life rewrites the plan for you. How to navigate the circumstances outside our control and still move your career forward.' },
         { d: 10, time: '5–6 PM', type: 'spotlight', host: '',           title: 'Skincare: Understanding Professional Treatments', note: 'Skin spotlight · Clinical skincare', spot: 'skin' },
@@ -1735,7 +1735,7 @@ class Component extends DCLogic {
         { d: 7,  time: '5–6 PM',  type: 'spotlight', host: '',        title: 'Skincare: Understanding Cosmetic Surgery', note: 'Skin spotlight', spot: 'skin' },
         { d: 8,  time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
         { d: 11, type: 'challenge', title: 'Skincare Challenge Begins', weeks: 3, spot: 'skin', sub: 'Building a consistent routine', desc: 'Build a consistent routine with small daily prompts for your morning or evening routine and a quick check in, with members doing it right beside you. By the end, it runs on its own.' },
-        { d: 11, time: '8–9 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room', rec: true, spot: 'money' },
+        { d: 11, time: '8–9 PM',  type: 'liveroom',  host: '',        title: 'Finance Live Room: Financial Fears and Freedom', rec: true, spot: 'money' },
         { d: 13, time: '3–4 PM',  type: 'science',   host: 'Damoon',  title: 'Science in Review: From Evidence to Practice' },
         { d: 15, time: '7–8 PM',  type: 'mentor',    host: 'Farahnaz, Razieh & Kamyar', title: 'Mentorship: Should I Stay or Move On?', note: 'Career decisions and next steps' },
         { d: 16, time: '12–1 PM', type: 'career',    host: 'Hoda',    title: 'Career Lab: When Work and Family Meet', note: 'How children and relationships affect our careers',
@@ -2047,9 +2047,6 @@ class Component extends DCLogic {
         bio: 'Over 16 years of teaching, a Master’s in Physiology, and owner and lead trainer of Omology Yoga School, where she has mentored over 1,000 yoga teachers.',
         tags: ['Vinyasa & Power Yoga', 'Yin Yoga', 'Meditation & breathwork', 'Sound healing'],
         full: "Yasaman Avazpour is an internationally experienced yoga teacher, E-RYT 500, YACEP, and holds a Master’s degree in Physiology. With over 16 years of teaching experience, she brings together traditional yoga philosophy, modern anatomy, and mindful movement to create an inclusive and empowering approach to yoga.\n\nAs the owner and lead trainer of Omology Yoga School, Yasi has guided thousands of practitioners and mentored over 1,000 yoga teachers worldwide.\n\nHer teaching spans Vinyasa, Power Yoga, Yin Yoga, meditation, breathwork, and sound healing. She is passionate about helping students understand their unique bodies, move with awareness, and discover a deeper connection between body, mind, and breath.\n\nRooted in compassion, kindness, and Buddhist philosophy, Yasi believes yoga is a lifelong journey of self-discovery, growth, and connection, both on and beyond the mat.", link: '', linkLabel: '', img: 'photos/experts/yasaman.jpg' },
-      { name: 'Dr. Ali Esmaeili', first: 'Dr. Ali', role: 'Joining us soon', leads: 'the Skin spotlight with Hoda', leadsType: 'spotlight',
-        bio: 'Dr. Ali will teach the Skin spotlight sessions with Hoda. His full bio and photo are coming soon.',
-        tags: [], full: '', link: '', linkLabel: '', img: '' },
     ];
     const experts = expertDefs.map((x, i) => {
       const st = sessionTypes[x.leadsType] || sessionTypes.free;
