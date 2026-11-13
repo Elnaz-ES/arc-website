@@ -2381,7 +2381,7 @@ class Component extends DCLogic {
       go: () => this.setState({ agreeUrl: skinSpotUrl, agreePaid: true, agreeChecked: false }),
     };
     // ---- Money Challenge on its own ----
-    const moneyChallengeUrl = 'https://ancient-roots-circle.circle.so/checkout/money-challeng';
+    const moneyChallengeUrl = 'https://ancient-roots-circle.circle.so/checkout/money-challenge';
     const moneyChallengePrice = '';   // e.g. '$30' once the price is set; leave empty to hide it
     const mcEv = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'challenge' && e.spot === 'money')), [])[0];
     const mcEnd = mcEv ? new Date(mcEv.endTs) : null;
