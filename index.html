@@ -917,6 +917,34 @@ html,body{margin:0;padding:0;}
     </div>
   </section>
 
+  <!-- Money Challenge (standalone) -->
+  <section id="money-challenge" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
+    <div style="background:#fbf6ec;border:1px solid rgba(20,48,39,.12);border-top:5px solid #2e7a52;border-radius:24px;padding:clamp(24px,3.2vw,40px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(20px,3vw,40px);box-shadow:0 14px 32px rgba(20,48,39,.06);">
+      <div style="flex:1 1 380px;min-width:260px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:14px;">
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#2e7a52;color:#fff;padding:5px 11px;border-radius:999px;">Challenge</span>
+          <span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(46,122,82,.4);color:#1c5236;padding:4px 11px;border-radius:999px;">{{ moneyChallenge.days }}</span>
+        </div>
+        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);letter-spacing:-0.02em;color:#143027;margin:0 0 10px;line-height:1.1;">Money Challenge</h2>
+        <p style="font-size:16px;line-height:1.6;color:#5b5446;margin:0;max-width:520px;">Build real money habits in three weeks. Daily prompts and small tasks help you start saving, set up investing and stay consistent, with the community doing it right beside you.</p>
+      </div>
+      <div style="flex:0 1 300px;min-width:240px;display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:10px;">
+          <div style="flex:1;background:#e0efe6;border-radius:14px;padding:12px 14px;text-align:center;">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1c5236;margin-bottom:4px;">Starts</div>
+            <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:#143027;">{{ moneyChallenge.starts }}</div>
+          </div>
+          <div style="flex:1;background:#e0efe6;border-radius:14px;padding:12px 14px;text-align:center;">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1c5236;margin-bottom:4px;">Ends</div>
+            <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:#143027;">{{ moneyChallenge.ends }}</div>
+          </div>
+        </div>
+        <span onClick="{{ moneyChallenge.go }}" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#143027;color:#f6efe3;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:15px 24px;border-radius:999px;">Join the Money Challenge<sc-if value="{{ moneyChallenge.hasPrice }}" hint-placeholder-val="{{ false }}"><span style="font-weight:800;color:#d6a23f;">{{ moneyChallenge.price }}</span></sc-if></span>
+        <span style="font-size:12.5px;color:#8a7f6a;text-align:center;">Included in the Personal Finance Bootcamp and for Cypress members</span>
+      </div>
+    </div>
+  </section>
+
   <!-- Skin Spotlight (standalone) -->
   <section id="skin-spotlight" style="scroll-margin-top:90px;max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(48px,6vw,72px);">
     <div style="background:#3a1526;color:#ffffff;border-radius:26px;padding:clamp(28px,3.6vw,48px);position:relative;overflow:hidden;background-image:linear-gradient(45deg,rgba(247,201,216,.05) 25%,transparent 25%,transparent 75%,rgba(247,201,216,.05) 75%),linear-gradient(45deg,rgba(247,201,216,.05) 25%,transparent 25%,transparent 75%,rgba(247,201,216,.05) 75%);background-size:40px 40px;background-position:0 0,20px 20px;">
@@ -2352,6 +2380,18 @@ class Component extends DCLogic {
       price: '$100', items: skinPassItems,
       go: () => this.setState({ agreeUrl: skinSpotUrl, agreePaid: true, agreeChecked: false }),
     };
+    // ---- Money Challenge on its own ----
+    const moneyChallengeUrl = 'https://ancient-roots-circle.circle.so/checkout/money-challeng';
+    const moneyChallengePrice = '';   // e.g. '$30' once the price is set; leave empty to hide it
+    const mcEv = scheduleMonths.reduce((a, m) => a.concat(m.events.filter(e => e.type === 'challenge' && e.spot === 'money')), [])[0];
+    const mcEnd = mcEv ? new Date(mcEv.endTs) : null;
+    const moneyChallenge = {
+      days: mcEv ? (mcEv.weeks * 7) + ' days' : '21 days',
+      starts: mcEv ? mcEv.dow + ' ' + mcEv.short + ' ' + mcEv.d : '',
+      ends: mcEnd ? DOW[mcEnd.getDay()] + ' ' + scheduleMonths.filter(x => x.mi === mcEnd.getMonth() && x.y === mcEnd.getFullYear())[0].short + ' ' + mcEnd.getDate() : '',
+      price: moneyChallengePrice, hasPrice: !!moneyChallengePrice,
+      go: () => this.setState({ agreeUrl: moneyChallengeUrl, agreePaid: true, agreeChecked: false }),
+    };
     const pffPass = {
       price: '$100', items: pffItems,
       hasUrl: !!pffPracticeUrl,
@@ -2452,7 +2492,7 @@ class Component extends DCLogic {
       calAgColor: calView === 'agenda' ? '#f6efe3' : '#5b5446',
       cookingList, cookingCopy, cookingDir, cookingFont, cookingHeadFont, cookingLang,
       setCookingEn, setCookingFa, cookingEnBg, cookingEnColor, cookingFaBg, cookingFaColor,
-      pffPass, skinPass,
+      pffPass, skinPass, moneyChallenge,
       courses, featuredCourse,
       goCourses: () => this.goSection('join', 'courses', 'alacarte'),
       courseCols: (s.vw || 1200) < 900 ? '1fr' : '1.05fr 1fr',
