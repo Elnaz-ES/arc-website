@@ -940,7 +940,7 @@ html,body{margin:0;padding:0;}
           </div>
         </div>
         <span onClick="{{ moneyChallenge.go }}" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#143027;color:#f6efe3;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:15px 24px;border-radius:999px;">Join the Money Challenge<sc-if value="{{ moneyChallenge.hasPrice }}" hint-placeholder-val="{{ false }}"><span style="font-weight:800;color:#d6a23f;">{{ moneyChallenge.price }}</span></sc-if></span>
-        <span style="font-size:12.5px;color:#8a7f6a;text-align:center;">Included in the Personal Finance Bootcamp and for Cypress members</span>
+        <span style="font-size:12.5px;color:#8a7f6a;text-align:center;">Included for Juniper and Cypress members, and in the Personal Finance Bootcamp</span>
       </div>
     </div>
   </section>
@@ -1727,7 +1727,7 @@ class Component extends DCLogic {
     const accessOf = t => openToAll.includes(t) ? 'All tiers' : cypressOnly.includes(t) ? 'Cypress' : 'Juniper & up';
     // a single session can be opened to everyone with open: true, whatever its type
     const isOpen = e => !!e.open || openToAll.includes(e.type);
-    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && (e.type === 'liveroom' || e.type === 'challenge')) ? 'Cypress · Bootcamp' : (e.spot === 'skin' && e.type === 'spotlight') ? 'Cypress · Skin pass' : accessOf(e.type);
+    const accessOfEv = e => e.open ? 'All tiers' : (e.spot === 'money' && e.type === 'challenge') ? 'Juniper & up' : (e.spot === 'money' && e.type === 'liveroom') ? 'Cypress · Bootcamp' : (e.spot === 'skin' && e.type === 'spotlight') ? 'Cypress · Skin pass' : accessOf(e.type);
     // Recorded / Not recorded badge, Live Rooms only. Set rec: true or rec: false on an event once confirmed; leave it off until then.
     const recBadge = e => e.rec === true
       ? { recLabel: 'Recorded', recBg: '#e2f0e8', recInk: '#14563d', recBorder: 'rgba(31,122,90,.45)' }
