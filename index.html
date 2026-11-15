@@ -1770,7 +1770,8 @@ class Component extends DCLogic {
         { d: 20, time: '5–6 PM',       type: 'spotlight', host: '',        title: 'Skincare Foundations: Your Everyday Routine', note: 'Skin spotlight · Session 1', spot: 'skin' },
         { d: 21, time: '5–6 PM',       type: 'liveroom',  host: 'Sarv, Ors & finance package participants', title: 'Finance Live Room: Putting Learning into Practice', rec: true, spot: 'money' },
         { d: 23, time: '5–6 PM',       type: 'liveroom',  host: '',        title: 'Skincare Live Room: What’s on Your Shelf?', note: 'Members share their skincare products · 1 of 3', desc: 'Members share their skincare products', rec: true, spot: 'skin' },
-        { d: 24, time: '8–9 PM',       type: 'dorehami',  host: '',        title: 'Dorehami: Making Friends', rec: false },
+        { d: 24, time: '1–2 PM',       type: 'dorehami',  host: '',        title: 'Dorehami: Making Friends', note: 'Session 1 of 2 · 10–11 AM Pacific', rec: false },
+        { d: 24, time: '8–9 PM',       type: 'dorehami',  host: '',        title: 'Dorehami: Making Friends', note: 'Session 2 of 2', rec: false },
         { d: 25, time: '6–7 PM',       type: 'liveroom',  host: '',        title: 'Skin Live Room', spot: 'skin' },
         { d: 25, time: '4–5 PM',       type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
       ] },
@@ -1805,7 +1806,8 @@ class Component extends DCLogic {
           desc: 'Children, partners and family life all shape a career. How to make room for both, and talk about it honestly at work.' },
         { d: 20, time: '4–5 PM',  type: 'yoga',      host: 'Yasaman', title: 'ARC Yoga with Yasaman' },
         { d: 22, time: '5–6 PM',  type: 'cooking',   host: 'Shervin', title: 'Cooking with Shervin', faTitle: 'آشپزی با شروین' },
-        { d: 27, time: '8–9 PM',  type: 'dorehami',  host: '',        title: 'Dorehami: Breaking the Social Media Habit', rec: false },
+        { d: 27, time: '8–9 PM',  type: 'dorehami',  host: '',        title: 'Dorehami: Breaking the Social Media Habit', note: 'Session 1 of 2', rec: false },
+        { d: 28, time: '2:30–3:30 PM', type: 'dorehami',  host: '',    title: 'Dorehami: Breaking the Social Media Habit', note: 'Session 2 of 2 · 11:30 AM–12:30 PM Pacific', rec: false },
         { d: 28, time: '5–6 PM',  type: 'liveroom',  host: '',        title: 'The Skincare Exchange: Plastic Surgery', note: 'Member-to-Member: Real Stories, Expectations & Lessons Learned · 3 of 3', desc: 'Member-to-Member: Real Stories, Expectations & Lessons Learned', rec: true, spot: 'skin' },
         { d: 29, time: '5–6 PM',  type: 'dorehami',  host: '',        title: 'Dorehami: Relationships After Immigration', rec: false, open: true },
       ] },
@@ -1831,7 +1833,8 @@ class Component extends DCLogic {
         Object.assign(e, { dow: DOW[dt.getDay()], ts: dt.getTime(), mKey: m.key, short: m.short, y: m.y, mi: m.mi });
         if (e.type === 'challenge') e.endTs = new Date(m.y, m.mi, e.d + e.weeks * 7 - 1).getTime();
       });
-      m.events.sort((a, b) => a.ts - b.ts || (a.type === 'challenge' ? -1 : 1));
+      const startMin = e => { const m2 = /^(\d+)(?::(\d+))?/.exec(e.time || ''); if (!m2) return -1; let h = +m2[1]; const pm = /PM/.test((e.time || '').split('–')[0]) || (!/AM/.test((e.time || '').split('–')[0]) && /PM/.test(e.time || '') && h < 12 && !(/AM/.test(e.time || ''))); if (pm && h < 12) h += 12; return h * 60 + (+(m2[2] || 0)); };
+      m.events.sort((a, b) => a.ts - b.ts || startMin(a) - startMin(b));
     });
     const isSession = e => e.type !== 'challenge';
     const liveMonths = scheduleMonths.filter(m => m.status !== 'Wrapped');
